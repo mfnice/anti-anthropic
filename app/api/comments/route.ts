@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
 import { addComment, listComments } from "@/lib/memory-store";
+import { checkAndRecordPost, getClientMeta } from "@/lib/request-guard";
 import { sanitizeStickerIds } from "@/lib/stickers";
 import type { Comment } from "@/lib/types";
 
@@ -65,12 +66,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "邮箱格式不正确" }, { status: 400 });
   }
 
+  const clientMeta = await getClientMeta(request);
+  const rateLimitError = checkAndRecordPost(clientMeta.ip_hash, msg);
+  if (rateLimitError) {
+    return NextResponse.json({ error: rateLimitError }, { status: 429 });
+  }
+
   const supabase = getSupabase();
 
   if (supabase) {
     const { data, error } = await supabase
       .from("comments")
-      .insert({ nickname: nick, message: msg, email: mail || null, stickers: stk })
+      .insert({
+        nickname: nick,
+        message: msg,
+        email: mail || null,
+        stickers: stk,
+        ...clientMeta,
+      })
       .select(SELECT)
       .single();
 
@@ -80,6 +93,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ comment: data as Comment }, { status: 201 });
   }
 
-  const comment = addComment({ nickname: nick, message: msg, stickers: stk });
+  const comment = addComment({
+    nickname: nick,
+    message: msg,
+    stickers: stk,
+    ...clientMeta,
+  });
   return NextResponse.json({ comment }, { status: 201 });
 }
