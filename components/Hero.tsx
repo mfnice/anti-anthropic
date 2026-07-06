@@ -5,7 +5,8 @@ import { useI18n } from "./LanguageProvider";
 
 // 站长可配置的首屏视频位；留空则回退到 hero-bg.jpg / hero-bg.svg
 const videoUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL;
-const localDarioUrl = "/dario.png";
+const localDarioUrl = "/dario.webp";
+const localDarioFallbackUrl = "/dario.png";
 const fallbackDarioUrl =
   "https://cdn.prod.website-files.com/67ed58c92cfedc451ebbbca1/689a240f28a630c1b560618f_Anthropic-dario-amodei-p-800.jpg";
 
@@ -15,6 +16,10 @@ export default function Hero() {
   const [darioSrc, setDarioSrc] = useState(localDarioUrl);
   const titleLines = t.hero.titlePre.split("\n");
   const isZh = locale === "zh";
+  const verdictLines = titleLines.map((line) =>
+    line.replace(/[✕✓]/g, "").trim()
+  );
+  const isVerdictTitle = t.hero.titleHighlight.trim() === "✓";
 
   return (
     <section className="relative flex min-h-screen flex-col overflow-hidden">
@@ -45,10 +50,10 @@ export default function Hero() {
 
       {/* 顶部品牌条 */}
       <header className="relative z-10 flex items-center gap-3 px-6 py-5 md:px-10">
-        <span className="h-3.5 w-3.5 rotate-45 bg-accent" />
+        <img src="/logo.svg" alt="" className="h-7 w-7" />
         <span className="text-sm font-bold tracking-widest">{t.brand}</span>
         <span className="font-mono-geek text-[11px] tracking-[0.3em] text-[#6b6b6b]">
-          VOICE_WALL // v2
+          ANTHROPIC_PROTEST // v3
         </span>
         <span className="font-mono-geek ml-auto hidden text-[11px] tracking-[0.3em] text-[#6b6b6b] md:inline">
           {t.hero.eyebrow}
@@ -70,25 +75,47 @@ export default function Hero() {
             <span className="min-w-0 break-words">{t.hero.eyebrow}</span>
           </p>
 
-          {/* 大标语：titlePre 里的 \n 会换行，highlight 用红色斜切块强调 */}
-          <h1
-            className="max-w-full break-words font-black"
-            style={{
-              fontSize: isZh
-                ? "clamp(56px, 10.5vw, 148px)"
-                : "clamp(42px, 7.2vw, 96px)",
-              lineHeight: isZh ? 1.02 : 1.06,
-              letterSpacing: 0,
-            }}
-          >
-            {titleLines.map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < titleLines.length - 1 && <br />}
+          {/* 大标语：判定牌式对照，避免符号贴片感 */}
+          {isVerdictTitle ? (
+            <h1
+              className="hero-verdict max-w-full font-black"
+              style={{
+                fontSize: isZh
+                  ? "clamp(56px, 9.6vw, 132px)"
+                  : "clamp(40px, 6.8vw, 88px)",
+                lineHeight: 1,
+                letterSpacing: 0,
+              }}
+            >
+              <span className="verdict-row verdict-row--false">
+                <span className="verdict-word">{verdictLines[0]}</span>
+                <span className="verdict-mark verdict-mark--cross">✕</span>
               </span>
-            ))}
-            <span className="hl">{t.hero.titleHighlight}</span>
-          </h1>
+              <span className="verdict-row verdict-row--true">
+                <span className="hl verdict-word">{verdictLines[1]}</span>
+                <span className="verdict-mark verdict-mark--check">✓</span>
+              </span>
+            </h1>
+          ) : (
+            <h1
+              className="max-w-full break-words font-black"
+              style={{
+                fontSize: isZh
+                  ? "clamp(56px, 10.5vw, 148px)"
+                  : "clamp(42px, 7.2vw, 96px)",
+                lineHeight: isZh ? 1.02 : 1.06,
+                letterSpacing: 0,
+              }}
+            >
+              {titleLines.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < titleLines.length - 1 && <br />}
+                </span>
+              ))}
+              <span className="hl">{t.hero.titleHighlight}</span>
+            </h1>
+          )}
 
           {/* 副标语 */}
           <p
@@ -125,6 +152,10 @@ export default function Hero() {
                 alt="Dario Amodei"
                 onError={() => {
                   if (darioSrc === localDarioUrl) {
+                    setDarioSrc(localDarioFallbackUrl);
+                    return;
+                  }
+                  if (darioSrc === localDarioFallbackUrl) {
                     setDarioSrc(fallbackDarioUrl);
                     return;
                   }

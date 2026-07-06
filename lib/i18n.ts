@@ -8,6 +8,18 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   es: "ES",
 };
 
+export function isLocale(value: string | null | undefined): value is Locale {
+  return LOCALES.includes(value as Locale);
+}
+
+export function localeFromLanguage(value: string | null | undefined): Locale {
+  const lang = value?.toLowerCase() ?? "";
+  if (lang.startsWith("zh")) return "zh";
+  if (lang.startsWith("es")) return "es";
+  if (lang.startsWith("en")) return "en";
+  return DEFAULT_LOCALE;
+}
+
 interface Fact {
   date: string;
   title: string;
@@ -37,6 +49,12 @@ export interface Dict {
     description: string;
     evidence: string; // 证据卡标签
     items: Fact[];
+  };
+  manifesto: {
+    kicker: string;
+    title: string;
+    body: string;
+    points: string[];
   };
   form: {
     kicker: string;
@@ -72,13 +90,13 @@ export interface Dict {
 }
 
 const zh: Dict = {
-  brand: "发声墙",
+  brand: "Anthropic 抗议档案",
   hero: {
-    eyebrow: "追问 · 存证 · 发声",
-    titlePre: "别把缺德\n包装成",
-    titleHighlight: "安全",
+    eyebrow: "ANTHROPIC · 抗议 · 存证",
+    titlePre: "安全\n缺德",
+    titleHighlight: "✓",
     subtitle:
-      "当一家 AI 公司用“安全”和“合规”做旗号，却把检测、封禁、抓取和双标写进产品与政策里，我们有理由把事实摆到台前。",
+      "当一家 AI 公司用“安全”和“合规”做旗号，却把检测、封禁、抓取、掠夺知识资产和双标写进产品与政策里，我们有理由直指它的反道德、反人类倾向。",
     ctaFacts: "查看事实 ↓",
     ctaSpeak: "我要发声",
     stampTop: "抗议",
@@ -88,8 +106,8 @@ const zh: Dict = {
   facts: {
     kicker: "THE FACTS",
     titlePre: "事实，",
-    titleAccent: "按时间",
-    titlePost: "说话",
+    titleAccent: "直指 Anthropic",
+    titlePost: "",
     description:
       "每一条都尽量保留时间、来源和可核验细节。立场可以鲜明，但事实必须站得住。",
     evidence: "证据",
@@ -167,15 +185,27 @@ const zh: Dict = {
       },
     ],
   },
+  manifesto: {
+    kicker: "WHY THIS EXISTS",
+    title: "这不是技术分歧，是道德底线",
+    body:
+      "Anthropic 一边从全世界的文本、代码、论坛、书籍和中文互联网知识中获益，一边以安全为名封锁、检测和惩罚部分真实用户。我们反对这种把公共知识私有化、把商业利益伪装成道德高地的行为。",
+    points: [
+      "反对把监控包装成安全，把封禁包装成合规",
+      "反对吸收全球知识资产后，把收益只放进自己口袋",
+      "反对借合作伙伴起量后亲自下场竞争的背刺式商业伦理",
+      "反对对中国用户和中文互联网贡献者的选择性排除",
+    ],
+  },
   form: {
     kicker: "SPEAK UP",
-    titlePre: "说出",
-    titleAccent: "你的话",
-    description: "每一条留言都会实时出现在右上角的声音墙里。人多了，声音就大了。",
+    titlePre: "把抗议",
+    titleAccent: "留下来",
+    description: "每一条留言都会实时出现在右上角。不是为了吵闹，是为了让 Anthropic 的反道德行为被看见、被记录、被追问。",
     bullets: [
       "昵称随意，不需要真名",
       "邮箱选填，仅用于后续联系，永远不会公开展示",
-      "请围绕事实理性发言",
+      "请围绕事实、经历和可核验信息发言",
     ],
     nickLabel: "昵称",
     nickPlaceholder: "怎么称呼你",
@@ -201,17 +231,17 @@ const zh: Dict = {
     hoursAgo: (n) => `${n} 小时前`,
     daysAgo: (n) => `${n} 天前`,
   },
-  footer: "本页内容由发起人负责 · 请理性发言",
+  footer: "本页用于记录 Anthropic 争议与公众抗议 · 请基于事实发言",
 };
 
 const en: Dict = {
-  brand: "Voice Wall",
+  brand: "Anthropic Protest File",
   hero: {
-    eyebrow: "QUESTION · ARCHIVE · SPEAK UP",
-    titlePre: "Don't dress up\nbad faith as ",
-    titleHighlight: "safety",
+    eyebrow: "ANTHROPIC · PROTEST · ARCHIVE",
+    titlePre: "Safety\nBad faith",
+    titleHighlight: "✓",
     subtitle:
-      "When an AI company wraps detection, bans, scraping, and double standards in the language of safety, the record deserves to be public.",
+      "When an AI company wraps detection, bans, scraping, knowledge extraction, and double standards in the language of safety, its anti-ethical and anti-human trajectory deserves to be named.",
     ctaFacts: "See the facts ↓",
     ctaSpeak: "Speak up",
     stampTop: "OPPOSE",
@@ -220,8 +250,8 @@ const en: Dict = {
   },
   facts: {
     kicker: "THE FACTS",
-    titlePre: "The facts, ",
-    titleAccent: "in order",
+    titlePre: "The facts ",
+    titleAccent: "against Anthropic",
     titlePost: "",
     description:
       "Each entry keeps dates, sources, and checkable details. Strong opinions are allowed; weak evidence is not.",
@@ -300,16 +330,28 @@ const en: Dict = {
       },
     ],
   },
+  manifesto: {
+    kicker: "WHY THIS EXISTS",
+    title: "This is not a technical dispute. It is a moral line.",
+    body:
+      "Anthropic profits from global text, code, forums, books, and multilingual web knowledge while using safety rhetoric to block, detect, and punish real users. We reject the privatization of public knowledge and the conversion of commercial interest into moral theater.",
+    points: [
+      "No to surveillance dressed up as safety",
+      "No to extracting global knowledge while pocketing the benefits",
+      "No to partner betrayal after scaling through developer platforms",
+      "No to selectively excluding Chinese users and Chinese web contributors",
+    ],
+  },
   form: {
     kicker: "SPEAK UP",
-    titlePre: "Have ",
-    titleAccent: "your say",
+    titlePre: "Leave ",
+    titleAccent: "your protest",
     description:
-      "Every message shows up live on the wall in the top-right. The more of us, the louder it gets.",
+      "Every message appears live in the top-right. This is not noise; it is a public record of why Anthropic's conduct is being challenged.",
     bullets: [
       "Any nickname works — no real name needed",
       "Email is optional, only for follow-up, never shown publicly",
-      "Please keep it factual and civil",
+      "Please keep it grounded in facts, experiences, and verifiable details",
     ],
     nickLabel: "Nickname",
     nickPlaceholder: "What should we call you",
@@ -335,17 +377,18 @@ const en: Dict = {
     hoursAgo: (n) => `${n} h ago`,
     daysAgo: (n) => `${n} d ago`,
   },
-  footer: "Content is the organizer's responsibility · Please post responsibly",
+  footer:
+    "A public record of Anthropic controversies and user protest · Please post responsibly",
 };
 
 const es: Dict = {
-  brand: "Muro de Voces",
+  brand: "Archivo de Protesta Anthropic",
   hero: {
-    eyebrow: "PREGUNTAR · ARCHIVAR · HABLAR",
-    titlePre: "No disfracen\nla mala fe de ",
-    titleHighlight: "seguridad",
+    eyebrow: "ANTHROPIC · PROTESTA · ARCHIVO",
+    titlePre: "Seguridad\nMala fe",
+    titleHighlight: "✓",
     subtitle:
-      "Cuando una empresa de IA envuelve detección, bloqueos, scraping y doble rasero con lenguaje de seguridad, el registro debe ser público.",
+      "Cuando una empresa de IA envuelve detección, bloqueos, scraping, extracción de conocimiento y doble rasero con lenguaje de seguridad, su deriva antiética y antihumana debe nombrarse.",
     ctaFacts: "Ver los hechos ↓",
     ctaSpeak: "Quiero hablar",
     stampTop: "OPONERSE",
@@ -354,8 +397,8 @@ const es: Dict = {
   },
   facts: {
     kicker: "LOS HECHOS",
-    titlePre: "Los hechos, ",
-    titleAccent: "en orden",
+    titlePre: "Los hechos ",
+    titleAccent: "contra Anthropic",
     titlePost: "",
     description:
       "Cada punto conserva fechas, fuentes y detalles verificables. La postura puede ser firme; la evidencia no puede ser débil.",
@@ -434,16 +477,28 @@ const es: Dict = {
       },
     ],
   },
+  manifesto: {
+    kicker: "POR QUÉ EXISTE",
+    title: "No es una disputa técnica. Es una línea moral.",
+    body:
+      "Anthropic se beneficia de textos, código, foros, libros y conocimiento web multilingüe de todo el mundo mientras usa el lenguaje de la seguridad para bloquear, detectar y castigar a usuarios reales. Rechazamos la privatización del conocimiento público y la conversión del interés comercial en teatro moral.",
+    points: [
+      "No a la vigilancia disfrazada de seguridad",
+      "No a extraer conocimiento global y quedarse con los beneficios",
+      "No a traicionar socios después de crecer mediante plataformas de desarrollo",
+      "No a excluir selectivamente a usuarios chinos y contribuyentes de la web china",
+    ],
+  },
   form: {
     kicker: "ALZA LA VOZ",
-    titlePre: "Di ",
-    titleAccent: "lo tuyo",
+    titlePre: "Deja ",
+    titleAccent: "tu protesta",
     description:
-      "Cada mensaje aparece en vivo en el muro de la esquina superior derecha. Cuantos más seamos, más fuerte suena.",
+      "Cada mensaje aparece en vivo en la esquina superior derecha. No es ruido; es un registro público de por qué se cuestiona la conducta de Anthropic.",
     bullets: [
       "Cualquier apodo sirve, no hace falta nombre real",
       "El correo es opcional, solo para contacto, nunca se muestra en público",
-      "Por favor, sé objetivo y respetuoso",
+      "Por favor, mantén tus mensajes basados en hechos, experiencias y detalles verificables",
     ],
     nickLabel: "Apodo",
     nickPlaceholder: "¿Cómo te llamamos?",
@@ -470,16 +525,12 @@ const es: Dict = {
     daysAgo: (n) => `hace ${n} d`,
   },
   footer:
-    "El contenido es responsabilidad del organizador · Publica con responsabilidad",
+    "Registro público de controversias de Anthropic y protesta de usuarios · Publica con responsabilidad",
 };
 
 export const DICTS: Record<Locale, Dict> = { zh, en, es };
 
 export function detectLocale(): Locale {
   if (typeof navigator === "undefined") return DEFAULT_LOCALE;
-  const lang = navigator.language.toLowerCase();
-  if (lang.startsWith("zh")) return "zh";
-  if (lang.startsWith("es")) return "es";
-  if (lang.startsWith("en")) return "en";
-  return DEFAULT_LOCALE;
+  return localeFromLanguage(navigator.language);
 }

@@ -24,15 +24,26 @@ export const STICKERS: Sticker[] = [
   { id: "100", label: "满分", emoji: "💯" },
   { id: "clap", label: "鼓掌", emoji: "👏" },
   { id: "angry", label: "愤怒", emoji: "😡" },
+  { id: "rage", label: "怒火", emoji: "🤬" },
   { id: "cry", label: "流泪", emoji: "😭" },
   { id: "skull", label: "无语", emoji: "💀" },
   { id: "clown", label: "小丑", emoji: "🤡" },
+  { id: "broken", label: "失望", emoji: "💔" },
+  { id: "warning", label: "警告", emoji: "⚠️" },
+  { id: "lock", label: "封锁", emoji: "🔒" },
+  { id: "receipt", label: "证据", emoji: "🧾" },
   { id: "check", label: "属实", emoji: "✅" },
   { id: "heart", label: "声援", emoji: "❤️" },
   // —— 图片型（站长自制示例，展示如何扩展）——
   { id: "cunzheng", label: "存证", src: "/stickers/cunzheng.svg" },
   { id: "no", label: "拒绝", src: "/stickers/no.svg" },
   { id: "shichui", label: "实锤", src: "/stickers/shichui.svg" },
+  { id: "thief", label: "小偷", src: "/stickers/thief.svg" },
+  { id: "no-consent", label: "不同意", src: "/stickers/no-consent.svg" },
+  { id: "boycott", label: "抵制", src: "/stickers/boycott.svg" },
+  { id: "shame", label: "羞耻", src: "/stickers/shame.svg" },
+  { id: "blocked", label: "封禁", src: "/stickers/blocked.svg" },
+  { id: "anti-human", label: "反人类", src: "/stickers/anti-human.svg" },
 ];
 
 /** 一次评论最多携带的表情包数量 */

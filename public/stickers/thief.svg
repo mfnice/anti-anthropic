@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="5" y="8" width="54" height="48" fill="#09090a" stroke="#ff3341" stroke-width="3"/>
+  <path d="M18 21h28l-5 10H23l-5-10Z" fill="#ff3341"/>
+  <circle cx="25" cy="37" r="4" fill="#fff"/>
+  <circle cx="39" cy="37" r="4" fill="#fff"/>
+  <path d="M23 48h18" stroke="#ff3341" stroke-width="4"/>
+  <text x="32" y="16" font-family="Arial Black, Impact, sans-serif" font-size="9" fill="#fff" text-anchor="middle">THIEF</text>
+</svg>

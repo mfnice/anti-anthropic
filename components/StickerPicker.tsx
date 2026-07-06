@@ -45,7 +45,7 @@ export default function StickerPicker({
       </button>
 
       {open && (
-        <div className="absolute bottom-full left-0 z-30 mb-2 w-72 border border-white/[0.14] bg-[#0e0e10] p-3 shadow-[0_16px_50px_rgba(0,0,0,0.55),4px_4px_0_var(--accent)]">
+        <div className="absolute bottom-full left-0 z-30 mb-2 w-80 max-w-[86vw] border border-white/[0.14] bg-[#0e0e10] p-3 shadow-[0_16px_50px_rgba(0,0,0,0.55),4px_4px_0_var(--accent)]">
           <div className="mb-2 flex items-center justify-between">
             <span className="font-mono-geek text-[11px] font-bold tracking-[0.2em] text-neutral-400">
               {t.form.stickerPanelTitle}
@@ -55,7 +55,7 @@ export default function StickerPicker({
             </span>
           </div>
 
-          <div className="grid grid-cols-6 gap-1.5">
+          <div className="grid grid-cols-7 gap-1.5">
             {STICKERS.map((s) => {
               const isOn = selected.includes(s.id);
               const disabled = !isOn && atLimit;
