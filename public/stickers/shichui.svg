@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g transform="rotate(-6 32 32)">
+    <rect x="6" y="20" width="52" height="24" fill="#0e0e10" stroke="#ff3341" stroke-width="2.5"/>
+    <!-- 小锤子 -->
+    <rect x="11" y="27" width="11" height="6" rx="1" fill="#ff3341"/>
+    <rect x="15" y="31" width="3" height="9" fill="#ff3341"/>
+    <text x="40" y="38" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="15" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="1">实锤</text>
+  </g>
+</svg>

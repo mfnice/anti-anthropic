@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="27" fill="#ff3341"/>
+  <circle cx="32" cy="32" r="22" fill="#09090a"/>
+  <path d="M18 46 46 18" stroke="#ff3341" stroke-width="7"/>
+  <text x="32" y="36" font-family="Arial Black, Impact, sans-serif" font-size="12" fill="#fff" text-anchor="middle">NO</text>
+</svg>
