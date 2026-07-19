@@ -1,4 +1,12 @@
-import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -20,15 +28,23 @@ cpSync(join(dist, "static"), join(standalone, "dist", "static"), { recursive: tr
 mkdirSync(join(dist, ".openai"), { recursive: true });
 cpSync(join(root, ".openai", "hosting.json"), join(dist, ".openai", "hosting.json"));
 
+rmSync(serverDir, { recursive: true, force: true });
 mkdirSync(serverDir, { recursive: true });
-cpSync(standalone, join(serverDir, "standalone"), { recursive: true });
+
+const packagedStandalone = join(serverDir, "standalone");
+renameSync(standalone, packagedStandalone);
+cpSync(
+  join(packagedStandalone, "server.js"),
+  join(packagedStandalone, "server.cjs"),
+);
 writeFileSync(
   join(serverDir, "index.js"),
-  [
-    'import { createRequire } from "node:module";',
-    'const require = createRequire(`${process.cwd()}/dist/server/index.js`);',
-    'require("./standalone/server.js");',
-    "",
-  ].join("\n"),
+  'import "./standalone/server.cjs";\n',
 );
 writeFileSync(join(serverDir, "package.json"), '{"type":"module"}\n');
+
+for (const entry of readdirSync(dist)) {
+  if (entry !== ".openai" && entry !== "server") {
+    rmSync(join(dist, entry), { recursive: true, force: true });
+  }
+}
