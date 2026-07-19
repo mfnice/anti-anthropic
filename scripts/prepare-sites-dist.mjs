@@ -24,5 +24,11 @@ mkdirSync(serverDir, { recursive: true });
 cpSync(standalone, join(serverDir, "standalone"), { recursive: true });
 writeFileSync(
   join(serverDir, "index.js"),
-  "import './standalone/server.js';\n",
+  [
+    'import { createRequire } from "node:module";',
+    'const require = createRequire(`${process.cwd()}/dist/server/index.js`);',
+    'require("./standalone/server.js");',
+    "",
+  ].join("\n"),
 );
+writeFileSync(join(serverDir, "package.json"), '{"type":"module"}\n');
