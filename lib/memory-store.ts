@@ -1,4 +1,9 @@
-import type { Comment, NewComment } from "./types";
+import type {
+  Comment,
+  NewComment,
+  NewPetitionSignature,
+  PetitionSignature,
+} from "./types";
 
 /**
  * 内存降级存储：没有配置 Supabase 时使用。
@@ -21,7 +26,7 @@ const comments: Comment[] = [
   },
 ];
 
-const petitionSignatures: Comment[] = [];
+const petitionSignatures: PetitionSignature[] = [];
 
 export function listComments(limit = 50): Comment[] {
   return comments.slice(-limit).reverse();
@@ -39,7 +44,7 @@ export function addComment(input: NewComment): Comment {
   return comment;
 }
 
-export function listPetitionSignatures(limit = 12): Comment[] {
+export function listPetitionSignatures(limit = 12): PetitionSignature[] {
   return petitionSignatures.slice(-limit).reverse();
 }
 
@@ -47,12 +52,12 @@ export function countPetitionSignatures(): number {
   return petitionSignatures.length;
 }
 
-export function addPetitionSignature(input: NewComment): Comment {
-  const signature: Comment = {
+export function addPetitionSignature(
+  input: NewPetitionSignature
+): PetitionSignature {
+  const signature: PetitionSignature = {
     id: crypto.randomUUID(),
     nickname: input.nickname,
-    message: input.message,
-    stickers: [],
     created_at: new Date().toISOString(),
   };
   petitionSignatures.push(signature);

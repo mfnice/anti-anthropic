@@ -18,3 +18,20 @@ export interface NewComment {
   ip_country?: string | null;
   user_agent?: string | null;
 }
+
+export interface PetitionSignature {
+  id: string;
+  nickname: string;
+  created_at: string;
+}
+
+export interface NewPetitionSignature {
+  nickname: string;
+  /** 选填，仅存库，永不通过公开接口返回 */
+  email?: string | null;
+  contact_opt_in: boolean;
+  /** 请求来源风控字段，仅存库，永不通过公开接口返回 */
+  ip_hash?: string;
+  ip_country?: string | null;
+  user_agent?: string | null;
+}

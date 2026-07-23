@@ -6,15 +6,16 @@ import {
   listPetitionSignatures,
 } from "@/lib/memory-store";
 import { checkAndRecordPost, getClientMeta } from "@/lib/request-guard";
-import type { Comment } from "@/lib/types";
+import type { PetitionSignature } from "@/lib/types";
 
-const PETITION_MARKER = "[petition-signature]";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RECENT_SELECT = "id, nickname, created_at";
 
 export const dynamic = "force-dynamic";
 
-function publicRecent(rows: Array<Pick<Comment, "id" | "nickname" | "created_at">>) {
+function publicRecent(
+  rows: Array<Pick<PetitionSignature, "id" | "nickname" | "created_at">>
+) {
   return rows.map(({ id, nickname, created_at }) => ({ id, nickname, created_at }));
 }
 
@@ -23,17 +24,20 @@ async function getPetitionData() {
 
   if (supabase) {
     const { data, error, count } = await supabase
-      .from("comments")
+      .from("petition_signatures")
       .select(RECENT_SELECT, { count: "exact" })
-      .eq("message", PETITION_MARKER)
       .order("created_at", { ascending: false })
       .limit(12);
 
     if (error) throw error;
     return {
       count: count ?? data?.length ?? 0,
-      recent: publicRecent((data ?? []) as Comment[]),
+      recent: publicRecent((data ?? []) as PetitionSignature[]),
     };
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("持久化联署存储尚未配置");
   }
 
   return {
@@ -47,7 +51,17 @@ export async function GET() {
     return NextResponse.json(await getPetitionData());
   } catch (error) {
     const message = error instanceof Error ? error.message : "无法读取联署";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const isStorageUnavailable =
+      message.includes("持久化联署存储") ||
+      message.includes("petition_signatures");
+    return NextResponse.json(
+      {
+        error: isStorageUnavailable
+          ? "联署数据库尚未初始化，请先执行 Supabase migration"
+          : "暂时无法读取联署，请稍后再试",
+      },
+      { status: isStorageUnavailable ? 503 : 500 }
+    );
   }
 }
 
@@ -85,7 +99,7 @@ export async function POST(request: Request) {
   const clientMeta = await getClientMeta(request);
   const rateLimitError = checkAndRecordPost(
     clientMeta.ip_hash,
-    `${PETITION_MARKER}:${mail || nick.toLowerCase()}`
+    `petition:${mail || nick.toLowerCase()}`
   );
   if (rateLimitError) {
     return NextResponse.json({ error: rateLimitError }, { status: 429 });
@@ -94,9 +108,8 @@ export async function POST(request: Request) {
   const supabase = getSupabase();
   if (supabase) {
     const duplicateQuery = supabase
-      .from("comments")
+      .from("petition_signatures")
       .select("id")
-      .eq("message", PETITION_MARKER)
       .limit(1);
     const { data: duplicate, error: duplicateError } = mail
       ? await duplicateQuery.eq("email", mail)
@@ -109,21 +122,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "你已经加入过这份联署" }, { status: 409 });
     }
 
-    const { error } = await supabase.from("comments").insert({
+    const { error } = await supabase.from("petition_signatures").insert({
       nickname: nick,
-      message: PETITION_MARKER,
       email: mail || null,
-      stickers: [],
+      contact_opt_in: Boolean(mail && contactOptIn === true),
       ...clientMeta,
     });
     if (error) {
+      if (error.code === "23505") {
+        return NextResponse.json(
+          { error: "你已经加入过这份联署" },
+          { status: 409 }
+        );
+      }
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
   } else {
+    if (process.env.NODE_ENV === "production") {
+      return NextResponse.json(
+        { error: "持久化联署存储尚未配置" },
+        { status: 503 }
+      );
+    }
     addPetitionSignature({
       nickname: nick,
-      message: PETITION_MARKER,
       email: mail || null,
+      contact_opt_in: Boolean(mail && contactOptIn === true),
       ...clientMeta,
     });
   }

@@ -35,9 +35,14 @@ npm run dev
 ## 隐私设计
 
 - 邮箱**选填**，数据库允许 NULL
-- 联署签名与留言复用同一张表，以内部标记区分；公开接口只返回联署人数、昵称和时间
+- 联署使用独立的 `petition_signatures` 表，与公开留言内容分开存储
+- 公开接口只返回联署人数、昵称和时间，不返回邮箱或风控字段
 - 联署邮箱只有在用户明确勾选后才会保存，仅用于本次行动的后续联系
 - API 查询评论时只返回 `id / nickname / message / stickers / created_at`，**email 永远不出库**
+
+已有远程 Supabase 项目升级时，在 SQL Editor 执行
+`supabase/migrations/202607240001_create_petition_signatures.sql`。迁移会把早期联署记录
+从 `comments` 移到独立表，并清理内部标记。
 - comments 表开启了 RLS 且不给 anon 任何策略，前端无法直连数据库读到邮箱
 
 ## 以后可以升级的
