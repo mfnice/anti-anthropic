@@ -71,7 +71,7 @@ export default function SubmitForm() {
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 md:grid-cols-[1fr_1.2fr] md:px-10">
         <Reveal>
           <p className="font-mono-geek mb-3 text-[12px] tracking-[0.4em] text-accent">
-            02 — {t.form.kicker}
+            03 — {t.form.kicker}
           </p>
           <h2 className="text-4xl font-black tracking-tight md:text-5xl">
             {t.form.titlePre}

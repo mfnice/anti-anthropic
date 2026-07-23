@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US", "es_ES"],
     images: [
       {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
+        url: "/og.png",
+        width: 1747,
+        height: 909,
         alt: "Anthropic Protest File: controversy facts and public comments",
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/opengraph-image"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,

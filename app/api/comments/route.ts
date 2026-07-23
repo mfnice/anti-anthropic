@@ -10,6 +10,7 @@ const SELECT = "id, nickname, message, stickers, created_at";
 export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PETITION_MARKER = "[petition-signature]";
 
 export async function GET() {
   const supabase = getSupabase();
@@ -19,6 +20,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from("comments")
       .select(SELECT)
+      .neq("message", PETITION_MARKER)
       .order("created_at", { ascending: false })
       .limit(50);
 
@@ -61,6 +63,9 @@ export async function POST(request: Request) {
       { error: "内容必填，且不超过 200 个字符" },
       { status: 400 }
     );
+  }
+  if (msg === PETITION_MARKER) {
+    return NextResponse.json({ error: "无效的留言内容" }, { status: 400 });
   }
   if (mail && !EMAIL_RE.test(mail)) {
     return NextResponse.json({ error: "邮箱格式不正确" }, { status: 400 });

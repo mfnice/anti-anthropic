@@ -3,6 +3,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Hero from "@/components/Hero";
 import Manifesto from "@/components/Manifesto";
 import Facts from "@/components/Facts";
+import Petition from "@/components/Petition";
 import SubmitForm from "@/components/SubmitForm";
 import CommentFeed from "@/components/CommentFeed";
 import Footer from "@/components/Footer";
@@ -55,6 +56,7 @@ export default async function Home() {
         <Hero />
         <Manifesto />
         <Facts />
+        <Petition />
         <SubmitForm />
         <Footer />
       </main>

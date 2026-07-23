@@ -53,7 +53,7 @@ export default function Hero() {
         <img src="/logo.svg" alt="" className="h-7 w-7" />
         <span className="text-sm font-bold tracking-widest">{t.brand}</span>
         <span className="font-mono-geek text-[11px] tracking-[0.3em] text-[#6b6b6b]">
-          ANTHROPIC_PROTEST // v3
+          ANTHROPIC_PROTEST // v4
         </span>
         <span className="font-mono-geek ml-auto hidden text-[11px] tracking-[0.3em] text-[#6b6b6b] md:inline">
           {t.hero.eyebrow}
@@ -126,19 +126,23 @@ export default function Hero() {
           </p>
 
           <div className="mt-12 flex flex-wrap gap-4">
-            {/* 主按钮（朋克化：硬白阴影 + 转正） */}
+            <a
+              href="#petition"
+              className="border-2 border-accent bg-accent px-[38px] py-[18px] text-[14px] font-black tracking-[0.3em] text-white transition duration-200 rotate-[-0.5deg] hover:rotate-0 hover:-translate-y-[3px] hover:shadow-[6px_6px_0_rgba(255,255,255,0.9)]"
+            >
+              {t.hero.ctaPetition}
+            </a>
             <a
               href="#facts"
-              className="border-2 border-accent bg-accent px-[38px] py-[18px] text-[14px] font-black tracking-[0.3em] text-white transition duration-200 rotate-[-0.5deg] hover:rotate-0 hover:-translate-y-[3px] hover:shadow-[6px_6px_0_rgba(255,255,255,0.9)]"
+              className="border-2 border-white/35 px-[38px] py-[18px] text-[14px] font-black tracking-[0.3em] text-neutral-200 backdrop-blur-sm transition duration-200 rotate-[0.5deg] hover:rotate-0 hover:border-accent hover:text-accent"
             >
               {t.hero.ctaFacts}
             </a>
-            {/* 次按钮 */}
             <a
               href="#speak"
-              className="border-2 border-white/35 px-[38px] py-[18px] text-[14px] font-black tracking-[0.3em] text-neutral-200 backdrop-blur-sm transition duration-200 rotate-[0.5deg] hover:rotate-0 hover:border-accent hover:text-accent"
+              className="px-3 py-[18px] text-[12px] font-bold tracking-[0.24em] text-neutral-400 transition hover:text-accent"
             >
-              {t.hero.ctaSpeak}
+              {t.hero.ctaSpeak} →
             </a>
           </div>
         </div>

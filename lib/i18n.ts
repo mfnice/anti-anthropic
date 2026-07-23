@@ -37,6 +37,7 @@ export interface Dict {
     subtitle: string;
     ctaFacts: string;
     ctaSpeak: string;
+    ctaPetition: string;
     stampTop: string;
     stampSub: string;
     marquee: string;
@@ -55,6 +56,35 @@ export interface Dict {
     title: string;
     body: string;
     points: string[];
+  };
+  petition: {
+    kicker: string;
+    title: string;
+    description: string;
+    statementLabel: string;
+    statement: string;
+    demandsTitle: string;
+    demands: string[];
+    countLabel: string;
+    countUnit: string;
+    nextGoal: (n: number) => string;
+    recentTitle: string;
+    emptyRecent: string;
+    nickLabel: string;
+    nickPlaceholder: string;
+    emailLabel: string;
+    emailHint: string;
+    emailPlaceholder: string;
+    consent: string;
+    privacy: string;
+    submit: string;
+    submitting: string;
+    signedTitle: string;
+    signedBody: string;
+    share: string;
+    copied: string;
+    networkErr: string;
+    genericErr: string;
   };
   form: {
     kicker: string;
@@ -99,6 +129,7 @@ const zh: Dict = {
       "当一家 AI 公司用“安全”和“合规”做旗号，却把检测、封禁、抓取、掠夺知识资产和双标写进产品与政策里，我们有理由直指它的反道德、反人类倾向。",
     ctaFacts: "查看事实 ↓",
     ctaSpeak: "我要发声",
+    ctaPetition: "加入联署",
     stampTop: "抗议",
     stampSub: "NO CONSENT",
     marquee: "自以为是的小偷，我们拒绝沉默",
@@ -129,6 +160,30 @@ const zh: Dict = {
         sourceLabel: "Financial Times",
         sourceUrl:
           "https://www.ft.com/content/ad033063-60f9-4c0c-8d8a-9193a83e6f60",
+      },
+      {
+        date: "2026-07-18",
+        title: "中国开源模型用价格和代码能力挤压 Claude",
+        detail:
+          "AP 报道称，Moonshot 的 Kimi K3 在前端编码能力上冲到 Arena 榜首，能力被拿来与 Claude、ChatGPT 对照，且价格明显压低。DeepSeek、Kimi、Qwen、GLM 等中国模型持续把“便宜、可部署、够好用”的压力推到 Anthropic 和 OpenAI 面前。",
+        sourceLabel: "AP",
+        sourceUrl: "https://apnews.com/article/0d8a5e268deb11a673f4d444fc597cc5",
+      },
+      {
+        date: "2026-05-14",
+        title: "Anthropic 自己承认中国模型已逼近前沿",
+        detail:
+          "Anthropic 在《2028: Two scenarios for global AI leadership》中把中美 AI 竞争放到战略层面，称中国 AI 实验室在模型智能上“并不远”，并呼吁美国收紧算力出口控制、打击蒸馏攻击。换句话说，它一边封堵中国用户，一边把中国模型的追赶当成核心压力。",
+        sourceLabel: "Anthropic",
+        sourceUrl: "https://www.anthropic.com/research/2028-ai-leadership?hl=en-US",
+      },
+      {
+        date: "2026-03-11",
+        title: "OpenAI 正在追赶 Claude Code 的开发者入口",
+        detail:
+          "WIRED 报道称，Claude Code 已成为 Anthropic 的关键增长点，年化收入超过 25 亿美元；OpenAI 的 Codex 到 2026 年 1 月也已接近 10 亿美元年化收入，用户规模从 Claude Code 的 5% 追到约 40%。Anthropic 面对的不只是安全问题，更是 OpenAI 对开发者工作流入口的正面挤压。",
+        sourceLabel: "WIRED",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/",
       },
       {
         date: "2025-02 至 2025-05",
@@ -189,13 +244,49 @@ const zh: Dict = {
     kicker: "WHY THIS EXISTS",
     title: "这不是技术分歧，是道德底线",
     body:
-      "Anthropic 一边从全世界的文本、代码、论坛、书籍和中文互联网知识中获益，一边以安全为名封锁、检测和惩罚部分真实用户。我们反对这种把公共知识私有化、把商业利益伪装成道德高地的行为。",
+      "Anthropic 一边从全世界的文本、代码、论坛、书籍和中文互联网知识中获益，一边以安全为名封锁、检测和惩罚部分真实用户。现在 OpenAI 正在抢它的开发者入口，中国模型又用低价和开源路线追近前沿，它更没有资格把商业焦虑包装成道德高地。",
     points: [
       "反对把监控包装成安全，把封禁包装成合规",
       "反对吸收全球知识资产后，把收益只放进自己口袋",
       "反对借合作伙伴起量后亲自下场竞争的背刺式商业伦理",
+      "反对把来自 OpenAI 和中国模型的竞争压力转嫁给普通用户",
       "反对对中国用户和中文互联网贡献者的选择性排除",
     ],
+  },
+  petition: {
+    kicker: "COLLECTIVE ACTION",
+    title: "签下名字，把愤怒变成共同要求",
+    description:
+      "这不是一张装饰性的签名表。每一次联署都会被真实计数，并成为我们后续公开信、媒体沟通和集体行动的支持依据。",
+    statementLabel: "联署声明",
+    statement:
+      "我们要求 Anthropic 停止以“安全”为名实施不透明的检测、封禁和差别对待；公开用户识别与申诉规则；尊重被用于训练和产品增长的创作者、开发者与全球知识贡献者。",
+    demandsTitle: "我们的三项要求",
+    demands: [
+      "公开检测、封禁与申诉机制，停止用隐蔽技术惩罚普通用户",
+      "为训练数据提供可执行的退出、授权、署名与补偿机制",
+      "停止对中国用户和中文互联网贡献者的选择性排除与双重标准",
+    ],
+    countLabel: "已加入联署",
+    countUnit: "人",
+    nextGoal: (n) => `下一阶段目标：${n.toLocaleString("zh-CN")} 人`,
+    recentTitle: "刚刚加入的人",
+    emptyRecent: "联署刚刚开始，成为第一个留下名字的人",
+    nickLabel: "公开名字 / 昵称",
+    nickPlaceholder: "你希望如何出现在联署名单中",
+    emailLabel: "联系邮箱",
+    emailHint: "选填 · 永不公开",
+    emailPlaceholder: "用于后续行动通知",
+    consent: "我愿意在留下邮箱后，接收本次行动的关键进展与后续联系",
+    privacy: "邮箱只用于本次公共行动，不会显示在联署名单中，也不会出售或公开。",
+    submit: "签署联署",
+    submitting: "正在签署…",
+    signedTitle: "你已加入联署",
+    signedBody: "你的名字已经进入行动记录。下一步，让更多人看到。",
+    share: "分享这份联署",
+    copied: "链接已复制",
+    networkErr: "网络错误，请稍后再试",
+    genericErr: "联署失败，请稍后再试",
   },
   form: {
     kicker: "SPEAK UP",
@@ -244,6 +335,7 @@ const en: Dict = {
       "When an AI company wraps detection, bans, scraping, knowledge extraction, and double standards in the language of safety, its anti-ethical and anti-human trajectory deserves to be named.",
     ctaFacts: "See the facts ↓",
     ctaSpeak: "Speak up",
+    ctaPetition: "Sign the petition",
     stampTop: "OPPOSE",
     stampSub: "NO CONSENT",
     marquee: "Self-righteous thieves, we refuse to stay silent",
@@ -274,6 +366,30 @@ const en: Dict = {
         sourceLabel: "Financial Times",
         sourceUrl:
           "https://www.ft.com/content/ad033063-60f9-4c0c-8d8a-9193a83e6f60",
+      },
+      {
+        date: "2026-07-18",
+        title: "Chinese open models squeeze Claude on price and coding",
+        detail:
+          "AP reported that Moonshot's Kimi K3 topped Arena's frontend coding leaderboard, drew comparisons with Claude and ChatGPT, and sharply undercut frontier pricing. DeepSeek, Kimi, Qwen, and GLM keep pushing the same pressure: cheaper, deployable, good-enough models that challenge Anthropic and OpenAI's closed premium stack.",
+        sourceLabel: "AP",
+        sourceUrl: "https://apnews.com/article/0d8a5e268deb11a673f4d444fc597cc5",
+      },
+      {
+        date: "2026-05-14",
+        title: "Anthropic itself says Chinese models are close to the frontier",
+        detail:
+          "In its 2028 AI leadership paper, Anthropic framed US-China AI competition as a strategic race, said PRC labs are not far behind on model intelligence, and urged tighter compute controls plus action against distillation. It is blocking Chinese users while treating Chinese model progress as a central competitive threat.",
+        sourceLabel: "Anthropic",
+        sourceUrl: "https://www.anthropic.com/research/2028-ai-leadership?hl=en-US",
+      },
+      {
+        date: "2026-03-11",
+        title: "OpenAI is chasing Claude Code's developer beachhead",
+        detail:
+          "WIRED reported that Claude Code had become a major Anthropic growth engine with more than $2.5 billion in annualized revenue, while OpenAI's Codex had reached just over $1 billion by January 2026 and grown from 5% to roughly 40% of Claude Code's usage. Anthropic is facing direct pressure over the developer workflow, not merely safety concerns.",
+        sourceLabel: "WIRED",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/",
       },
       {
         date: "2025-02 to 2025-05",
@@ -334,13 +450,49 @@ const en: Dict = {
     kicker: "WHY THIS EXISTS",
     title: "This is not a technical dispute. It is a moral line.",
     body:
-      "Anthropic profits from global text, code, forums, books, and multilingual web knowledge while using safety rhetoric to block, detect, and punish real users. We reject the privatization of public knowledge and the conversion of commercial interest into moral theater.",
+      "Anthropic profits from global text, code, forums, books, and multilingual web knowledge while using safety rhetoric to block, detect, and punish real users. Now that OpenAI is attacking its developer beachhead and Chinese models are closing the gap with cheaper open systems, it has even less right to package commercial anxiety as moral high ground.",
     points: [
       "No to surveillance dressed up as safety",
       "No to extracting global knowledge while pocketing the benefits",
       "No to partner betrayal after scaling through developer platforms",
+      "No to passing pressure from OpenAI and Chinese models onto ordinary users",
       "No to selectively excluding Chinese users and Chinese web contributors",
     ],
+  },
+  petition: {
+    kicker: "COLLECTIVE ACTION",
+    title: "Sign your name. Turn anger into a shared demand.",
+    description:
+      "This is not a decorative counter. Every signature is counted and can support a future open letter, press outreach, and collective action.",
+    statementLabel: "PETITION STATEMENT",
+    statement:
+      "We call on Anthropic to stop opaque detection, bans, and discriminatory treatment in the name of safety; publish clear identification and appeal rules; and respect the creators, developers, and global knowledge contributors who helped build its products.",
+    demandsTitle: "OUR THREE DEMANDS",
+    demands: [
+      "Publish detection, suspension, and appeal rules; stop punishing ordinary users through hidden mechanisms",
+      "Provide workable opt-out, consent, attribution, and compensation for training data",
+      "End selective exclusion and double standards toward Chinese users and Chinese-language web contributors",
+    ],
+    countLabel: "SIGNATURES",
+    countUnit: "people",
+    nextGoal: (n) => `Next milestone: ${n.toLocaleString("en-US")}`,
+    recentTitle: "RECENT SIGNERS",
+    emptyRecent: "The petition just opened. Be the first to sign.",
+    nickLabel: "Public name / nickname",
+    nickPlaceholder: "How should your name appear",
+    emailLabel: "Contact email",
+    emailHint: "optional · never public",
+    emailPlaceholder: "For future action updates",
+    consent: "If I leave an email, I agree to receive key updates and follow-up about this action",
+    privacy: "Email is used only for this public action. It is never shown, sold, or published.",
+    submit: "Sign the petition",
+    submitting: "Signing…",
+    signedTitle: "You signed the petition",
+    signedBody: "Your name is now part of the action record. Next: help more people see it.",
+    share: "Share this petition",
+    copied: "Link copied",
+    networkErr: "Network error, please try again",
+    genericErr: "Could not sign, please try again",
   },
   form: {
     kicker: "SPEAK UP",
@@ -391,6 +543,7 @@ const es: Dict = {
       "Cuando una empresa de IA envuelve detección, bloqueos, scraping, extracción de conocimiento y doble rasero con lenguaje de seguridad, su deriva antiética y antihumana debe nombrarse.",
     ctaFacts: "Ver los hechos ↓",
     ctaSpeak: "Quiero hablar",
+    ctaPetition: "Firmar la petición",
     stampTop: "OPONERSE",
     stampSub: "SIN CONSENTIR",
     marquee: "Ladrones moralistas, nos negamos a guardar silencio",
@@ -421,6 +574,30 @@ const es: Dict = {
         sourceLabel: "Financial Times",
         sourceUrl:
           "https://www.ft.com/content/ad033063-60f9-4c0c-8d8a-9193a83e6f60",
+      },
+      {
+        date: "2026-07-18",
+        title: "Modelos chinos abiertos presionan a Claude en precio y código",
+        detail:
+          "AP informó que Kimi K3 de Moonshot llegó al primer puesto de Arena en codificación frontend, fue comparado con Claude y ChatGPT, y redujo mucho la presión de precios. DeepSeek, Kimi, Qwen y GLM empujan el mismo mensaje: modelos más baratos, desplegables y suficientemente buenos contra el paquete cerrado premium de Anthropic y OpenAI.",
+        sourceLabel: "AP",
+        sourceUrl: "https://apnews.com/article/0d8a5e268deb11a673f4d444fc597cc5",
+      },
+      {
+        date: "2026-05-14",
+        title: "Anthropic admite que los modelos chinos se acercan a la frontera",
+        detail:
+          "En su informe sobre liderazgo de IA hacia 2028, Anthropic presentó la competencia EE. UU.-China como una carrera estratégica, dijo que los laboratorios chinos no están lejos en inteligencia de modelos y pidió más controles de cómputo y acciones contra la destilación. Bloquea a usuarios chinos mientras trata el avance chino como amenaza central.",
+        sourceLabel: "Anthropic",
+        sourceUrl: "https://www.anthropic.com/research/2028-ai-leadership?hl=en-US",
+      },
+      {
+        date: "2026-03-11",
+        title: "OpenAI persigue la entrada de desarrolladores de Claude Code",
+        detail:
+          "WIRED informó que Claude Code se volvió un motor clave para Anthropic, con más de 2.5 mil millones de dólares de ingresos anualizados; Codex de OpenAI llegó a algo más de 1 mil millón en enero de 2026 y pasó de 5% a cerca de 40% del uso de Claude Code. Anthropic enfrenta presión directa por el flujo de trabajo de desarrolladores, no solo debates de seguridad.",
+        sourceLabel: "WIRED",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/",
       },
       {
         date: "2025-02 a 2025-05",
@@ -481,13 +658,49 @@ const es: Dict = {
     kicker: "POR QUÉ EXISTE",
     title: "No es una disputa técnica. Es una línea moral.",
     body:
-      "Anthropic se beneficia de textos, código, foros, libros y conocimiento web multilingüe de todo el mundo mientras usa el lenguaje de la seguridad para bloquear, detectar y castigar a usuarios reales. Rechazamos la privatización del conocimiento público y la conversión del interés comercial en teatro moral.",
+      "Anthropic se beneficia de textos, código, foros, libros y conocimiento web multilingüe de todo el mundo mientras usa el lenguaje de la seguridad para bloquear, detectar y castigar a usuarios reales. Ahora que OpenAI ataca su entrada a desarrolladores y los modelos chinos cierran la brecha con sistemas abiertos y baratos, tiene aún menos derecho a presentar su ansiedad comercial como superioridad moral.",
     points: [
       "No a la vigilancia disfrazada de seguridad",
       "No a extraer conocimiento global y quedarse con los beneficios",
       "No a traicionar socios después de crecer mediante plataformas de desarrollo",
+      "No a trasladar la presión de OpenAI y de los modelos chinos a usuarios normales",
       "No a excluir selectivamente a usuarios chinos y contribuyentes de la web china",
     ],
+  },
+  petition: {
+    kicker: "ACCIÓN COLECTIVA",
+    title: "Firma. Convierte la indignación en una exigencia común.",
+    description:
+      "No es un contador decorativo. Cada firma se registra de verdad y podrá respaldar una carta abierta, contacto con medios y futuras acciones colectivas.",
+    statementLabel: "DECLARACIÓN",
+    statement:
+      "Exigimos que Anthropic deje de aplicar detecciones, bloqueos y tratos discriminatorios opacos bajo el nombre de seguridad; publique reglas claras de identificación y apelación; y respete a creadores, desarrolladores y contribuyentes del conocimiento global.",
+    demandsTitle: "NUESTRAS TRES EXIGENCIAS",
+    demands: [
+      "Publicar las reglas de detección, suspensión y apelación, y dejar de castigar mediante mecanismos ocultos",
+      "Ofrecer exclusión, consentimiento, atribución y compensación reales para los datos de entrenamiento",
+      "Terminar con la exclusión selectiva y el doble rasero hacia usuarios chinos y la web en chino",
+    ],
+    countLabel: "FIRMAS",
+    countUnit: "personas",
+    nextGoal: (n) => `Próxima meta: ${n.toLocaleString("es-ES")}`,
+    recentTitle: "FIRMAS RECIENTES",
+    emptyRecent: "La petición acaba de abrir. Sé la primera persona en firmar.",
+    nickLabel: "Nombre público / apodo",
+    nickPlaceholder: "Cómo debe aparecer tu nombre",
+    emailLabel: "Correo de contacto",
+    emailHint: "opcional · nunca público",
+    emailPlaceholder: "Para novedades de la acción",
+    consent: "Si dejo mi correo, acepto recibir novedades clave y contacto sobre esta acción",
+    privacy: "El correo solo se usa para esta acción pública. Nunca se muestra, vende ni publica.",
+    submit: "Firmar la petición",
+    submitting: "Firmando…",
+    signedTitle: "Has firmado la petición",
+    signedBody: "Tu nombre ya forma parte del registro. Ahora ayuda a que más gente lo vea.",
+    share: "Compartir la petición",
+    copied: "Enlace copiado",
+    networkErr: "Error de red, inténtalo de nuevo",
+    genericErr: "No se pudo firmar, inténtalo de nuevo",
   },
   form: {
     kicker: "ALZA LA VOZ",

@@ -21,6 +21,8 @@ const comments: Comment[] = [
   },
 ];
 
+const petitionSignatures: Comment[] = [];
+
 export function listComments(limit = 50): Comment[] {
   return comments.slice(-limit).reverse();
 }
@@ -35,4 +37,24 @@ export function addComment(input: NewComment): Comment {
   };
   comments.push(comment);
   return comment;
+}
+
+export function listPetitionSignatures(limit = 12): Comment[] {
+  return petitionSignatures.slice(-limit).reverse();
+}
+
+export function countPetitionSignatures(): number {
+  return petitionSignatures.length;
+}
+
+export function addPetitionSignature(input: NewComment): Comment {
+  const signature: Comment = {
+    id: crypto.randomUUID(),
+    nickname: input.nickname,
+    message: input.message,
+    stickers: [],
+    created_at: new Date().toISOString(),
+  };
+  petitionSignatures.push(signature);
+  return signature;
 }
