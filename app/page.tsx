@@ -1,6 +1,7 @@
 import { LanguageProvider } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Hero from "@/components/Hero";
+import LatestBriefing from "@/components/LatestBriefing";
 import Manifesto from "@/components/Manifesto";
 import Facts from "@/components/Facts";
 import Petition from "@/components/Petition";
@@ -39,6 +40,8 @@ export default async function Home() {
       "AI training data",
       "Chinese internet content",
       "AI ethics",
+      "AI billing security",
+      "AI sandbox escape",
       "anti-ethical AI conduct",
       "web scraping",
     ],
@@ -54,6 +57,7 @@ export default async function Home() {
         <CommentFeed />
         <LanguageSwitcher />
         <Hero />
+        <LatestBriefing />
         <Manifesto />
         <Facts />
         <Petition />

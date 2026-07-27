@@ -28,6 +28,20 @@ interface Fact {
   sourceUrl?: string;
 }
 
+interface BriefSource {
+  label: string;
+  url: string;
+}
+
+interface BriefItem {
+  date: string;
+  status: string;
+  tone: "alert" | "watch" | "verified";
+  title: string;
+  detail: string;
+  sources: BriefSource[];
+}
+
 export interface Dict {
   brand: string;
   hero: {
@@ -41,6 +55,14 @@ export interface Dict {
     stampTop: string;
     stampSub: string;
     marquee: string;
+  };
+  briefing: {
+    kicker: string;
+    updated: string;
+    title: string;
+    description: string;
+    sourceLabel: string;
+    items: BriefItem[];
   };
   facts: {
     kicker: string;
@@ -133,6 +155,92 @@ const zh: Dict = {
     stampTop: "抗议",
     stampSub: "NO CONSENT",
     marquee: "自以为是的小偷，我们拒绝沉默",
+  },
+  briefing: {
+    kicker: "LATEST CASE FILE",
+    updated: "更新至 2026-07-28",
+    title: "“安全”叙事，正在被自己的产品打脸",
+    description:
+      "最新进展按证据强度记录：官方公告说明公司承认了什么，独立报道说明外界验证了什么；尚未证实的“薅羊毛”说法，不包装成事实。",
+    sourceLabel: "来源",
+    items: [
+      {
+        date: "2026-07-27",
+        status: "独立安全研究",
+        tone: "alert",
+        title: "Claude Cowork 本地沙箱可被突破",
+        detail:
+          "研究人员演示了 SharedRoot 攻击链：借助已披露的 Linux 内核漏洞 CVE-2026-46331，Claude Cowork 的本地虚拟机可越过隔离，读写 Mac 宿主机文件。后续版本默认转向云端执行，但选择本地运行的用户仍需确认补丁和挂载权限。",
+        sources: [
+          {
+            label: "TechRadar",
+            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
+          },
+          {
+            label: "The Hacker News",
+            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
+          },
+        ],
+      },
+      {
+        date: "2026-07-24",
+        status: "官方发布 / 风险仍在",
+        tone: "watch",
+        title: "Opus 5 上线，但“最新”不等于风险清零",
+        detail:
+          "Anthropic 将 Opus 5 描述为更安全、更不易被滥用的新模型。可就在此前，能力更强的 Fable 5 曾因网络安全风险被暂停，并在增加安全过滤后重新部署。新版本声明不是独立安全验证，历史处置也不能被发布会覆盖。",
+        sources: [
+          {
+            label: "Reuters",
+            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
+          },
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/redeploying-fable-5",
+          },
+        ],
+      },
+      {
+        date: "2026-04 至 2026-05",
+        status: "计费 / 反欺诈事故",
+        tone: "alert",
+        title: "“Gift Max”异常不是福利，而是支付系统失控",
+        detail:
+          "多名用户报告未经授权的 Gift Max 扣款、幽灵账单和订阅状态错乱。Anthropic 对媒体表示会增加防护，并在识别欺诈购买后取消订阅、发起退款。现有证据支持“异常扣款与礼品订阅欺诈”，并不支持把它写成用户可以合法白嫖的漏洞。",
+        sources: [
+          {
+            label: "The Guardian",
+            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
+          },
+          {
+            label: "GitHub #51404",
+            url: "https://github.com/anthropics/claude-code/issues/51404",
+          },
+        ],
+      },
+      {
+        date: "2026-06 至今",
+        status: "处置争议",
+        tone: "verified",
+        title: "封号和退款可以止损，却不能替代解决问题",
+        detail:
+          "Anthropic 的官方帮助中心确认：被封用户可以申诉，付费用户可以申请退款。公开用户报告则显示，有人遇到订阅被撤销、账户受限和退款同步发生，却没有得到具体原因或人工解决。把钱退回去不等于解释了误判，也没有修好计费和申诉链路。",
+        sources: [
+          {
+            label: "封禁与申诉规则",
+            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
+          },
+          {
+            label: "退款规则",
+            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
+          },
+          {
+            label: "GitHub #24235",
+            url: "https://github.com/anthropics/claude-code/issues/24235",
+          },
+        ],
+      },
+    ],
   },
   facts: {
     kicker: "THE FACTS",
@@ -339,6 +447,92 @@ const en: Dict = {
     stampTop: "OPPOSE",
     stampSub: "NO CONSENT",
     marquee: "Self-righteous thieves, we refuse to stay silent",
+  },
+  briefing: {
+    kicker: "LATEST CASE FILE",
+    updated: "Updated through 2026-07-28",
+    title: "The safety story is colliding with the product record",
+    description:
+      "New developments are logged by evidence level: official statements show what the company acknowledges; independent reporting shows what outsiders verified. Unproven claims of a free-usage exploit are not presented as fact.",
+    sourceLabel: "Sources",
+    items: [
+      {
+        date: "2026-07-27",
+        status: "Independent security research",
+        tone: "alert",
+        title: "Claude Cowork's local sandbox could be escaped",
+        detail:
+          "Researchers demonstrated SharedRoot: using the disclosed Linux kernel flaw CVE-2026-46331, a local Claude Cowork VM could cross its isolation boundary and read or write files on the Mac host. Newer builds default to cloud execution, but local users still need to verify patches and mount permissions.",
+        sources: [
+          {
+            label: "TechRadar",
+            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
+          },
+          {
+            label: "The Hacker News",
+            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
+          },
+        ],
+      },
+      {
+        date: "2026-07-24",
+        status: "Official launch / risk remains",
+        tone: "watch",
+        title: "Opus 5 is new. That does not make risk disappear.",
+        detail:
+          "Anthropic describes Opus 5 as safer and harder to misuse. Yet the more capable Fable 5 had just been suspended over cyber-risk concerns and redeployed with an added safety filter. A launch claim is not independent validation, and the prior intervention remains part of the record.",
+        sources: [
+          {
+            label: "Reuters",
+            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
+          },
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/redeploying-fable-5",
+          },
+        ],
+      },
+      {
+        date: "2026-04 to 2026-05",
+        status: "Billing / fraud incident",
+        tone: "alert",
+        title: "The Gift Max anomaly was not a perk; it was payment-system failure",
+        detail:
+          "Users reported unauthorized Gift Max charges, phantom invoices, and broken subscription state. Anthropic told the press it was adding protections and would cancel and refund purchases identified as fraudulent. Available evidence supports a billing and gift-subscription fraud problem—not a legitimate way for users to obtain free service.",
+        sources: [
+          {
+            label: "The Guardian",
+            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
+          },
+          {
+            label: "GitHub #51404",
+            url: "https://github.com/anthropics/claude-code/issues/51404",
+          },
+        ],
+      },
+      {
+        date: "2026-06 onward",
+        status: "Remedy dispute",
+        tone: "verified",
+        title: "Bans and refunds limit damage; they do not solve the failure",
+        detail:
+          "Anthropic's help center confirms that banned users may appeal and paid users may request refunds. Public issue reports describe subscriptions revoked, accounts restricted, and refunds issued together without a specific explanation or human resolution. Returning money does not explain a false positive or repair billing and appeals.",
+        sources: [
+          {
+            label: "Safeguards & appeals",
+            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
+          },
+          {
+            label: "Refund policy",
+            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
+          },
+          {
+            label: "GitHub #24235",
+            url: "https://github.com/anthropics/claude-code/issues/24235",
+          },
+        ],
+      },
+    ],
   },
   facts: {
     kicker: "THE FACTS",
@@ -547,6 +741,92 @@ const es: Dict = {
     stampTop: "OPONERSE",
     stampSub: "SIN CONSENTIR",
     marquee: "Ladrones moralistas, nos negamos a guardar silencio",
+  },
+  briefing: {
+    kicker: "EXPEDIENTE MÁS RECIENTE",
+    updated: "Actualizado hasta 2026-07-28",
+    title: "El relato de seguridad choca con el historial del producto",
+    description:
+      "Las novedades se registran según la fuerza de la evidencia: los comunicados oficiales muestran lo que la empresa reconoce y las fuentes independientes, lo que se ha verificado fuera. Un supuesto fallo para usar el servicio gratis no se presenta como hecho sin pruebas.",
+    sourceLabel: "Fuentes",
+    items: [
+      {
+        date: "2026-07-27",
+        status: "Investigación de seguridad independiente",
+        tone: "alert",
+        title: "Era posible escapar del sandbox local de Claude Cowork",
+        detail:
+          "Investigadores demostraron SharedRoot: mediante el fallo de Linux CVE-2026-46331, una VM local de Claude Cowork podía superar el aislamiento y leer o escribir archivos del Mac anfitrión. Las versiones nuevas usan la nube por defecto, pero quienes ejecutan localmente aún deben verificar parches y permisos.",
+        sources: [
+          {
+            label: "TechRadar",
+            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
+          },
+          {
+            label: "The Hacker News",
+            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
+          },
+        ],
+      },
+      {
+        date: "2026-07-24",
+        status: "Lanzamiento oficial / riesgo vigente",
+        tone: "watch",
+        title: "Opus 5 es nuevo; eso no elimina el riesgo",
+        detail:
+          "Anthropic presenta Opus 5 como más seguro y difícil de usar indebidamente. Sin embargo, Fable 5 acababa de ser suspendido por preocupaciones de ciberseguridad y fue redesplegado con un filtro adicional. Una afirmación de lanzamiento no es una validación independiente.",
+        sources: [
+          {
+            label: "Reuters",
+            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
+          },
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/redeploying-fable-5",
+          },
+        ],
+      },
+      {
+        date: "2026-04 a 2026-05",
+        status: "Incidente de cobro / fraude",
+        tone: "alert",
+        title: "La anomalía Gift Max no era un regalo, sino un fallo de pagos",
+        detail:
+          "Usuarios denunciaron cargos Gift Max no autorizados, facturas fantasma y estados de suscripción rotos. Anthropic dijo que añadiría protecciones y cancelaría y reembolsaría compras identificadas como fraudulentas. La evidencia disponible apunta a fraude y fallos de facturación, no a una vía legítima para usar el servicio gratis.",
+        sources: [
+          {
+            label: "The Guardian",
+            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
+          },
+          {
+            label: "GitHub #51404",
+            url: "https://github.com/anthropics/claude-code/issues/51404",
+          },
+        ],
+      },
+      {
+        date: "Desde 2026-06",
+        status: "Disputa sobre la solución",
+        tone: "verified",
+        title: "Bloquear y reembolsar reduce el daño; no resuelve el fallo",
+        detail:
+          "El centro de ayuda confirma que los usuarios bloqueados pueden apelar y los clientes de pago pueden pedir reembolsos. Informes públicos describen suscripciones anuladas, cuentas restringidas y reembolsos simultáneos sin explicación concreta ni resolución humana.",
+        sources: [
+          {
+            label: "Bloqueos y apelaciones",
+            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
+          },
+          {
+            label: "Política de reembolso",
+            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
+          },
+          {
+            label: "GitHub #24235",
+            url: "https://github.com/anthropics/claude-code/issues/24235",
+          },
+        ],
+      },
+    ],
   },
   facts: {
     kicker: "LOS HECHOS",

@@ -36,10 +36,18 @@ export default function CommentFeed() {
 
   useEffect(() => {
     let cancelled = false;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    let controller: AbortController | undefined;
+    const desktopQuery = window.matchMedia("(min-width: 640px)");
 
     async function poll() {
+      controller?.abort();
+      controller = new AbortController();
       try {
-        const res = await fetch("/api/comments", { cache: "no-store" });
+        const res = await fetch("/api/comments", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
         if (!res.ok || cancelled) return;
         const data = (await res.json()) as { comments: Comment[] };
 
@@ -59,16 +67,36 @@ export default function CommentFeed() {
       }
     }
 
-    poll();
-    const timer = setInterval(poll, 4000);
+    function startPolling() {
+      if (timer || document.hidden || !desktopQuery.matches) return;
+      void poll();
+      timer = setInterval(poll, 8000);
+    }
+
+    function stopPolling() {
+      if (timer) clearInterval(timer);
+      timer = undefined;
+      controller?.abort();
+    }
+
+    function handleVisibilityChange() {
+      if (document.hidden || !desktopQuery.matches) stopPolling();
+      else startPolling();
+    }
+
+    startPolling();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    desktopQuery.addEventListener("change", handleVisibilityChange);
     return () => {
       cancelled = true;
-      clearInterval(timer);
+      stopPolling();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      desktopQuery.removeEventListener("change", handleVisibilityChange);
     };
   }, []);
 
   return (
-    <aside className="fixed right-4 top-4 z-50 w-56 max-w-[70vw] md:w-64">
+    <aside className="fixed right-4 top-4 z-50 hidden w-56 max-w-[70vw] sm:block md:w-64">
       <div className="overflow-hidden border border-white/[0.12] bg-black/[0.08] shadow-[3px_3px_0_rgba(255,51,65,0.65)]">
         <div className="flex items-center gap-2.5 border-b border-white/[0.1] bg-black/[0.16] px-4 py-3">
           <span className="relative flex h-2 w-2">

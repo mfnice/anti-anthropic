@@ -7,7 +7,7 @@ export default function LanguageSwitcher() {
   const { locale, setLocale } = useI18n();
 
   return (
-    <div className="font-mono-geek fixed bottom-5 left-5 z-50 flex items-center gap-0.5 border border-white/[0.14] bg-[#0e0e10]/85 p-[3px] backdrop-blur-xl">
+    <div className="font-mono-geek fixed bottom-5 right-5 z-50 flex items-center gap-0.5 border border-white/[0.14] bg-[#0e0e10]/85 p-[3px] backdrop-blur-xl">
       {LOCALES.map((l) => (
         <button
           key={l}

@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import { useI18n } from "./LanguageProvider";
 
 // 站长可配置的首屏视频位；留空则回退到 hero-bg.jpg / hero-bg.svg
 const videoUrl = process.env.NEXT_PUBLIC_HERO_VIDEO_URL;
-const localDarioUrl = "/dario.webp";
-const localDarioFallbackUrl = "/dario.png";
-const fallbackDarioUrl =
-  "https://cdn.prod.website-files.com/67ed58c92cfedc451ebbbca1/689a240f28a630c1b560618f_Anthropic-dario-amodei-p-800.jpg";
 
 export default function Hero() {
   const { locale, t } = useI18n();
-  const [showDario, setShowDario] = useState(true);
-  const [darioSrc, setDarioSrc] = useState(localDarioUrl);
   const titleLines = t.hero.titlePre.split("\n");
   const isZh = locale === "zh";
   const verdictLines = titleLines.map((line) =>
@@ -50,7 +44,7 @@ export default function Hero() {
 
       {/* 顶部品牌条 */}
       <header className="relative z-10 flex items-center gap-3 px-6 py-5 md:px-10">
-        <img src="/logo.svg" alt="" className="h-7 w-7" />
+        <Image src="/logo.svg" alt="" width={28} height={28} />
         <span className="text-sm font-bold tracking-widest">{t.brand}</span>
         <span className="font-mono-geek text-[11px] tracking-[0.3em] text-[#6b6b6b]">
           ANTHROPIC_PROTEST // v4
@@ -147,32 +141,23 @@ export default function Hero() {
           </div>
         </div>
 
-        {showDario && (
-          <aside className="relative hidden self-center lg:block">
-            <div className="absolute -inset-4 border border-accent/30 rotate-2" />
-            <figure className="relative overflow-hidden border-2 border-white/25 bg-black shadow-[12px_12px_0_rgba(255,51,65,0.45)] rotate-[-1.5deg]">
-              <img
-                src={darioSrc}
-                alt="Dario Amodei"
-                onError={() => {
-                  if (darioSrc === localDarioUrl) {
-                    setDarioSrc(localDarioFallbackUrl);
-                    return;
-                  }
-                  if (darioSrc === localDarioFallbackUrl) {
-                    setDarioSrc(fallbackDarioUrl);
-                    return;
-                  }
-                  setShowDario(false);
-                }}
-                className="h-[460px] w-full object-cover grayscale contrast-125"
-              />
-              <figcaption className="font-mono-geek absolute inset-x-0 bottom-0 border-t border-accent/60 bg-black/78 px-4 py-3 text-[11px] font-bold tracking-[0.22em] text-neutral-300 backdrop-blur-sm">
-                DARIO AMODEI / ANTHROPIC CEO
-              </figcaption>
-            </figure>
-          </aside>
-        )}
+        <aside className="relative hidden self-center lg:block">
+          <div className="absolute -inset-4 border border-accent/30 rotate-2" />
+          <figure className="relative overflow-hidden border-2 border-white/25 bg-black shadow-[12px_12px_0_rgba(255,51,65,0.45)] rotate-[-1.5deg]">
+            <Image
+              src="/dario.webp"
+              alt="Dario Amodei"
+              width={1200}
+              height={663}
+              sizes="360px"
+              loading="eager"
+              className="h-[460px] w-full object-cover grayscale contrast-125"
+            />
+            <figcaption className="font-mono-geek absolute inset-x-0 bottom-0 border-t border-accent/60 bg-black/78 px-4 py-3 text-[11px] font-bold tracking-[0.22em] text-neutral-300 backdrop-blur-sm">
+              DARIO AMODEI / ANTHROPIC CEO
+            </figcaption>
+          </figure>
+        </aside>
       </div>
 
       {/* 红色印章 */}
