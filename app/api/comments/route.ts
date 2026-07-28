@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
-import { addComment, listComments } from "@/lib/memory-store";
+import { addComment, countComments, listComments } from "@/lib/memory-store";
 import { checkAndRecordPost, getClientMeta } from "@/lib/request-guard";
 import { sanitizeStickerIds } from "@/lib/stickers";
 import type { Comment } from "@/lib/types";
@@ -17,9 +17,9 @@ export async function GET() {
 
   if (supabase) {
     // 只查公开字段，email 永远不出库
-    const { data, error } = await supabase
+    const { data, error, count } = await supabase
       .from("comments")
-      .select(SELECT)
+      .select(SELECT, { count: "exact" })
       .neq("message", PETITION_MARKER)
       .order("created_at", { ascending: false })
       .limit(50);
@@ -27,10 +27,16 @@ export async function GET() {
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
-    return NextResponse.json({ comments: data as Comment[] });
+    return NextResponse.json({
+      comments: data as Comment[],
+      count: count ?? data?.length ?? 0,
+    });
   }
 
-  return NextResponse.json({ comments: listComments() });
+  return NextResponse.json({
+    comments: listComments(),
+    count: countComments(),
+  });
 }
 
 export async function POST(request: Request) {

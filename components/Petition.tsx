@@ -44,7 +44,7 @@ export default function Petition() {
   const [copied, setCopied] = useState(false);
 
   const goal = useMemo(() => nextMilestone(data.count), [data.count]);
-  const progress = Math.min(100, Math.max(3, (data.count / goal) * 100));
+  const progress = Math.min(100, Math.max(0, (data.count / goal) * 100));
 
   const load = useCallback(async () => {
     try {
@@ -144,27 +144,44 @@ export default function Petition() {
               </p>
             </div>
 
-            <div className="border border-accent/45 bg-black/25 p-5 shadow-[8px_8px_0_rgba(255,51,65,0.18)]">
-              <p className="font-mono-geek text-[10px] font-bold tracking-[0.3em] text-neutral-500">
+            <div className="relative overflow-hidden border-2 border-accent bg-[#080809] p-6 shadow-[10px_10px_0_rgba(255,51,65,0.3)]">
+              <span
+                aria-hidden
+                className="font-display pointer-events-none absolute -right-2 -top-5 text-[88px] leading-none text-white/[0.035]"
+              >
+                COUNT
+              </span>
+              <div className="relative flex items-center justify-between gap-4">
+                <p className="font-mono-geek text-[10px] font-bold tracking-[0.3em] text-accent">
                 {t.petition.countLabel}
-              </p>
-              <p className="mt-2 flex items-end gap-3">
-                <span className="font-display text-6xl leading-none text-white md:text-7xl">
+                </p>
+                <span className="font-mono-geek inline-flex items-center gap-2 border border-white/15 bg-white/[0.04] px-2 py-1 text-[9px] font-bold tracking-[0.18em] text-neutral-400">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+                  {t.petition.liveCount}
+                </span>
+              </div>
+              <p className="relative mt-4 flex items-end gap-3">
+                <span className="font-display text-[clamp(72px,8vw,112px)] leading-[0.78] tabular-nums text-white">
                   {data.count.toLocaleString(locale === "zh" ? "zh-CN" : locale)}
                 </span>
-                <span className="pb-1 text-sm text-neutral-500">
+                <span className="pb-1 text-sm font-black tracking-[0.18em] text-accent">
                   {t.petition.countUnit}
                 </span>
               </p>
-              <div className="mt-5 h-2 overflow-hidden bg-white/10">
+              <div className="relative mt-7 h-3 overflow-hidden border border-white/10 bg-white/[0.06]">
                 <div
-                  className="petition-progress h-full bg-accent"
+                  className="petition-progress h-full bg-[repeating-linear-gradient(135deg,#ff3341_0_8px,#d51f2c_8px_16px)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="font-mono-geek mt-2 text-[10px] tracking-[0.18em] text-neutral-500">
-                {t.petition.nextGoal(goal)}
-              </p>
+              <div className="relative mt-3 flex items-center justify-between gap-4">
+                <p className="font-mono-geek text-[10px] tracking-[0.18em] text-neutral-500">
+                  {t.petition.nextGoal(goal)}
+                </p>
+                <span className="font-mono-geek text-[10px] font-bold tabular-nums text-neutral-300">
+                  {Math.round(progress)}%
+                </span>
+              </div>
             </div>
           </div>
         </Reveal>

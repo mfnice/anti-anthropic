@@ -32,6 +32,10 @@ export function listComments(limit = 50): Comment[] {
   return comments.slice(-limit).reverse();
 }
 
+export function countComments(): number {
+  return comments.length;
+}
+
 export function addComment(input: NewComment): Comment {
   const comment: Comment = {
     id: crypto.randomUUID(),

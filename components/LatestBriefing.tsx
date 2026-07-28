@@ -74,10 +74,26 @@ export default function LatestBriefing() {
             const tone = toneClasses[item.tone];
 
             return (
-              <Reveal key={`${item.date}-${item.title}`} delay={index * 80}>
+              <Reveal
+                key={`${item.date}-${item.title}`}
+                delay={index * 80}
+                className={index === 0 ? "md:col-span-2" : undefined}
+              >
                 <article
-                  className={`group relative h-full border border-transparent bg-[#111114] p-6 transition duration-300 md:p-8 ${tone.edge}`}
+                  className={`group relative h-full overflow-hidden border border-transparent bg-[#111114] p-6 transition duration-300 md:p-8 ${
+                    index === 0
+                      ? "border-accent/55 bg-[linear-gradient(115deg,rgba(255,51,65,.1),#111114_48%)]"
+                      : ""
+                  } ${tone.edge}`}
                 >
+                  {index === 0 && (
+                    <span
+                      aria-hidden
+                      className="font-display pointer-events-none absolute -right-3 -top-5 text-[110px] leading-none text-white/[0.035]"
+                    >
+                      NEW
+                    </span>
+                  )}
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <p className="font-mono-geek text-[11px] font-bold tracking-[0.2em] text-neutral-500">
                       {item.date}
@@ -90,15 +106,25 @@ export default function LatestBriefing() {
                     </span>
                   </div>
 
-                  <p className="font-display mt-7 text-[46px] leading-none text-white/[0.055]">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="-mt-4 max-w-xl text-xl font-black leading-snug text-neutral-100 md:text-2xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-neutral-400">
-                    {item.detail}
-                  </p>
+                  <div
+                    className={
+                      index === 0
+                        ? "mt-7 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end"
+                        : ""
+                    }
+                  >
+                    <div>
+                      <p className="font-display text-[46px] leading-none text-white/[0.055]">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <h3 className="-mt-4 max-w-xl text-xl font-black leading-snug text-neutral-100 md:text-2xl">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="mt-4 text-sm leading-7 text-neutral-400 lg:mt-0">
+                      {item.detail}
+                    </p>
+                  </div>
 
                   <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/[0.08] pt-5">
                     <span className="font-mono-geek text-[9px] font-bold tracking-[0.22em] text-neutral-600">

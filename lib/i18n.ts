@@ -89,6 +89,7 @@ export interface Dict {
     demands: string[];
     countLabel: string;
     countUnit: string;
+    liveCount: string;
     nextGoal: (n: number) => string;
     recentTitle: string;
     emptyRecent: string;
@@ -133,6 +134,9 @@ export interface Dict {
   feed: {
     title: string;
     empty: string;
+    live: string;
+    countLabel: string;
+    latestLabel: (n: number) => string;
     now: string;
     minutesAgo: (n: number) => string;
     hoursAgo: (n: number) => string;
@@ -164,6 +168,20 @@ const zh: Dict = {
       "最新进展按证据强度记录：官方公告说明公司承认了什么，独立报道说明外界验证了什么；尚未证实的“薅羊毛”说法，不包装成事实。",
     sourceLabel: "来源",
     items: [
+      {
+        date: "2026-07-28",
+        status: "最新核验 / 隐私提示",
+        tone: "alert",
+        title: "公开分享的 Claude 内容进入 Google 搜索",
+        detail:
+          "Axios 在 Google 结果中找到了用户公开分享的 Claude artifacts，包括应用、文档、表格和基础设施图；报道没有发现默认私密对话被索引。Anthropic 称，内容只有在用户生成公开链接、又把链接放到搜索引擎可见的位置后才可被搜索。问题仍然真实：不可猜的链接不是访问控制，面向少数人的“分享”也可能变成全网可检索。",
+        sources: [
+          {
+            label: "Axios",
+            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
+          },
+        ],
+      },
       {
         date: "2026-07-27",
         status: "独立安全研究",
@@ -377,6 +395,7 @@ const zh: Dict = {
     ],
     countLabel: "已加入联署",
     countUnit: "人",
+    liveCount: "实时真实计数",
     nextGoal: (n) => `下一阶段目标：${n.toLocaleString("zh-CN")} 人`,
     recentTitle: "刚刚加入的人",
     emptyRecent: "联署刚刚开始，成为第一个留下名字的人",
@@ -425,6 +444,9 @@ const zh: Dict = {
   feed: {
     title: "大家正在说",
     empty: "还没有留言，来做第一个",
+    live: "直播",
+    countLabel: "公开留言总数",
+    latestLabel: (n) => `正在显示最新 ${n} 条`,
     now: "刚刚",
     minutesAgo: (n) => `${n} 分钟前`,
     hoursAgo: (n) => `${n} 小时前`,
@@ -456,6 +478,20 @@ const en: Dict = {
       "New developments are logged by evidence level: official statements show what the company acknowledges; independent reporting shows what outsiders verified. Unproven claims of a free-usage exploit are not presented as fact.",
     sourceLabel: "Sources",
     items: [
+      {
+        date: "2026-07-28",
+        status: "Latest check / privacy warning",
+        tone: "alert",
+        title: "Publicly shared Claude artifacts appeared in Google Search",
+        detail:
+          "Axios found publicly shared Claude artifacts—including apps, documents, spreadsheets, and infrastructure diagrams—in Google results, but did not find private-by-default chats indexed. Anthropic says content becomes searchable only after a user creates a public link and posts it somewhere a crawler can see. The risk is still real: an unguessable link is not access control, and a limited handoff can become web-searchable.",
+        sources: [
+          {
+            label: "Axios",
+            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
+          },
+        ],
+      },
       {
         date: "2026-07-27",
         status: "Independent security research",
@@ -669,6 +705,7 @@ const en: Dict = {
     ],
     countLabel: "SIGNATURES",
     countUnit: "people",
+    liveCount: "LIVE VERIFIED TOTAL",
     nextGoal: (n) => `Next milestone: ${n.toLocaleString("en-US")}`,
     recentTitle: "RECENT SIGNERS",
     emptyRecent: "The petition just opened. Be the first to sign.",
@@ -718,6 +755,9 @@ const en: Dict = {
   feed: {
     title: "People are talking",
     empty: "No messages yet — be the first",
+    live: "LIVE",
+    countLabel: "PUBLIC MESSAGES",
+    latestLabel: (n) => `Showing latest ${n}`,
     now: "just now",
     minutesAgo: (n) => `${n} min ago`,
     hoursAgo: (n) => `${n} h ago`,
@@ -750,6 +790,20 @@ const es: Dict = {
       "Las novedades se registran según la fuerza de la evidencia: los comunicados oficiales muestran lo que la empresa reconoce y las fuentes independientes, lo que se ha verificado fuera. Un supuesto fallo para usar el servicio gratis no se presenta como hecho sin pruebas.",
     sourceLabel: "Fuentes",
     items: [
+      {
+        date: "2026-07-28",
+        status: "Última verificación / privacidad",
+        tone: "alert",
+        title: "Contenido público de Claude apareció en Google",
+        detail:
+          "Axios encontró artifacts de Claude compartidos públicamente —aplicaciones, documentos, hojas de cálculo y diagramas de infraestructura— en resultados de Google, pero no halló chats privados por defecto indexados. Anthropic afirma que el contenido solo se vuelve localizable cuando alguien crea un enlace público y lo publica donde un rastreador puede verlo. El riesgo sigue siendo real: un enlace difícil de adivinar no es control de acceso.",
+        sources: [
+          {
+            label: "Axios",
+            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
+          },
+        ],
+      },
       {
         date: "2026-07-27",
         status: "Investigación de seguridad independiente",
@@ -963,6 +1017,7 @@ const es: Dict = {
     ],
     countLabel: "FIRMAS",
     countUnit: "personas",
+    liveCount: "TOTAL REAL EN VIVO",
     nextGoal: (n) => `Próxima meta: ${n.toLocaleString("es-ES")}`,
     recentTitle: "FIRMAS RECIENTES",
     emptyRecent: "La petición acaba de abrir. Sé la primera persona en firmar.",
@@ -1012,6 +1067,9 @@ const es: Dict = {
   feed: {
     title: "La gente está hablando",
     empty: "Aún no hay mensajes, sé el primero",
+    live: "EN VIVO",
+    countLabel: "MENSAJES PÚBLICOS",
+    latestLabel: (n) => `Mostrando los últimos ${n}`,
     now: "ahora mismo",
     minutesAgo: (n) => `hace ${n} min`,
     hoursAgo: (n) => `hace ${n} h`,

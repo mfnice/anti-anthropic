@@ -29,8 +29,9 @@ function timeAgo(iso: string, feed: Dict["feed"]) {
  * 之后接入 Supabase Realtime 可以改为推送，见 README。
  */
 export default function CommentFeed() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const [comments, setComments] = useState<Comment[]>([]);
+  const [total, setTotal] = useState(0);
   const knownIds = useRef(new Set<string>());
   const [newIds, setNewIds] = useState<Set<string>>(new Set());
 
@@ -49,7 +50,10 @@ export default function CommentFeed() {
           signal: controller.signal,
         });
         if (!res.ok || cancelled) return;
-        const data = (await res.json()) as { comments: Comment[] };
+        const data = (await res.json()) as {
+          comments: Comment[];
+          count?: number;
+        };
 
         const fresh = new Set<string>();
         for (const c of data.comments) {
@@ -60,6 +64,7 @@ export default function CommentFeed() {
         }
         if (!cancelled) {
           setComments(data.comments);
+          setTotal(data.count ?? data.comments.length);
           setNewIds(fresh);
         }
       } catch {
@@ -96,9 +101,13 @@ export default function CommentFeed() {
   }, []);
 
   return (
-    <aside className="fixed right-4 top-4 z-50 hidden w-56 max-w-[70vw] sm:block md:w-64">
-      <div className="overflow-hidden border border-white/[0.12] bg-black/[0.08] shadow-[3px_3px_0_rgba(255,51,65,0.65)]">
-        <div className="flex items-center gap-2.5 border-b border-white/[0.1] bg-black/[0.16] px-4 py-3">
+    <aside className="fixed right-4 top-4 z-50 hidden w-72 max-w-[78vw] sm:block md:w-80">
+      <div className="relative overflow-hidden border border-accent/55 bg-[#09090a]/94 shadow-[8px_8px_0_rgba(255,51,65,0.5)] backdrop-blur-xl">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent"
+        />
+        <div className="flex items-center gap-2.5 border-b border-white/[0.12] bg-white/[0.035] px-4 py-3">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
@@ -109,12 +118,26 @@ export default function CommentFeed() {
           <span className="text-sm font-semibold text-neutral-200">
             {t.feed.title}
           </span>
-          <span className="font-mono-geek ml-auto text-xs tabular-nums text-neutral-500">
-            {comments.length}
+          <span className="font-mono-geek ml-auto border border-accent/40 bg-accent/10 px-2 py-1 text-[10px] font-bold tabular-nums text-accent">
+            {t.feed.live}
           </span>
         </div>
 
-        <ul className="feed-scroll relative max-h-72 space-y-1.5 overflow-y-auto p-2.5">
+        <div className="grid grid-cols-[1fr_auto] items-end border-b border-white/[0.1] px-4 py-4">
+          <div>
+            <p className="font-mono-geek text-[9px] font-bold tracking-[0.25em] text-neutral-500">
+              {t.feed.countLabel}
+            </p>
+            <p className="font-display mt-1 text-5xl leading-none tabular-nums text-white">
+              {total.toLocaleString(locale === "zh" ? "zh-CN" : locale)}
+            </p>
+          </div>
+          <p className="pb-1 text-right text-[10px] leading-4 text-neutral-500">
+            {t.feed.latestLabel(comments.length)}
+          </p>
+        </div>
+
+        <ul className="feed-scroll relative max-h-80 space-y-2 overflow-y-auto p-3">
           {comments.length === 0 && (
             <li className="py-8 text-center text-sm text-neutral-500">
               {t.feed.empty}
@@ -123,13 +146,13 @@ export default function CommentFeed() {
           {comments.map((c) => (
             <li
               key={c.id}
-              className={`flex gap-2.5 rounded-lg bg-black/[0.16] px-2.5 py-2 transition hover:bg-black/[0.28] ${
+              className={`flex gap-3 border border-white/[0.08] bg-white/[0.035] px-3 py-2.5 transition hover:border-accent/35 hover:bg-accent/[0.04] ${
                 newIds.has(c.id) ? "comment-enter" : ""
               }`}
             >
               <span
                 aria-hidden
-                className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center text-xs font-bold text-white"
+                className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border border-white/20 text-xs font-bold text-white shadow-[2px_2px_0_rgba(255,255,255,0.15)]"
                 style={{
                   background: `hsl(${hueOf(c.nickname)} 60% 45%)`,
                 }}
@@ -138,14 +161,14 @@ export default function CommentFeed() {
               </span>
               <div className="min-w-0">
                 <p className="flex items-baseline gap-2">
-                  <span className="truncate text-xs font-semibold text-neutral-300">
+                  <span className="truncate text-xs font-bold text-neutral-200">
                     {c.nickname}
                   </span>
-                  <span className="shrink-0 text-[10px] text-neutral-600">
+                  <span className="shrink-0 font-mono-geek text-[9px] text-neutral-600">
                     {timeAgo(c.created_at, t.feed)}
                   </span>
                 </p>
-                <p className="break-words text-sm leading-snug text-neutral-100">
+                <p className="mt-0.5 break-words text-sm leading-relaxed text-neutral-100">
                   {c.message}
                 </p>
                 {c.stickers?.length > 0 && (
@@ -160,8 +183,7 @@ export default function CommentFeed() {
           ))}
         </ul>
 
-        {/* 底部渐隐 */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="h-1 bg-[linear-gradient(90deg,#ff3341_0_62%,rgba(255,255,255,.12)_62%)]" />
       </div>
     </aside>
   );

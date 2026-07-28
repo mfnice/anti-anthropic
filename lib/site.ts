@@ -8,7 +8,7 @@ export const siteTitle =
   "Anthropic Protest File | Claude 安全、支付与封号争议档案";
 
 export const siteDescription =
-  "持续核验 Anthropic 与 Claude 争议：最新模型安全、Claude Cowork 沙箱逃逸、Gift Max 异常扣款、封号退款、Claude Code 检测、训练数据抓取与用户申诉。";
+  "持续核验 Anthropic 与 Claude 争议：公开分享内容被搜索引擎索引、模型安全、Claude Cowork 沙箱逃逸、Gift Max 异常扣款、封号退款、训练数据抓取与用户申诉。";
 
 export const siteKeywords = [
   "Anthropic",
@@ -33,6 +33,9 @@ export const siteKeywords = [
   "Claude Opus 5",
   "Claude Fable 5",
   "Claude Cowork",
+  "Claude public links",
+  "Claude privacy",
+  "Google indexing",
   "Gift Max",
   "AI 支付安全",
   "Claude 封号退款",
