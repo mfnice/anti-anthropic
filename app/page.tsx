@@ -2,6 +2,7 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Hero from "@/components/Hero";
 import LatestBriefing from "@/components/LatestBriefing";
+import AINews from "@/components/AINews";
 import Manifesto from "@/components/Manifesto";
 import Facts from "@/components/Facts";
 import Petition from "@/components/Petition";
@@ -58,6 +59,7 @@ export default async function Home() {
         <LanguageSwitcher />
         <Hero />
         <LatestBriefing />
+        <AINews />
         <Manifesto />
         <Facts />
         <Petition />
