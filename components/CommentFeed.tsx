@@ -133,7 +133,9 @@ export default function CommentFeed() {
             </p>
           </div>
           <p className="pb-1 text-right text-[10px] leading-4 text-neutral-500">
-            {t.feed.latestLabel(comments.length)}
+            {t.feed.latestLabel(
+              comments.filter((comment) => !comment.is_placeholder).length
+            )}
           </p>
         </div>
 
@@ -146,8 +148,12 @@ export default function CommentFeed() {
           {comments.map((c) => (
             <li
               key={c.id}
-              className={`flex gap-3 border border-white/[0.08] bg-white/[0.035] px-3 py-2.5 transition hover:border-accent/35 hover:bg-accent/[0.04] ${
-                newIds.has(c.id) ? "comment-enter" : ""
+              className={`flex gap-3 border px-3 py-2.5 transition ${
+                c.is_placeholder
+                  ? "border-dashed border-white/[0.1] bg-white/[0.018]"
+                  : "border-white/[0.08] bg-white/[0.035] hover:border-accent/35 hover:bg-accent/[0.04]"
+              } ${
+                newIds.has(c.id) && !c.is_placeholder ? "comment-enter" : ""
               }`}
             >
               <span
@@ -162,14 +168,21 @@ export default function CommentFeed() {
               <div className="min-w-0">
                 <p className="flex items-baseline gap-2">
                   <span className="truncate text-xs font-bold text-neutral-200">
-                    {c.nickname}
+                    {c.is_placeholder ? t.feed.placeholderAuthor : c.nickname}
                   </span>
+                  {c.is_placeholder && (
+                    <span className="shrink-0 border border-white/[0.12] px-1.5 py-0.5 font-mono-geek text-[8px] tracking-[0.12em] text-neutral-500">
+                      {t.feed.placeholderLabel}
+                    </span>
+                  )}
                   <span className="shrink-0 font-mono-geek text-[9px] text-neutral-600">
                     {timeAgo(c.created_at, t.feed)}
                   </span>
                 </p>
                 <p className="mt-0.5 break-words text-sm leading-relaxed text-neutral-100">
-                  {c.message}
+                  {c.is_placeholder
+                    ? (t.feed.placeholderMessages[c.id] ?? c.message)
+                    : c.message}
                 </p>
                 {c.stickers?.length > 0 && (
                   <div className="mt-1 flex flex-wrap items-center gap-1">

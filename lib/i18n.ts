@@ -137,6 +137,9 @@ export interface Dict {
     live: string;
     countLabel: string;
     latestLabel: (n: number) => string;
+    placeholderLabel: string;
+    placeholderAuthor: string;
+    placeholderMessages: Record<string, string>;
     now: string;
     minutesAgo: (n: number) => string;
     hoursAgo: (n: number) => string;
@@ -445,8 +448,16 @@ const zh: Dict = {
     title: "大家正在说",
     empty: "还没有留言，来做第一个",
     live: "直播",
-    countLabel: "公开留言总数",
-    latestLabel: (n) => `正在显示最新 ${n} 条`,
+    countLabel: "累计发声",
+    latestLabel: (n) => `近 7 天留言 · ${n} 条`,
+    placeholderLabel: "提示",
+    placeholderAuthor: "留言墙提示",
+    placeholderMessages: {
+      "wall-note-window": "这里展示最近 7 天内的公开留言。",
+      "wall-note-archive": "留言满 7 天后会从墙上隐藏，累计发声数仍会保留。",
+      "wall-note-facts": "欢迎分享亲身经历，也请尽量附上可核验的信息。",
+      "wall-note-respect": "请围绕事实讨论，不公开他人的私人信息。",
+    },
     now: "刚刚",
     minutesAgo: (n) => `${n} 分钟前`,
     hoursAgo: (n) => `${n} 小时前`,
@@ -756,8 +767,19 @@ const en: Dict = {
     title: "People are talking",
     empty: "No messages yet — be the first",
     live: "LIVE",
-    countLabel: "PUBLIC MESSAGES",
-    latestLabel: (n) => `Showing latest ${n}`,
+    countLabel: "VOICES RAISED",
+    latestLabel: (n) => `Past 7 days · ${n} messages`,
+    placeholderLabel: "NOTE",
+    placeholderAuthor: "Wall notice",
+    placeholderMessages: {
+      "wall-note-window": "This wall shows public messages from the past 7 days.",
+      "wall-note-archive":
+        "Messages leave the wall after 7 days, while the cumulative voice count remains.",
+      "wall-note-facts":
+        "Share firsthand experiences and include verifiable information when possible.",
+      "wall-note-respect":
+        "Keep the discussion factual and do not post anyone's private information.",
+    },
     now: "just now",
     minutesAgo: (n) => `${n} min ago`,
     hoursAgo: (n) => `${n} h ago`,
@@ -1068,8 +1090,20 @@ const es: Dict = {
     title: "La gente está hablando",
     empty: "Aún no hay mensajes, sé el primero",
     live: "EN VIVO",
-    countLabel: "MENSAJES PÚBLICOS",
-    latestLabel: (n) => `Mostrando los últimos ${n}`,
+    countLabel: "VOCES ALZADAS",
+    latestLabel: (n) => `Últimos 7 días · ${n} mensajes`,
+    placeholderLabel: "NOTA",
+    placeholderAuthor: "Aviso del muro",
+    placeholderMessages: {
+      "wall-note-window":
+        "Este muro muestra los mensajes públicos de los últimos 7 días.",
+      "wall-note-archive":
+        "Los mensajes se ocultan del muro tras 7 días, pero el total acumulado se conserva.",
+      "wall-note-facts":
+        "Comparte experiencias directas e incluye información verificable cuando sea posible.",
+      "wall-note-respect":
+        "Habla sobre hechos y no publiques información privada de otras personas.",
+    },
     now: "ahora mismo",
     minutesAgo: (n) => `hace ${n} min`,
     hoursAgo: (n) => `hace ${n} h`,

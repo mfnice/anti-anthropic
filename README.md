@@ -38,7 +38,9 @@ npm run dev
 - 联署使用独立的 `petition_signatures` 表，与公开留言内容分开存储
 - 公开接口只返回联署人数、昵称和时间，不返回邮箱或风控字段
 - 联署邮箱只有在用户明确勾选后才会保存，仅用于本次行动的后续联系
-- API 查询评论时只返回 `id / nickname / message / stickers / created_at`，**email 永远不出库**
+- API 从数据库查询评论时只读取 `id / nickname / message / stickers / created_at`，**email 永远不出库**
+- 公开留言墙只展示最近 7 天的用户留言；到期后仅从墙上隐藏，不删除数据
+- 留言墙中标记为“提示”的占位内容由接口补充，不写入数据库，也不计入真实留言数
 
 已有远程 Supabase 项目升级时，在 SQL Editor 执行
 `supabase/migrations/202607240001_create_petition_signatures.sql`。迁移会把早期联署记录

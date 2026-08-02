@@ -5,6 +5,8 @@ export interface Comment {
   /** 携带的表情包 id 列表（对应 lib/stickers.ts） */
   stickers: string[];
   created_at: string;
+  /** 由公开墙补充的说明性占位内容，不是用户提交 */
+  is_placeholder?: boolean;
 }
 
 export interface NewComment {

@@ -9,27 +9,15 @@ import type {
  * 内存降级存储：没有配置 Supabase 时使用。
  * 重启进程数据会丢失，只用于本地开发预览。
  */
-const comments: Comment[] = [
-  {
-    id: "seed-1",
-    nickname: "路人甲",
-    message: "支持！把事实说清楚。",
-    stickers: ["fist", "fire"],
-    created_at: new Date(Date.now() - 1000 * 60 * 8).toISOString(),
-  },
-  {
-    id: "seed-2",
-    nickname: "围观群众",
-    message: "已转发，让更多人看到。",
-    stickers: ["mega"],
-    created_at: new Date(Date.now() - 1000 * 60 * 3).toISOString(),
-  },
-];
+const comments: Comment[] = [];
 
 const petitionSignatures: PetitionSignature[] = [];
 
-export function listComments(limit = 50): Comment[] {
-  return comments.slice(-limit).reverse();
+export function listComments(limit = 50, createdAfter?: string): Comment[] {
+  const visibleComments = createdAfter
+    ? comments.filter((comment) => comment.created_at >= createdAfter)
+    : comments;
+  return visibleComments.slice(-limit).reverse();
 }
 
 export function countComments(): number {
