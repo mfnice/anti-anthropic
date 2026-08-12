@@ -7,7 +7,7 @@ export default function Facts() {
   const { t } = useI18n();
 
   return (
-    <section id="facts" className="relative mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
+    <section id="facts" className="facts-section relative mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
       {/* 背景装饰英文 */}
       <span
         aria-hidden

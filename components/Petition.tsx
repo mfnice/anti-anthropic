@@ -117,7 +117,7 @@ export default function Petition() {
   return (
     <section
       id="petition"
-      className="relative overflow-hidden border-y border-accent/30 bg-[#120d0f] py-24"
+      className="petition-section relative overflow-hidden border-y border-accent/30 bg-[#120d0f] py-24"
     >
       <span
         aria-hidden

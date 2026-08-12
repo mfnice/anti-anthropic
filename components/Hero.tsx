@@ -16,7 +16,7 @@ export default function Hero() {
   const isVerdictTitle = t.hero.titleHighlight.trim() === "✓";
 
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden">
+    <section className="hero-editorial relative flex min-h-screen flex-col overflow-hidden">
       {/* 背景：视频位优先，否则背景图 */}
       {videoUrl ? (
         <video
@@ -43,14 +43,22 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#09090a]" />
 
       {/* 顶部品牌条 */}
-      <header className="relative z-10 flex items-center gap-3 px-6 py-5 md:px-10">
-        <Image src="/logo.svg" alt="" width={28} height={28} />
-        <span className="text-sm font-bold tracking-widest">{t.brand}</span>
-        <span className="font-mono-geek text-[11px] tracking-[0.3em] text-[#6b6b6b]">
-          ANTHROPIC_PROTEST // v4
+      <header className="hero-nav relative z-10 flex items-center gap-3 px-6 py-5 md:px-10">
+        <span className="hero-nav__mark">
+          <Image src="/logo.svg" alt="" width={26} height={26} />
         </span>
-        <span className="font-mono-geek ml-auto hidden text-[11px] tracking-[0.3em] text-[#6b6b6b] md:inline">
-          {t.hero.eyebrow}
+        <span className="text-sm font-black tracking-widest">{t.brand}</span>
+        <span className="font-mono-geek hero-nav__edition hidden text-[10px] tracking-[0.28em] sm:inline">
+          INDEPENDENT FILE / 2026
+        </span>
+        <nav className="hero-nav__links ml-auto hidden items-center gap-5 lg:flex" aria-label="Primary">
+          <a href="#ai-news">AI WIRE</a>
+          <a href="#facts">EVIDENCE</a>
+          <a href="#petition">PETITION</a>
+          <a href="#speak">VOICE</a>
+        </nav>
+        <span className="font-mono-geek hero-nav__live ml-auto inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.22em] lg:ml-5">
+          <span className="signal-led" aria-hidden /> LIVE
         </span>
       </header>
 
@@ -62,7 +70,7 @@ export default function Hero() {
         NO.
       </span>
 
-      <div className="relative z-10 grid flex-1 items-center gap-10 px-6 py-10 md:px-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:px-20">
+      <div className="relative z-10 grid flex-1 items-center gap-10 px-6 py-10 md:px-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:px-20">
         <div className="max-w-4xl">
           <p className="font-mono-geek mb-8 flex max-w-full items-center gap-4 text-[13px] font-bold tracking-[0.32em] text-accent md:tracking-[0.55em]">
             <span className="inline-block h-0.5 w-[52px] bg-accent" />
@@ -119,7 +127,7 @@ export default function Hero() {
             {t.hero.subtitle}
           </p>
 
-          <div className="mt-12 flex flex-wrap gap-4">
+          <div className="hero-actions mt-12 flex flex-wrap gap-4">
             <a
               href="#petition"
               className="border-2 border-accent bg-accent px-[38px] py-[18px] text-[14px] font-black tracking-[0.3em] text-white transition duration-200 rotate-[-0.5deg] hover:rotate-0 hover:-translate-y-[3px] hover:shadow-[6px_6px_0_rgba(255,255,255,0.9)]"
@@ -141,9 +149,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <aside className="relative hidden self-center lg:block">
-          <div className="absolute -inset-4 border border-accent/30 rotate-2" />
-          <figure className="relative overflow-hidden border-2 border-white/25 bg-black shadow-[12px_12px_0_rgba(255,51,65,0.45)] rotate-[-1.5deg]">
+        <aside className="hero-dossier relative hidden self-center lg:block">
+          <div className="hero-dossier__orbit absolute -inset-4 rotate-2" />
+          <figure className="hero-dossier__card relative overflow-hidden border-2 border-white/25 bg-black rotate-[-1.5deg]">
             <Image
               src="/dario.webp"
               alt="Dario Amodei"
@@ -157,6 +165,11 @@ export default function Hero() {
               DARIO AMODEI / ANTHROPIC CEO
             </figcaption>
           </figure>
+          <div className="hero-dossier__meta font-mono-geek">
+            <span>CASE 24—0813</span>
+            <span>STATUS / OPEN</span>
+            <span>PUBLIC RECORD</span>
+          </div>
         </aside>
       </div>
 
@@ -175,7 +188,7 @@ export default function Hero() {
       </div>
 
       {/* 底部滚动横幅 */}
-      <div className="relative z-10 overflow-hidden border-y-2 border-accent bg-black/45 py-3 backdrop-blur-sm">
+      <div className="ticker-acid relative z-10 overflow-hidden border-y-2 border-accent bg-black/45 py-3 backdrop-blur-sm">
         <div className="marquee-track">
           {Array.from({ length: 8 }).map((_, i) => (
             <span

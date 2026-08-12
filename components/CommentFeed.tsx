@@ -24,22 +24,38 @@ function timeAgo(iso: string, feed: Dict["feed"]) {
   return feed.daysAgo(Math.floor(hr / 24));
 }
 
-/**
- * 右上角"直播式"评论框：每 4 秒轮询一次最新评论。
- * 之后接入 Supabase Realtime 可以改为推送，见 README。
- */
+/** 右上角直播评论框：优先使用 SSE，连接失败时退回普通轮询。 */
 export default function CommentFeed() {
   const { locale, t } = useI18n();
   const [comments, setComments] = useState<Comment[]>([]);
   const [total, setTotal] = useState(0);
+  const [transport, setTransport] = useState<"connecting" | "sse" | "poll">(
+    "connecting"
+  );
   const knownIds = useRef(new Set<string>());
   const [newIds, setNewIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
     let timer: ReturnType<typeof setInterval> | undefined;
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
     let controller: AbortController | undefined;
+    let source: EventSource | undefined;
     const desktopQuery = window.matchMedia("(min-width: 640px)");
+
+    function applyPayload(data: { comments: Comment[]; count?: number }) {
+      if (cancelled) return;
+      const fresh = new Set<string>();
+      for (const c of data.comments) {
+        if (!knownIds.current.has(c.id)) {
+          knownIds.current.add(c.id);
+          fresh.add(c.id);
+        }
+      }
+      setComments(data.comments);
+      setTotal(data.count ?? data.comments.length);
+      setNewIds(fresh);
+    }
 
     async function poll() {
       controller?.abort();
@@ -50,59 +66,86 @@ export default function CommentFeed() {
           signal: controller.signal,
         });
         if (!res.ok || cancelled) return;
-        const data = (await res.json()) as {
-          comments: Comment[];
-          count?: number;
-        };
-
-        const fresh = new Set<string>();
-        for (const c of data.comments) {
-          if (!knownIds.current.has(c.id)) {
-            knownIds.current.add(c.id);
-            fresh.add(c.id);
-          }
-        }
-        if (!cancelled) {
-          setComments(data.comments);
-          setTotal(data.count ?? data.comments.length);
-          setNewIds(fresh);
-        }
+        applyPayload(
+          (await res.json()) as { comments: Comment[]; count?: number }
+        );
       } catch {
         // 网络抖动忽略，下一轮再试
       }
     }
 
     function startPolling() {
-      if (timer || document.hidden || !desktopQuery.matches) return;
+      source?.close();
+      source = undefined;
+      if (timer) return;
+      setTransport("poll");
       void poll();
       timer = setInterval(poll, 8000);
     }
 
-    function stopPolling() {
+    function startConnection() {
+      if (document.hidden || !desktopQuery.matches || source || timer) return;
+
+      if (!("EventSource" in window)) {
+        startPolling();
+        return;
+      }
+
+      setTransport("connecting");
+      source = new EventSource("/api/comments/stream");
+      source.addEventListener("comments", (event) => {
+        try {
+          applyPayload(
+            JSON.parse(event.data) as { comments: Comment[]; count?: number }
+          );
+        } catch {
+          // 忽略单次格式异常，EventSource 会继续接收下一条快照。
+        }
+      });
+      source.onopen = () => {
+        if (fallbackTimer) clearTimeout(fallbackTimer);
+        fallbackTimer = undefined;
+        setTransport("sse");
+      };
+      source.onerror = () => {
+        if (!cancelled) setTransport("connecting");
+      };
+
+      // 首次连接失败时自动退回普通轮询。
+      fallbackTimer = setTimeout(() => {
+        if (source?.readyState !== EventSource.OPEN) startPolling();
+      }, 6500);
+    }
+
+    function stopConnection() {
       if (timer) clearInterval(timer);
       timer = undefined;
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+      fallbackTimer = undefined;
       controller?.abort();
+      source?.close();
+      source = undefined;
     }
 
     function handleVisibilityChange() {
-      if (document.hidden || !desktopQuery.matches) stopPolling();
-      else startPolling();
+      if (document.hidden || !desktopQuery.matches) stopConnection();
+      else startConnection();
     }
 
-    startPolling();
+    startConnection();
     document.addEventListener("visibilitychange", handleVisibilityChange);
     desktopQuery.addEventListener("change", handleVisibilityChange);
     return () => {
       cancelled = true;
-      stopPolling();
+      stopConnection();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       desktopQuery.removeEventListener("change", handleVisibilityChange);
     };
   }, []);
 
   return (
-    <aside className="fixed right-4 top-4 z-50 hidden w-72 max-w-[78vw] sm:block md:w-80">
-      <div className="relative overflow-hidden border border-accent/55 bg-[#09090a]/94 shadow-[8px_8px_0_rgba(255,51,65,0.5)] backdrop-blur-xl">
+    <aside className="live-wall fixed right-4 top-4 z-50 hidden w-72 max-w-[78vw] sm:block md:w-80">
+      <div className="live-wall__panel relative overflow-hidden border border-accent/55 bg-[#09090a]/94 backdrop-blur-xl">
         <div
           aria-hidden
           className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent"
@@ -118,8 +161,12 @@ export default function CommentFeed() {
           <span className="text-sm font-semibold text-neutral-200">
             {t.feed.title}
           </span>
-          <span className="font-mono-geek ml-auto border border-accent/40 bg-accent/10 px-2 py-1 text-[10px] font-bold tabular-nums text-accent">
-            {t.feed.live}
+          <span className="font-mono-geek ml-auto border border-accent/40 bg-accent/10 px-2 py-1 text-[9px] font-bold tabular-nums text-accent">
+            {transport === "sse"
+              ? `SSE · ${t.feed.live}`
+              : transport === "poll"
+                ? `SYNC · ${t.feed.live}`
+                : "LINKING…"}
           </span>
         </div>
 

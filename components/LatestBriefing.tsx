@@ -27,7 +27,7 @@ export default function LatestBriefing() {
   return (
     <section
       aria-labelledby="latest-briefing-title"
-      className="relative overflow-hidden border-b border-white/[0.08] bg-[#0d0d0f] py-24"
+      className="briefing-section relative overflow-hidden border-b border-white/[0.08] bg-[#0d0d0f] py-24"
     >
       <div
         aria-hidden

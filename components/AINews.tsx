@@ -27,7 +27,7 @@ export default function AINews() {
     <section
       id="ai-news"
       aria-labelledby="ai-news-title"
-      className="relative overflow-hidden border-b border-white/[0.08] bg-[#080b0f] py-24"
+      className="news-section relative overflow-hidden border-b border-white/[0.08] bg-[#080b0f] py-24"
     >
       <div
         aria-hidden

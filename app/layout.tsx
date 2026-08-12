@@ -47,10 +47,10 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US", "es_ES"],
     images: [
       {
-        url: "/og.png",
-        width: 1747,
-        height: 909,
-        alt: "Anthropic Protest File: controversy facts and public comments",
+        url: "/og-v2.png",
+        width: 1734,
+        height: 907,
+        alt: "Anthropic Protest File — public record, AI news and voice wall",
       },
     ],
   },
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/og.png"],
+    images: ["/og-v2.png"],
   },
   robots: {
     index: true,
@@ -100,7 +100,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       className={`h-full antialiased ${archivo.variable} ${plexMono.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-[#09090a] text-neutral-100">
+      <body className="min-h-full flex flex-col bg-[#0a0f0d] text-neutral-100">
         {children}
         <div className="grain" aria-hidden />
       </body>

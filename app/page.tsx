@@ -1,6 +1,7 @@
 import { LanguageProvider } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Hero from "@/components/Hero";
+import SignalStrip from "@/components/SignalStrip";
 import LatestBriefing from "@/components/LatestBriefing";
 import AINews from "@/components/AINews";
 import Manifesto from "@/components/Manifesto";
@@ -54,10 +55,11 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main>
+      <main className="site-shell">
         <CommentFeed />
         <LanguageSwitcher />
         <Hero />
+        <SignalStrip />
         <LatestBriefing />
         <AINews />
         <Manifesto />

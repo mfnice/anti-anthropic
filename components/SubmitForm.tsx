@@ -66,7 +66,7 @@ export default function SubmitForm() {
   return (
     <section
       id="speak"
-      className="relative border-t border-white/5 bg-white/[0.015] py-28"
+      className="speak-section relative border-t border-white/5 bg-white/[0.015] py-28"
     >
       <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 md:grid-cols-[1fr_1.2fr] md:px-10">
         <Reveal>
