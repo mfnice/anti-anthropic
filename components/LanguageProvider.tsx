@@ -11,13 +11,16 @@ import {
 import {
   DEFAULT_LOCALE,
   DICTS,
-  detectLocale,
-  isLocale,
   type Dict,
   type Locale,
 } from "@/lib/i18n";
 
 const STORAGE_KEY = "voice-wall-locale";
+const HTML_LANG: Record<Locale, string> = {
+  zh: "zh-CN",
+  en: "en",
+  es: "es",
+};
 
 interface I18nContextValue {
   locale: Locale;
@@ -36,20 +39,15 @@ export function LanguageProvider({
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
-  // 首次挂载：服务端已按 cookie / Accept-Language 选择；客户端只兜底校正。
+  // URL 决定首屏语言，确保搜索引擎和用户看到同一版本。
   useEffect(() => {
-    const saved =
-      typeof window !== "undefined"
-        ? (window.localStorage.getItem(STORAGE_KEY) as Locale | null)
-        : null;
-    const initial = isLocale(saved) ? saved : initialLocale ?? detectLocale();
-    if (initial !== locale) setLocaleState(initial);
-    document.documentElement.lang = initial;
+    if (initialLocale !== locale) setLocaleState(initialLocale);
+    document.documentElement.lang = HTML_LANG[initialLocale];
   }, [initialLocale, locale]);
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = HTML_LANG[l];
     try {
       window.localStorage.setItem(STORAGE_KEY, l);
       document.cookie = `${STORAGE_KEY}=${l}; Max-Age=31536000; Path=/; SameSite=Lax`;

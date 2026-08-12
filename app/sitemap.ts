@@ -1,14 +1,18 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/site";
+import {
+  absoluteUrl,
+  languageAlternates,
+  localePath,
+  siteUpdatedAt,
+} from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: siteUrl,
-      lastModified: new Date("2026-07-06T00:00:00.000Z"),
+  return Object.values(localePath).map((path, index) => ({
+      url: absoluteUrl(path),
+      lastModified: new Date(`${siteUpdatedAt}T00:00:00+08:00`),
       changeFrequency: "daily",
-      priority: 1,
-      images: [`${siteUrl}/dario.webp`, `${siteUrl}/logo.svg`],
-    },
-  ];
+      priority: index === 0 ? 1 : 0.9,
+      alternates: { languages: languageAlternates() },
+      images: [absoluteUrl("/og-v2.png"), absoluteUrl("/dario.webp")],
+    }));
 }

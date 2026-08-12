@@ -2,7 +2,7 @@
 
 Anthropic Protest File is a public record page about Anthropic, Claude, Claude Code, Cursor, AI training data, web scraping, Chinese internet content, regional access restrictions, user bans, and criticism of anti-ethical or anti-human AI conduct.
 
-The page documents controversy claims, dates, source links, and public comments. It argues that AI companies should not absorb global knowledge assets, including multilingual and Chinese web content, while excluding parts of the public from access and benefit.
+The site documents controversy claims, dates, source links, petitions, and public comments. It also publishes a daily sourced digest of OpenAI, Chinese foundation models, and global AI industry developments.
 
 Primary topics:
 - Anthropic controversy
@@ -13,7 +13,16 @@ Primary topics:
 - Mainland China user restrictions
 - Copyright, Reddit, books, and lyrics disputes
 - AI ethics and public accountability
+- OpenAI product and policy news
+- DeepSeek, Kimi, Qwen, GLM, and Chinese foundation models
+- AI agents, coding models, and industry competition
 
-Canonical site: /
-Sitemap: /sitemap.xml
-Robots: /robots.txt
+Language editions:
+- Chinese: https://anti-anthropic.vercel.app/
+- English: https://anti-anthropic.vercel.app/en
+- Spanish: https://anti-anthropic.vercel.app/es
+
+Canonical site: https://anti-anthropic.vercel.app/
+Sitemap: https://anti-anthropic.vercel.app/sitemap.xml
+Robots: https://anti-anthropic.vercel.app/robots.txt
+AI news RSS: https://anti-anthropic.vercel.app/feed.xml

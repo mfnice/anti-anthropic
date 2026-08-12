@@ -1,6 +1,7 @@
 "use client";
 
 import { LOCALES, LOCALE_LABELS } from "@/lib/i18n";
+import { localePath } from "@/lib/site";
 import { useI18n } from "./LanguageProvider";
 
 export default function LanguageSwitcher() {
@@ -9,11 +10,13 @@ export default function LanguageSwitcher() {
   return (
     <div className="font-mono-geek fixed bottom-5 right-5 z-50 flex items-center gap-0.5 border border-white/[0.14] bg-[#0e0e10]/85 p-[3px] backdrop-blur-xl">
       {LOCALES.map((l) => (
-        <button
+        <a
           key={l}
-          type="button"
+          href={localePath[l]}
           onClick={() => setLocale(l)}
-          aria-pressed={locale === l}
+          hrefLang={l === "zh" ? "zh-CN" : l}
+          lang={l === "zh" ? "zh-CN" : l}
+          aria-current={locale === l ? "page" : undefined}
           className={`px-3 py-1.5 text-xs font-bold tracking-wide transition ${
             locale === l
               ? "bg-accent text-white"
@@ -21,7 +24,7 @@ export default function LanguageSwitcher() {
           }`}
         >
           {LOCALE_LABELS[l]}
-        </button>
+        </a>
       ))}
     </div>
   );
