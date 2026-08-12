@@ -30,7 +30,7 @@ interface AINewsSectionCopy {
   categories: Record<AINewsCategory, string>;
 }
 
-export const AI_NEWS_UPDATED_AT = "2026-08-03";
+export const AI_NEWS_UPDATED_AT = "2026-08-13";
 
 export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
   zh: {
@@ -78,6 +78,118 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
 };
 
 export const AI_NEWS_ITEMS: AINewsItem[] = [
+  {
+    id: "openai-enterprise-agent-adoption",
+    date: "2026-08-12",
+    category: "openai",
+    copy: {
+      zh: {
+        title: "OpenAI：企业 AI 正从辅助问答转向代理执行",
+        summary:
+          "OpenAI 发布两份企业采用研究：截至 6 月，Codex 占企业客户在 Codex 与 ChatGPT 合计输出 token 的 64%；自 2 月以来，企业 Codex 周活用户在法律、销售、招聘和营销岗位分别增长 108 倍、41 倍、41 倍和 26 倍。数据来自 OpenAI 客户样本，适合观察趋势，不等同于整个市场份额。",
+      },
+      en: {
+        title: "OpenAI says enterprise AI is shifting from assistance to execution",
+        summary:
+          "Two OpenAI studies report that Codex generated 64% of combined Codex and ChatGPT output tokens among enterprise customers as of June. Since February, weekly enterprise Codex users grew 108× in legal, 41× in sales, 41× in recruiting, and 26× in marketing. The figures describe OpenAI's customer sample, not total market share.",
+      },
+      es: {
+        title: "OpenAI afirma que la IA empresarial pasa de asistir a ejecutar",
+        summary:
+          "Dos estudios de OpenAI señalan que, hasta junio, Codex generó el 64% de los tokens de salida combinados de Codex y ChatGPT entre clientes empresariales. Desde febrero, los usuarios semanales de Codex crecieron 108 veces en legal, 41 en ventas, 41 en selección y 26 en marketing. Son datos de clientes de OpenAI, no cuota de mercado total.",
+      },
+    },
+    sources: [
+      {
+        label: "OpenAI",
+        url: "https://openai.com/index/how-enterprises-put-ai-to-work/",
+      },
+    ],
+  },
+  {
+    id: "openai-chatgpt-ads-expansion",
+    date: "2026-08-11",
+    category: "openai",
+    copy: {
+      zh: {
+        title: "ChatGPT 广告试点扩展到英国、墨西哥、巴西、日本和韩国",
+        summary:
+          "OpenAI 已把 ChatGPT Ads 推向五个新市场。广告继续面向登录的成年 Free 和 Go 用户；付费、企业和教育套餐不显示广告。OpenAI 表示广告不会影响回答，广告主不能访问聊天记录，但系统会用对话主题、历史聊天和广告互动匹配广告。",
+      },
+      en: {
+        title: "ChatGPT ads expand to the UK, Mexico, Brazil, Japan, and South Korea",
+        summary:
+          "OpenAI has launched its ChatGPT Ads pilot in five more markets. Ads remain limited to logged-in adults on Free and Go tiers; paid, enterprise, and education plans stay ad-free. OpenAI says ads do not alter answers and advertisers cannot access chats, although matching can use conversation topics, chat history, and prior ad interactions.",
+      },
+      es: {
+        title: "Los anuncios de ChatGPT llegan a Reino Unido, México, Brasil, Japón y Corea del Sur",
+        summary:
+          "OpenAI amplió el piloto de ChatGPT Ads a cinco mercados. Los anuncios siguen limitados a adultos conectados en los planes Free y Go; los planes de pago, empresa y educación continúan sin anuncios. OpenAI afirma que no alteran las respuestas y que los anunciantes no ven los chats, aunque la selección puede usar temas, historial e interacciones previas.",
+      },
+    },
+    sources: [
+      {
+        label: "OpenAI",
+        url: "https://openai.com/index/testing-ads-in-chatgpt/",
+      },
+    ],
+  },
+  {
+    id: "openai-gpt-5-6-cyber-daybreak",
+    date: "2026-08-10",
+    category: "openai",
+    copy: {
+      zh: {
+        title: "OpenAI 推出 GPT‑5.6‑Cyber 与两级 Daybreak 访问体系",
+        summary:
+          "Daybreak Blue 面向常规防御工作开放 GPT‑5.6 Sol，Daybreak Red 则向获批研究人员提供专门训练的 GPT‑5.6‑Cyber，用于漏洞研究、利用验证和安全测试。OpenAI 的内部评测显示，Cyber 模型在高级双用途请求上的完成率显著更高，因此访问被放在受治理的可信环境中。",
+      },
+      en: {
+        title: "OpenAI launches GPT‑5.6‑Cyber with two-tier Daybreak access",
+        summary:
+          "Daybreak Blue gives approved defenders GPT‑5.6 Sol for broad defensive work, while Daybreak Red provides the purpose-trained GPT‑5.6‑Cyber for vulnerability research, exploit validation, and security testing. OpenAI's internal evaluations show much higher completion of advanced dual-use requests, so access is restricted to governed trusted environments.",
+      },
+      es: {
+        title: "OpenAI lanza GPT‑5.6‑Cyber con acceso Daybreak de dos niveles",
+        summary:
+          "Daybreak Blue ofrece GPT‑5.6 Sol a defensores aprobados para trabajo defensivo general; Daybreak Red da acceso a GPT‑5.6‑Cyber, entrenado para investigación de vulnerabilidades, validación de exploits y pruebas de seguridad. Las evaluaciones internas muestran mucha mayor finalización de solicitudes avanzadas de doble uso, por lo que el acceso queda en entornos gobernados.",
+      },
+    },
+    sources: [
+      {
+        label: "OpenAI",
+        url: "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/",
+      },
+    ],
+  },
+  {
+    id: "kimi-code-agent-core-v2",
+    date: "2026-08-05",
+    category: "china",
+    copy: {
+      zh: {
+        title: "Kimi Code 默认启用 agent-core-v2，并加入官方 Computer Use 插件",
+        summary:
+          "Kimi Code v0.33.0 将新版代理引擎设为 TUI、打印模式和 ACP 等界面的默认核心，并在官方插件市场加入 Kimi Computer Use 与 WebBridge。Web 端同时支持自定义模型供应商、会话置顶和套餐用量查看，产品竞争开始从单模型能力延伸到完整代理运行环境。",
+      },
+      en: {
+        title: "Kimi Code defaults to agent-core-v2 and adds official Computer Use plugins",
+        summary:
+          "Kimi Code v0.33.0 makes agent-core-v2 the default engine across its TUI, print mode, and ACP surfaces, while adding official Kimi Computer Use and WebBridge plugins. The web UI also gains custom providers, pinned sessions, and plan usage, extending competition from model quality to the surrounding agent runtime.",
+      },
+      es: {
+        title: "Kimi Code adopta agent-core-v2 y añade plugins oficiales de Computer Use",
+        summary:
+          "Kimi Code v0.33.0 convierte agent-core-v2 en el motor predeterminado de la TUI, el modo de impresión y ACP, y añade plugins oficiales Kimi Computer Use y WebBridge. La interfaz web incorpora proveedores personalizados, sesiones fijadas y uso del plan, ampliando la competencia del modelo al entorno completo del agente.",
+      },
+    },
+    sources: [
+      {
+        label: "Kimi",
+        url: "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
+      },
+    ],
+  },
   {
     id: "openai-gpt-5-6-price-cut",
     date: "2026-07-31",
@@ -139,62 +251,6 @@ export const AI_NEWS_ITEMS: AINewsItem[] = [
     ],
   },
   {
-    id: "openai-academic-researchers",
-    date: "2026-07-29",
-    category: "openai",
-    copy: {
-      zh: {
-        title: "OpenAI 向科研人员开放免费前沿模型计划",
-        summary:
-          "ChatGPT for Academic Researchers 今年夏季先覆盖 1 万名研究人员，计划在 2027 年扩大到 10 万人，提供 GPT‑5.6、Codex、深度研究与科研连接器。该计划属于 OpenAI 至 2027 年超过 2.5 亿美元的外部科研投入。",
-      },
-      en: {
-        title: "OpenAI launches free frontier access for researchers",
-        summary:
-          "ChatGPT for Academic Researchers starts with 10,000 researchers this summer and aims for 100,000 by 2027, with GPT‑5.6, Codex, deep research, and scientific connectors. It is part of more than $250 million committed to external research through 2027.",
-      },
-      es: {
-        title: "OpenAI ofrece acceso gratuito a modelos frontera para investigadores",
-        summary:
-          "ChatGPT for Academic Researchers comienza este verano con 10.000 investigadores y aspira a llegar a 100.000 en 2027, con GPT‑5.6, Codex, investigación profunda y conectores científicos. Forma parte de una inversión externa superior a 250 millones de dólares hasta 2027.",
-      },
-    },
-    sources: [
-      {
-        label: "OpenAI",
-        url: "https://openai.com/index/chatgpt-for-academic-researchers/",
-      },
-    ],
-  },
-  {
-    id: "china-models-global-adoption",
-    date: "2026-07-26",
-    category: "industry",
-    copy: {
-      zh: {
-        title: "中国开源模型正在从低价替代走向全球采用",
-        summary:
-          "美联社报道，近一个月 OpenRouter 最受欢迎的前五个模型均来自中国；Kimi K3 发布后一周下载量超过 93 万。成本、开放权重与智能体需求，正在共同推动开发者重新评估模型供应商。",
-      },
-      en: {
-        title: "Chinese open models move from cheap alternatives to global adoption",
-        summary:
-          "AP reports that the five most popular models on OpenRouter over the past month were Chinese, while Kimi downloads topped 930,000 in the week after K3 launched. Cost, open weights, and agent demand are reshaping model selection.",
-      },
-      es: {
-        title: "Los modelos chinos pasan de alternativa barata a adopción global",
-        summary:
-          "AP informa que los cinco modelos más populares de OpenRouter durante el último mes fueron chinos, mientras Kimi superó 930.000 descargas en la semana posterior a K3. El coste, los pesos abiertos y la demanda de agentes están cambiando la selección de proveedores.",
-      },
-    },
-    sources: [
-      {
-        label: "AP",
-        url: "https://apnews.com/article/china-ai-model-us-kimi-deepseek-a00bf637866fcd4d81f4fde28c9862ce",
-      },
-    ],
-  },
-  {
     id: "qwen-image-3",
     date: "2026-07-21",
     category: "china",
@@ -251,38 +307,6 @@ export const AI_NEWS_ITEMS: AINewsItem[] = [
       {
         label: "AP",
         url: "https://apnews.com/article/kimi-k3-china-ai-model-us-4c66a2e0f557ce79d3cc2d769c9a6226",
-      },
-    ],
-  },
-  {
-    id: "glm-5-2",
-    date: "2026-06-16",
-    category: "china",
-    copy: {
-      zh: {
-        title: "智谱 GLM‑5.2 押注百万上下文与长程任务",
-        summary:
-          "GLM‑5.2 提供 100 万 token 上下文、多档思考强度与更强的长程编程能力，并以 MIT 许可证开放权重。智谱称 IndexShare 架构在百万上下文下把相关单 token 计算量降低 2.9 倍。",
-      },
-      en: {
-        title: "Z.ai's GLM‑5.2 bets on 1M context and long-horizon work",
-        summary:
-          "GLM‑5.2 offers a 1M-token context, adjustable reasoning effort, and stronger long-horizon coding under an MIT license. Z.ai says its IndexShare design cuts the relevant per-token compute by 2.9× at 1M context.",
-      },
-      es: {
-        title: "GLM‑5.2 apuesta por un millón de tokens y tareas prolongadas",
-        summary:
-          "GLM‑5.2 ofrece un millón de tokens de contexto, esfuerzo de razonamiento ajustable y mejor programación de larga duración bajo licencia MIT. Z.ai afirma que IndexShare reduce 2,9 veces el cómputo relevante por token con ese contexto.",
-      },
-    },
-    sources: [
-      {
-        label: "Z.ai",
-        url: "https://z.ai/blog/glm-5.2",
-      },
-      {
-        label: "智谱文档",
-        url: "https://docs.bigmodel.cn/cn/guide/models/text/glm-5.2",
       },
     ],
   },
