@@ -1,5 +1,6 @@
 "use client";
 
+import { AI_NEWS_ITEMS } from "@/lib/ai-news";
 import { useI18n } from "./LanguageProvider";
 
 const copy = {
@@ -12,7 +13,7 @@ const copy = {
       ["公开发声", "#speak"],
     ],
     stats: [
-      ["08", "AI 新闻 / 本期"],
+      [String(AI_NEWS_ITEMS.length).padStart(2, "0"), "AI 新闻 / 本期"],
       ["10+", "事实证据 / 持续核验"],
       ["7 天", "公开留言 / 自动隐藏"],
       ["SSE", "留言流 / 实时连接"],
@@ -27,7 +28,7 @@ const copy = {
       ["Speak out", "#speak"],
     ],
     stats: [
-      ["08", "AI stories / edition"],
+      [String(AI_NEWS_ITEMS.length).padStart(2, "0"), "AI stories / edition"],
       ["10+", "Evidence files / verified"],
       ["7 days", "Public notes / visible"],
       ["SSE", "Comment stream / live"],
@@ -42,7 +43,7 @@ const copy = {
       ["Tomar la palabra", "#speak"],
     ],
     stats: [
-      ["08", "Noticias IA / edición"],
+      [String(AI_NEWS_ITEMS.length).padStart(2, "0"), "Noticias IA / edición"],
       ["10+", "Pruebas / verificadas"],
       ["7 días", "Mensajes / visibles"],
       ["SSE", "Comentarios / en vivo"],

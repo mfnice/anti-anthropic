@@ -30,7 +30,7 @@ interface AINewsSectionCopy {
   categories: Record<AINewsCategory, string>;
 }
 
-export const AI_NEWS_UPDATED_AT = "2026-08-13";
+export const AI_NEWS_UPDATED_AT = "2026-11-03";
 
 export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
   zh: {
@@ -39,7 +39,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
     description:
       "追踪 OpenAI、中国大模型与全球产业变化。优先采用官方发布，并用可靠媒体补充市场影响；不把传闻写成事实。",
     updatedLabel: "核验更新",
-    cadence: "每天 09:00 · 新加坡时间",
+    cadence: "按实质更新核验",
     sourceLabel: "来源",
     categories: {
       openai: "OPENAI",
@@ -53,7 +53,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
     description:
       "Tracking OpenAI, Chinese foundation models, and the global AI market. Official releases come first, with reputable reporting for industry impact—not rumors presented as fact.",
     updatedLabel: "Verified",
-    cadence: "Daily at 09:00 · Singapore time",
+    cadence: "Verified when substantive updates emerge",
     sourceLabel: "Sources",
     categories: {
       openai: "OPENAI",
@@ -67,7 +67,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
     description:
       "Seguimiento de OpenAI, los modelos fundacionales chinos y el mercado global. Priorizamos fuentes oficiales y usamos medios fiables para medir el impacto, sin presentar rumores como hechos.",
     updatedLabel: "Verificado",
-    cadence: "Cada día a las 09:00 · hora de Singapur",
+    cadence: "Verificado cuando hay novedades relevantes",
     sourceLabel: "Fuentes",
     categories: {
       openai: "OPENAI",
@@ -79,234 +79,182 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
 
 export const AI_NEWS_ITEMS: AINewsItem[] = [
   {
-    id: "openai-enterprise-agent-adoption",
-    date: "2026-08-12",
+    id: "openai-gpt-6-rosalind",
+    date: "2026-10-30",
     category: "openai",
     copy: {
       zh: {
-        title: "OpenAI：企业 AI 正从辅助问答转向代理执行",
+        title: "OpenAI 发布面向生命科学研究的 GPT‑6 Rosalind",
         summary:
-          "OpenAI 发布两份企业采用研究：截至 6 月，Codex 占企业客户在 Codex 与 ChatGPT 合计输出 token 的 64%；自 2 月以来，企业 Codex 周活用户在法律、销售、招聘和营销岗位分别增长 108 倍、41 倍、41 倍和 26 倍。数据来自 OpenAI 客户样本，适合观察趋势，不等同于整个市场份额。",
+          "官方更新日志公布 GPT‑6 Rosalind，结合生物学推理与科学工具使用。访问仅面向通过 Rosalind Research 可信访问审核的组织，供获授权用户开展内部研究；这不是面向所有用户的通用开放。",
       },
       en: {
-        title: "OpenAI says enterprise AI is shifting from assistance to execution",
+        title: "OpenAI releases GPT‑6 Rosalind for life sciences research",
         summary:
-          "Two OpenAI studies report that Codex generated 64% of combined Codex and ChatGPT output tokens among enterprise customers as of June. Since February, weekly enterprise Codex users grew 108× in legal, 41× in sales, 41× in recruiting, and 26× in marketing. The figures describe OpenAI's customer sample, not total market share.",
+          "The official changelog introduces GPT‑6 Rosalind for biological reasoning and scientific tool use. Access is restricted to organizations approved for Rosalind Research, for internal research by authorized users; it is not a general public rollout.",
       },
       es: {
-        title: "OpenAI afirma que la IA empresarial pasa de asistir a ejecutar",
+        title: "OpenAI presenta GPT‑6 Rosalind para investigación biológica",
         summary:
-          "Dos estudios de OpenAI señalan que, hasta junio, Codex generó el 64% de los tokens de salida combinados de Codex y ChatGPT entre clientes empresariales. Desde febrero, los usuarios semanales de Codex crecieron 108 veces en legal, 41 en ventas, 41 en selección y 26 en marketing. Son datos de clientes de OpenAI, no cuota de mercado total.",
+          "El registro oficial presenta GPT‑6 Rosalind para razonamiento biológico y uso de herramientas científicas. El acceso está limitado a organizaciones aprobadas para Rosalind Research y a investigación interna de usuarios autorizados; no es un lanzamiento abierto al público.",
       },
     },
     sources: [
       {
-        label: "OpenAI",
-        url: "https://openai.com/index/how-enterprises-put-ai-to-work/",
+        label: "OpenAI · Changelog",
+        url: "https://developers.openai.com/api/docs/changelog",
       },
     ],
   },
   {
-    id: "openai-chatgpt-ads-expansion",
-    date: "2026-08-11",
+    id: "openai-gpt-6-1-terra",
+    date: "2026-10-26",
     category: "openai",
     copy: {
       zh: {
-        title: "ChatGPT 广告试点扩展到英国、墨西哥、巴西、日本和韩国",
+        title: "GPT‑6.1 Terra 上线，聚焦视觉推理与电脑操作",
         summary:
-          "OpenAI 已把 ChatGPT Ads 推向五个新市场。广告继续面向登录的成年 Free 和 Go 用户；付费、企业和教育套餐不显示广告。OpenAI 表示广告不会影响回答，广告主不能访问聊天记录，但系统会用对话主题、历史聊天和广告互动匹配广告。",
+          "OpenAI 将 Terra 定位于看图、理解屏幕、操作应用和清晰写作。模型支持文本与图像输入；API 工具调用需使用 Responses API。它也已进入 ChatGPT Work 和 Codex，具体访问取决于套餐及工作区设置。",
       },
       en: {
-        title: "ChatGPT ads expand to the UK, Mexico, Brazil, Japan, and South Korea",
+        title: "GPT‑6.1 Terra arrives for visual reasoning and computer use",
         summary:
-          "OpenAI has launched its ChatGPT Ads pilot in five more markets. Ads remain limited to logged-in adults on Free and Go tiers; paid, enterprise, and education plans stay ad-free. OpenAI says ads do not alter answers and advertisers cannot access chats, although matching can use conversation topics, chat history, and prior ad interactions.",
+          "OpenAI positions Terra for images, screen workflows, and clear writing. It accepts text and image inputs; API tool calling requires Responses. It is also available in ChatGPT Work and Codex, subject to plan and workspace access.",
       },
       es: {
-        title: "Los anuncios de ChatGPT llegan a Reino Unido, México, Brasil, Japón y Corea del Sur",
+        title: "GPT‑6.1 Terra llega para razonamiento visual y uso del ordenador",
         summary:
-          "OpenAI amplió el piloto de ChatGPT Ads a cinco mercados. Los anuncios siguen limitados a adultos conectados en los planes Free y Go; los planes de pago, empresa y educación continúan sin anuncios. OpenAI afirma que no alteran las respuestas y que los anunciantes no ven los chats, aunque la selección puede usar temas, historial e interacciones previas.",
+          "OpenAI orienta Terra a imágenes, tareas en pantalla y escritura clara. Acepta texto e imágenes; las llamadas a herramientas requieren Responses. También está disponible en ChatGPT Work y Codex, según el plan y la configuración del espacio de trabajo.",
       },
     },
     sources: [
       {
-        label: "OpenAI",
-        url: "https://openai.com/index/testing-ads-in-chatgpt/",
+        label: "OpenAI · Model",
+        url: "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
       },
-    ],
-  },
-  {
-    id: "openai-gpt-5-6-cyber-daybreak",
-    date: "2026-08-10",
-    category: "openai",
-    copy: {
-      zh: {
-        title: "OpenAI 推出 GPT‑5.6‑Cyber 与两级 Daybreak 访问体系",
-        summary:
-          "Daybreak Blue 面向常规防御工作开放 GPT‑5.6 Sol，Daybreak Red 则向获批研究人员提供专门训练的 GPT‑5.6‑Cyber，用于漏洞研究、利用验证和安全测试。OpenAI 的内部评测显示，Cyber 模型在高级双用途请求上的完成率显著更高，因此访问被放在受治理的可信环境中。",
-      },
-      en: {
-        title: "OpenAI launches GPT‑5.6‑Cyber with two-tier Daybreak access",
-        summary:
-          "Daybreak Blue gives approved defenders GPT‑5.6 Sol for broad defensive work, while Daybreak Red provides the purpose-trained GPT‑5.6‑Cyber for vulnerability research, exploit validation, and security testing. OpenAI's internal evaluations show much higher completion of advanced dual-use requests, so access is restricted to governed trusted environments.",
-      },
-      es: {
-        title: "OpenAI lanza GPT‑5.6‑Cyber con acceso Daybreak de dos niveles",
-        summary:
-          "Daybreak Blue ofrece GPT‑5.6 Sol a defensores aprobados para trabajo defensivo general; Daybreak Red da acceso a GPT‑5.6‑Cyber, entrenado para investigación de vulnerabilidades, validación de exploits y pruebas de seguridad. Las evaluaciones internas muestran mucha mayor finalización de solicitudes avanzadas de doble uso, por lo que el acceso queda en entornos gobernados.",
-      },
-    },
-    sources: [
       {
-        label: "OpenAI",
-        url: "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/",
+        label: "OpenAI · Release notes",
+        url: "https://learn.chatgpt.com/docs/whats-new/october-26-30-2026",
       },
     ],
   },
   {
-    id: "kimi-code-agent-core-v2",
-    date: "2026-08-05",
+    id: "kimi-k3-1-pro",
+    date: "2026-10-23",
     category: "china",
     copy: {
       zh: {
-        title: "Kimi Code 默认启用 agent-core-v2，并加入官方 Computer Use 插件",
+        title: "Kimi K3.1 Pro 上线，权重发布仍需区分计划与完成",
         summary:
-          "Kimi Code v0.33.0 将新版代理引擎设为 TUI、打印模式和 ACP 等界面的默认核心，并在官方插件市场加入 Kimi Computer Use 与 WebBridge。Web 端同时支持自定义模型供应商、会话置顶和套餐用量查看，产品竞争开始从单模型能力延伸到完整代理运行环境。",
+          "Kimi Code 于 10 月 23 日宣布 K3.1 Pro 系列上线，支持最高 100 万 token 上下文，并提供 Highspeed 版本。官方称完整权重将在 11 月 4 日前发布；本次核验保留这一计划表述，不把产品上线写成权重已公开。",
       },
       en: {
-        title: "Kimi Code defaults to agent-core-v2 and adds official Computer Use plugins",
+        title: "Kimi K3.1 Pro launches; weight release remains a separate milestone",
         summary:
-          "Kimi Code v0.33.0 makes agent-core-v2 the default engine across its TUI, print mode, and ACP surfaces, while adding official Kimi Computer Use and WebBridge plugins. The web UI also gains custom providers, pinned sessions, and plan usage, extending competition from model quality to the surrounding agent runtime.",
+          "Kimi Code announced the K3.1 Pro series on October 23, with up to a 1M-token context and a Highspeed version. The official blog promises full weights by November 4. Product availability should not be confused with a completed weight release.",
       },
       es: {
-        title: "Kimi Code adopta agent-core-v2 y añade plugins oficiales de Computer Use",
+        title: "Llega Kimi K3.1 Pro; publicar los pesos sigue siendo otro hito",
         summary:
-          "Kimi Code v0.33.0 convierte agent-core-v2 en el motor predeterminado de la TUI, el modo de impresión y ACP, y añade plugins oficiales Kimi Computer Use y WebBridge. La interfaz web incorpora proveedores personalizados, sesiones fijadas y uso del plan, ampliando la competencia del modelo al entorno completo del agente.",
+          "Kimi Code anunció la serie K3.1 Pro el 23 de octubre, con hasta un millón de tokens de contexto y una versión Highspeed. El blog oficial promete los pesos completos para el 4 de noviembre. El lanzamiento del producto no confirma que los pesos ya estén publicados.",
       },
     },
     sources: [
       {
-        label: "Kimi",
-        url: "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
-      },
-    ],
-  },
-  {
-    id: "openai-gpt-5-6-price-cut",
-    date: "2026-07-31",
-    category: "openai",
-    copy: {
-      zh: {
-        title: "OpenAI 下调 GPT‑5.6 Luna 与 Terra API 价格",
-        summary:
-          "OpenAI 将 Luna 的价格下调 80%，至每百万输入 / 输出 token 0.20 / 1.20 美元；Terra 下调 20%，至 2 / 12 美元。公司把降价归因于推理、缓存、路由与模型效率的共同提升。",
-      },
-      en: {
-        title: "OpenAI cuts GPT‑5.6 Luna and Terra API prices",
-        summary:
-          "OpenAI cut Luna pricing by 80% to $0.20 / $1.20 per million input / output tokens, and Terra by 20% to $2 / $12. It attributes the reductions to gains across inference, caching, routing, and model efficiency.",
-      },
-      es: {
-        title: "OpenAI reduce el precio de GPT‑5.6 Luna y Terra",
-        summary:
-          "OpenAI rebajó Luna un 80%, hasta 0,20 / 1,20 dólares por millón de tokens de entrada / salida, y Terra un 20%, hasta 2 / 12 dólares. La empresa atribuye la reducción a mejoras de inferencia, caché, enrutamiento y eficiencia del modelo.",
-      },
-    },
-    sources: [
-      {
-        label: "OpenAI",
-        url: "https://openai.com/index/building-abundant-intelligence/",
-      },
-    ],
-  },
-  {
-    id: "deepseek-v4-flash-0731",
-    date: "2026-07-31",
-    category: "china",
-    copy: {
-      zh: {
-        title: "DeepSeek 正式发布 V4 Flash 0731",
-        summary:
-          "新版本取代此前预览版，采用 MIT 许可证，模型卡标注为 304B 参数，并强化了智能体任务与 DSpark 推测解码。官方基准显示，它以更少激活参数超过 V4 Pro 预览版的多项成绩。",
-      },
-      en: {
-        title: "DeepSeek formally releases V4 Flash 0731",
-        summary:
-          "The MIT-licensed 304B release supersedes the preview and strengthens agentic work with DSpark speculative decoding. DeepSeek's published benchmarks show it beating the V4 Pro preview on several tasks despite fewer activated parameters.",
-      },
-      es: {
-        title: "DeepSeek publica oficialmente V4 Flash 0731",
-        summary:
-          "La versión de 304B parámetros, bajo licencia MIT, sustituye a la preliminar y refuerza las tareas de agentes con decodificación especulativa DSpark. Los benchmarks publicados por DeepSeek la sitúan por encima de V4 Pro Preview en varias pruebas con menos parámetros activos.",
-      },
-    },
-    sources: [
-      {
-        label: "DeepSeek",
-        url: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
-      },
-      {
-        label: "Axios",
-        url: "https://www.axios.com/2026/08/01/deepseek-model-cheap-ai-price-war",
-      },
-    ],
-  },
-  {
-    id: "qwen-image-3",
-    date: "2026-07-21",
-    category: "china",
-    copy: {
-      zh: {
-        title: "阿里发布 Qwen‑Image 3.0",
-        summary:
-          "Qwen 团队推出第三代图像生成基础模型，把方向概括为“真实”，重点提升丰富内容、真实细节与知识表达。这也是中国大模型竞争从文本和代码继续扩展到视觉生成的最新一步。",
-      },
-      en: {
-        title: "Alibaba releases Qwen‑Image 3.0",
-        summary:
-          "Qwen's third-generation image foundation model centers on what the team calls “Real,” with an emphasis on rich content, authentic detail, and knowledge. It extends Chinese model competition beyond text and code into visual generation.",
-      },
-      es: {
-        title: "Alibaba lanza Qwen‑Image 3.0",
-        summary:
-          "La tercera generación del modelo fundacional de imagen de Qwen se centra en lo que el equipo llama «Real», con énfasis en contenido rico, detalles auténticos y conocimiento. La competencia china se extiende así del texto y el código a la generación visual.",
-      },
-    },
-    sources: [
-      {
-        label: "Qwen",
-        url: "https://qwen.ai/blog?id=qwen-image-3.0",
-      },
-    ],
-  },
-  {
-    id: "kimi-k3",
-    date: "2026-07-16",
-    category: "china",
-    copy: {
-      zh: {
-        title: "月之暗面开源 Kimi K3",
-        summary:
-          "Kimi K3 采用 2.8 万亿参数规模，支持原生视觉理解与最高 100 万 token 上下文，面向长程编程、知识工作与复杂智能体任务。上线后的需求一度迫使 Kimi 暂停新订阅。",
-      },
-      en: {
-        title: "Moonshot open-sources Kimi K3",
-        summary:
-          "Kimi K3 uses a 2.8-trillion-parameter architecture with native vision and up to a 1M-token context, targeting long-horizon coding, knowledge work, and complex agents. Demand later forced Kimi to pause new subscriptions temporarily.",
-      },
-      es: {
-        title: "Moonshot abre los pesos de Kimi K3",
-        summary:
-          "Kimi K3 usa una arquitectura de 2,8 billones de parámetros, visión nativa y hasta un millón de tokens de contexto, orientada a programación prolongada, trabajo de conocimiento y agentes complejos. La demanda obligó después a pausar temporalmente nuevas suscripciones.",
-      },
-    },
-    sources: [
-      {
-        label: "Kimi",
+        label: "Kimi · Release notes",
         url: "https://www.kimi.com/code/docs/en/kimi-code/whats-new.html",
       },
       {
-        label: "AP",
-        url: "https://apnews.com/article/kimi-k3-china-ai-model-us-4c66a2e0f557ce79d3cc2d769c9a6226",
+        label: "Kimi · Technical report",
+        url: "https://www.kimi.com/en/blog/kimi-k3-1-pro",
+      },
+    ],
+  },
+  {
+    id: "openai-decisions-api-ga",
+    date: "2026-10-22",
+    category: "openai",
+    copy: {
+      zh: {
+        title: "OpenAI Decisions API 正式开放，每次最多评估 400 个问题",
+        summary:
+          "Decisions API 使用 GPT‑6 Luna，把文本、图像和 JSON 转成概率判断、分类或评分。正式版将单次问题上限从 200 提至 400，并加入提示缓存与问题内图像，面向分类、路由和优先级判断等应用。",
+      },
+      en: {
+        title: "OpenAI Decisions API reaches GA with up to 400 questions per request",
+        summary:
+          "Using GPT‑6 Luna, Decisions turns text, images, and JSON into probabilities, categories, or scores. General availability raises the question limit from 200 to 400 and adds prompt caching and question-specific images for classification, routing, and prioritization.",
+      },
+      es: {
+        title: "Decisions API pasa a disponibilidad general con hasta 400 preguntas",
+        summary:
+          "Con GPT‑6 Luna, Decisions convierte texto, imágenes y JSON en probabilidades, categorías o puntuaciones. La versión general amplía el límite de 200 a 400 preguntas e incorpora caché de prompts e imágenes por pregunta para clasificar, enrutar y priorizar.",
+      },
+    },
+    sources: [
+      {
+        label: "OpenAI · Decisions",
+        url: "https://developers.openai.com/api/docs/guides/decisions",
+      },
+      {
+        label: "OpenAI · Changelog",
+        url: "https://developers.openai.com/api/docs/changelog",
+      },
+    ],
+  },
+  {
+    id: "deepseek-v4-1-flash-1017-search",
+    date: "2026-10-17",
+    category: "china",
+    copy: {
+      zh: {
+        title: "DeepSeek 更新 V4.1 Flash，并开放自研搜索 API",
+        summary:
+          "V4.1 Flash‑1017 已覆盖官网、App 与 API，调用名仍为 deepseek-flash，价格不变。同日 DeepSeek 开放搜索与网页抓取接口，支持多语言检索。官方报告任务效率改善，具体收益仍取决于实际工作负载。",
+      },
+      en: {
+        title: "DeepSeek updates V4.1 Flash and opens its search API",
+        summary:
+          "V4.1 Flash‑1017 reaches the website, app, and API under the unchanged deepseek-flash name and pricing. DeepSeek also opens search and page-fetch APIs with multilingual search. It reports better task efficiency; practical gains depend on the workload.",
+      },
+      es: {
+        title: "DeepSeek actualiza V4.1 Flash y abre su API de búsqueda",
+        summary:
+          "V4.1 Flash‑1017 llega a la web, la app y la API, sin cambiar el nombre deepseek-flash ni los precios. DeepSeek también abre búsqueda multilingüe y recuperación de páginas. La empresa informa de mayor eficiencia; las mejoras prácticas dependen de cada tarea.",
+      },
+    },
+    sources: [
+      {
+        label: "DeepSeek · Changelog",
+        url: "https://api-docs.deepseek.com/updates/",
+      },
+    ],
+  },
+  {
+    id: "qwen-image-2-1",
+    date: "2026-09-20",
+    category: "china",
+    copy: {
+      zh: {
+        title: "Qwen 开源 Image‑2.1，统一图像生成与编辑",
+        summary:
+          "Qwen‑Image‑2.1 的视觉生成部分为 70 亿参数，原生支持透明图像生成和编辑，最多接受 10 张参考图。官方还介绍了局部修改与人物、商品一致性能力，让素材制作与后续编辑使用同一模型。",
+      },
+      en: {
+        title: "Qwen open-sources Image‑2.1 for unified generation and editing",
+        summary:
+          "Qwen‑Image‑2.1 combines generation and editing with a 7B-parameter visual component. It natively supports transparent images and up to ten references. The team also highlights local edits and consistency for people and products within the same model.",
+      },
+      es: {
+        title: "Qwen abre Image‑2.1 para unificar generación y edición",
+        summary:
+          "Qwen‑Image‑2.1 combina generación y edición con un componente visual de 7.000 millones de parámetros. Admite imágenes transparentes y hasta diez referencias. El equipo también destaca los cambios locales y la consistencia de personas y productos dentro del mismo modelo.",
+      },
+    },
+    sources: [
+      {
+        label: "Qwen · Research",
+        url: "https://qwen.ai/blog?id=qwen-image-2.1",
       },
     ],
   },

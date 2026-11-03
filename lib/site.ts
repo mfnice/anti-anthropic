@@ -6,7 +6,7 @@ export const siteUrl =
   "https://anti-anthropic.vercel.app";
 
 export const siteName = "Anthropic Protest File";
-export const siteUpdatedAt = "2026-08-13";
+export const siteUpdatedAt = "2026-11-03";
 
 export const localePath: Record<Locale, string> = {
   zh: "/",

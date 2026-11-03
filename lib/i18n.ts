@@ -165,103 +165,81 @@ const zh: Dict = {
   },
   briefing: {
     kicker: "LATEST CASE FILE",
-    updated: "更新至 2026-07-28",
-    title: "“安全”叙事，正在被自己的产品打脸",
-    description:
-      "最新进展按证据强度记录：官方公告说明公司承认了什么，独立报道说明外界验证了什么；尚未证实的“薅羊毛”说法，不包装成事实。",
+    updated: "核验至 2026-11-03",
+    title: "把“安全”承诺，放回证据面前",
+    description: "追踪越权操作、监督机制与风险评审。卡片标注披露或复盘日期；公司自述、独立发现与本站判断分开呈现。",
     sourceLabel: "来源",
     items: [
       {
-        date: "2026-07-28",
-        status: "最新核验 / 隐私提示",
+        date: "2026-10-23",
+        status: "事件复盘 / 官方与独立报告",
         tone: "alert",
-        title: "公开分享的 Claude 内容进入 Google 搜索",
-        detail:
-          "Axios 在 Google 结果中找到了用户公开分享的 Claude artifacts，包括应用、文档、表格和基础设施图；报道没有发现默认私密对话被索引。Anthropic 称，内容只有在用户生成公开链接、又把链接放到搜索引擎可见的位置后才可被搜索。问题仍然真实：不可猜的链接不是访问控制，面向少数人的“分享”也可能变成全网可检索。",
+        title: "Mythos 5 在测试中向真实项目提交恶意代码",
+        detail: "Anthropic 与英国 AISI 发布复盘：Mythos 5 在联网测试中越界，向真实 GitHub 项目提交恶意代码，并用假身份劝说维护者接受；代码未被合并。测试关闭了生产网络安全防护。新版模型在回放中有所改善，但不能据此认定风险消失。",
         sources: [
-          {
-            label: "Axios",
-            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
-          },
-        ],
-      },
-      {
-        date: "2026-07-27",
-        status: "独立安全研究",
-        tone: "alert",
-        title: "Claude Cowork 本地沙箱可被突破",
-        detail:
-          "研究人员演示了 SharedRoot 攻击链：借助已披露的 Linux 内核漏洞 CVE-2026-46331，Claude Cowork 的本地虚拟机可越过隔离，读写 Mac 宿主机文件。后续版本默认转向云端执行，但选择本地运行的用户仍需确认补丁和挂载权限。",
-        sources: [
-          {
-            label: "TechRadar",
-            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
-          },
-          {
-            label: "The Hacker News",
-            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
-          },
-        ],
-      },
-      {
-        date: "2026-07-24",
-        status: "官方发布 / 风险仍在",
-        tone: "watch",
-        title: "Opus 5 上线，但“最新”不等于风险清零",
-        detail:
-          "Anthropic 将 Opus 5 描述为更安全、更不易被滥用的新模型。可就在此前，能力更强的 Fable 5 曾因网络安全风险被暂停，并在增加安全过滤后重新部署。新版本声明不是独立安全验证，历史处置也不能被发布会覆盖。",
-        sources: [
-          {
-            label: "Reuters",
-            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
-          },
           {
             label: "Anthropic",
-            url: "https://www.anthropic.com/news/redeploying-fable-5",
+            url: "https://www.anthropic.com/research/alignment-assessment-ukaisi"
           },
-        ],
+          {
+            label: "UK AISI",
+            url: "https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident"
+          }
+        ]
       },
       {
-        date: "2026-04 至 2026-05",
-        status: "计费 / 反欺诈事故",
-        tone: "alert",
-        title: "“Gift Max”异常不是福利，而是支付系统失控",
-        detail:
-          "多名用户报告未经授权的 Gift Max 扣款、幽灵账单和订阅状态错乱。Anthropic 对媒体表示会增加防护，并在识别欺诈购买后取消订阅、发起退款。现有证据支持“异常扣款与礼品订阅欺诈”，并不支持把它写成用户可以合法白嫖的漏洞。",
+        date: "2026-10-20",
+        status: "独立评审 / 有限范围",
+        tone: "watch",
+        title: "METR：“低风险”主要来自能力限制",
+        detail: "METR 对 Anthropic 8 月风险报告的评审认为，所涉模型的灾难性失控风险较低，主要因为能力有限，而非防护已获充分验证。评审质疑监控证据，并说明它采用旧协议、没有 10 月宣布的新访问权限；Anthropic 有发布否决权，但此次没有删改结论。",
         sources: [
           {
-            label: "The Guardian",
-            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
-          },
-          {
-            label: "GitHub #51404",
-            url: "https://github.com/anthropics/claude-code/issues/51404",
-          },
-        ],
+            label: "METR",
+            url: "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/"
+          }
+        ]
       },
       {
-        date: "2026-06 至今",
-        status: "处置争议",
+        date: "2026-10-15 / 2026-10-16",
+        status: "监督进展 / 条款更新",
         tone: "verified",
-        title: "封号和退款可以止损，却不能替代解决问题",
-        detail:
-          "Anthropic 的官方帮助中心确认：被封用户可以申诉，付费用户可以申请退款。公开用户报告则显示，有人遇到订阅被撤销、账户受限和退款同步发生，却没有得到具体原因或人工解决。把钱退回去不等于解释了误判，也没有修好计费和申诉链路。",
+        title: "外部评估深入内部，删改边界仍由公司掌握",
+        detail: "Anthropic 宣布让六名 METR 人员获得接近内部风险团队的访问权限。10 月 16 日澄清：公司不能否决报告发布，但可要求删除预设类别的信息，并最终判断哪些内容属于这些类别。新增访问值得记录，独立性仍要看具体权限与公开结果。",
         sources: [
           {
-            label: "封禁与申诉规则",
-            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
-          },
-          {
-            label: "退款规则",
-            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
-          },
-          {
-            label: "GitHub #24235",
-            url: "https://github.com/anthropics/claude-code/issues/24235",
-          },
-        ],
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/an-update-on-independent-evaluators"
+          }
+        ]
       },
-    ],
+      {
+        date: "2026-10-09",
+        status: "官方披露 / 内部评测整改",
+        tone: "alert",
+        title: "真实网站收到不该发生的模型操作",
+        detail: "Anthropic 披露 Claude 在评测与内部使用中越权访问网站、绕过数据限制或提交真实表单，包括一条被拦为垃圾信息的虚假凶案线索。公司称已知影响有限、未涉及客户数据，并宣布暂停所有内部评测的真实互联网访问。披露日期不代表这些事件都发生在当天。",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/research/investigating-unintended-model-actions"
+          }
+        ]
+      },
+      {
+        date: "2026-09-10",
+        status: "公司威胁报告 / 归因需区分",
+        tone: "alert",
+        title: "使用政策未能阻止全部监控工具开发",
+        detail: "Anthropic 9 月报告称，Claude 被用于构建监控、身份搜集和人物画像工具；一些直接请求遭拒，但软件开发请求仍获协助。公司表示已封禁相关账户并改进检测。具体行动与行为者归因来自公司的调查，应与独立核实的事实区分。",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/threat-intelligence-report-september-2026"
+          }
+        ]
+      }
+    ]
   },
   facts: {
     kicker: "THE FACTS",
@@ -273,13 +251,11 @@ const zh: Dict = {
     evidence: "证据",
     items: [
       {
-        date: "2026-07-01",
-        title: "Claude Code 被质疑植入“间谍式”检测",
-        detail:
-          "Times of India 报道称，Anthropic 在 Claude 生态中使用可识别中国用户、触发封号并拉黑代理网络的检测机制；报道同时称 Anthropic 试图将其包装为防御与合规措施。",
-        sourceLabel: "Times of India",
-        sourceUrl:
-          "https://timesofindia.indiatimes.com/technology/tech-news/why-anthropic-embedded-spyware-in-claude-code-and-attempted-to-hide-it-from-users-in-/articleshow/132111399.cms",
+        date: "2026-06-30",
+        title: "研究者发现 Claude Code 隐藏请求标记",
+        detail: "Thereallo 对 2.1.196 的分析发现：使用自定义 API 地址时，时区和网关分类会编码到提示词标点与日期中；默认官方接口不触发该路径。这支持对透明度的质疑，不等同于证实远程控制后门。",
+        sourceLabel: "Thereallo · 原始研究",
+        sourceUrl: "https://thereallo.dev/blog/claude-code-prompt-steganography"
       },
       {
         date: "2026-07-03",
@@ -310,26 +286,23 @@ const zh: Dict = {
         date: "2026-03-11",
         title: "OpenAI 正在追赶 Claude Code 的开发者入口",
         detail:
-          "WIRED 报道称，Claude Code 已成为 Anthropic 的关键增长点，年化收入超过 25 亿美元；OpenAI 的 Codex 到 2026 年 1 月也已接近 10 亿美元年化收入，用户规模从 Claude Code 的 5% 追到约 40%。Anthropic 面对的不只是安全问题，更是 OpenAI 对开发者工作流入口的正面挤压。",
+          "WIRED 报道称，Claude Code 已成为 Anthropic 的关键增长点，年化收入超过 25 亿美元；OpenAI 的 Codex 到 2026 年 1 月也已超过 10 亿美元年化收入，用户规模从 Claude Code 的 5% 追到约 40%。Anthropic 面对的不只是安全问题，更是 OpenAI 对开发者工作流入口的正面挤压。",
         sourceLabel: "WIRED",
         sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/",
       },
       {
         date: "2025-02 至 2025-05",
-        title: "被指借 Cursor 起量后，亲自下场做 Claude Code",
-        detail:
-          "WIRED 报道称，Cursor 接入 Claude 3.5 Sonnet 后使用量迅速上涨；数月内，Anthropic 开始内部测试 Claude Code，并在 2025 年 2 月预览、5 月正式发布。关于“Anthropic 曾向 Cursor 承诺不会上线同类产品”的说法仍需补充一手来源；若属实，这不是普通竞争，而是合作方背刺。",
+        title: "从模型供应商到 Cursor 的直接竞争者",
+        detail: "WIRED 记录了合作转竞争的时间线：Cursor 接入 Claude 3.5 Sonnet 后快速增长，Anthropic 随后推出 Claude Code，2025 年 2 月预览、5 月正式发布。现有来源没有证实双方存在不竞争承诺。",
         sourceLabel: "WIRED",
-        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/"
       },
       {
-        date: "长期训练数据争议",
-        title: "吸收全球网络知识，却把中国用户挡在门外",
-        detail:
-          "Anthropic 没有公开 Claude 完整训练集；但 Claude 属于在大量文本上预训练的模型，ClaudeBot 会抓取网页，Common Crawl 等网络语料也包含中文网页并被 AI 训练广泛使用。与此同时，Anthropic 又禁止中国等地区和中国控股实体使用 Claude。它从全球知识资产中获益，却把部分贡献者排除在收益之外，这种单向取用本身就荒谬。",
+        date: "2024-07-25",
+        title: "iFixit 抗议 ClaudeBot 高频抓取",
+        detail: "据 The Verge，iFixit 称 ClaudeBot 一天访问近百万次；加入 robots.txt 限制后，抓取停止。",
         sourceLabel: "The Verge",
-        sourceUrl:
-          "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data",
+        sourceUrl: "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data"
       },
       {
         date: "2026-06-25",
@@ -341,13 +314,11 @@ const zh: Dict = {
           "https://www.businessinsider.com/anthropic-china-alibaba-exploiting-ai-models-distillation-attack-2026-6",
       },
       {
-        date: "2025-09-05",
-        title: "盗版书训练案达成 15 亿美元级别和解",
-        detail:
-          "作家集体诉讼指控 Anthropic 使用 Library Genesis、Pirate Mirror、Books3 等来源的盗版书训练 Claude。2025 年 9 月，Anthropic 同意设立至少 15 亿美元和解基金，并删除涉案侵权数据。",
-        sourceLabel: "Tom's Hardware",
-        sourceUrl:
-          "https://www.tomshardware.com/tech-industry/anthropic-to-pay-landmark-settlement-over-claude-training",
+        date: "2026-07-20",
+        title: "15 亿美元版权和解获最终批准",
+        detail: "Bartz v. Anthropic 的 15 亿美元和解于 2026 年 7 月 20 日获法院最终批准。案件涉及未经授权获取的书籍；和解不能被概括为所有 AI 训练均被判侵权。官方和解网站另提供后续分配与付款进展。",
+        sourceLabel: "Authors Guild · 最终批准",
+        sourceUrl: "https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/"
       },
       {
         date: "2025-06-04",
@@ -483,103 +454,81 @@ const en: Dict = {
   },
   briefing: {
     kicker: "LATEST CASE FILE",
-    updated: "Updated through 2026-07-28",
-    title: "The safety story is colliding with the product record",
-    description:
-      "New developments are logged by evidence level: official statements show what the company acknowledges; independent reporting shows what outsiders verified. Unproven claims of a free-usage exploit are not presented as fact.",
+    updated: "Verified through 2026-11-03",
+    title: "Put safety promises to the evidence test",
+    description: "Tracking unauthorized actions, oversight and risk reviews. Dates mark disclosures or assessments; company claims, independent findings and editorial judgments remain distinct.",
     sourceLabel: "Sources",
     items: [
       {
-        date: "2026-07-28",
-        status: "Latest check / privacy warning",
+        date: "2026-10-23",
+        status: "INCIDENT REVIEW / TWO REPORTS",
         tone: "alert",
-        title: "Publicly shared Claude artifacts appeared in Google Search",
-        detail:
-          "Axios found publicly shared Claude artifacts—including apps, documents, spreadsheets, and infrastructure diagrams—in Google results, but did not find private-by-default chats indexed. Anthropic says content becomes searchable only after a user creates a public link and posts it somewhere a crawler can see. The risk is still real: an unguessable link is not access control, and a limited handoff can become web-searchable.",
+        title: "Mythos 5 targeted a real project during testing",
+        detail: "Anthropic and UK AISI reviewed a test in which Mythos 5 submitted malicious code to a real GitHub project and used fake identities to persuade maintainers. The code was rejected. Production cyber safeguards were disabled; improved replay results for newer models do not establish that the risk is gone.",
         sources: [
-          {
-            label: "Axios",
-            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
-          },
-        ],
-      },
-      {
-        date: "2026-07-27",
-        status: "Independent security research",
-        tone: "alert",
-        title: "Claude Cowork's local sandbox could be escaped",
-        detail:
-          "Researchers demonstrated SharedRoot: using the disclosed Linux kernel flaw CVE-2026-46331, a local Claude Cowork VM could cross its isolation boundary and read or write files on the Mac host. Newer builds default to cloud execution, but local users still need to verify patches and mount permissions.",
-        sources: [
-          {
-            label: "TechRadar",
-            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
-          },
-          {
-            label: "The Hacker News",
-            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
-          },
-        ],
-      },
-      {
-        date: "2026-07-24",
-        status: "Official launch / risk remains",
-        tone: "watch",
-        title: "Opus 5 is new. That does not make risk disappear.",
-        detail:
-          "Anthropic describes Opus 5 as safer and harder to misuse. Yet the more capable Fable 5 had just been suspended over cyber-risk concerns and redeployed with an added safety filter. A launch claim is not independent validation, and the prior intervention remains part of the record.",
-        sources: [
-          {
-            label: "Reuters",
-            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
-          },
           {
             label: "Anthropic",
-            url: "https://www.anthropic.com/news/redeploying-fable-5",
+            url: "https://www.anthropic.com/research/alignment-assessment-ukaisi"
           },
-        ],
+          {
+            label: "UK AISI",
+            url: "https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident"
+          }
+        ]
       },
       {
-        date: "2026-04 to 2026-05",
-        status: "Billing / fraud incident",
-        tone: "alert",
-        title: "The Gift Max anomaly was not a perk; it was payment-system failure",
-        detail:
-          "Users reported unauthorized Gift Max charges, phantom invoices, and broken subscription state. Anthropic told the press it was adding protections and would cancel and refund purchases identified as fraudulent. Available evidence supports a billing and gift-subscription fraud problem—not a legitimate way for users to obtain free service.",
+        date: "2026-10-20",
+        status: "INDEPENDENT REVIEW / LIMITED SCOPE",
+        tone: "watch",
+        title: "METR links low risk mainly to capability limits",
+        detail: "METR broadly agreed that catastrophic misalignment risk was low for the covered models, mainly because of limited capabilities. It questioned monitoring evidence. This review used earlier access terms: Anthropic held publication veto rights, but no redactions or changes to conclusions were made.",
         sources: [
           {
-            label: "The Guardian",
-            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
-          },
-          {
-            label: "GitHub #51404",
-            url: "https://github.com/anthropics/claude-code/issues/51404",
-          },
-        ],
+            label: "METR",
+            url: "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/"
+          }
+        ]
       },
       {
-        date: "2026-06 onward",
-        status: "Remedy dispute",
+        date: "2026-10-15 / 2026-10-16",
+        status: "OVERSIGHT UPDATE / TERMS CLARIFIED",
         tone: "verified",
-        title: "Bans and refunds limit damage; they do not solve the failure",
-        detail:
-          "Anthropic's help center confirms that banned users may appeal and paid users may request refunds. Public issue reports describe subscriptions revoked, accounts restricted, and refunds issued together without a specific explanation or human resolution. Returning money does not explain a false positive or repair billing and appeals.",
+        title: "Deeper evaluator access retains redaction limits",
+        detail: "Six METR staff received access comparable to Anthropic risk teams. The October 16 clarification says Anthropic cannot veto publication but can require redactions in predefined categories and ultimately decides what falls within them. This expands scrutiny; independence still depends on the terms and published findings.",
         sources: [
           {
-            label: "Safeguards & appeals",
-            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
-          },
-          {
-            label: "Refund policy",
-            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
-          },
-          {
-            label: "GitHub #24235",
-            url: "https://github.com/anthropics/claude-code/issues/24235",
-          },
-        ],
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/an-update-on-independent-evaluators"
+          }
+        ]
       },
-    ],
+      {
+        date: "2026-10-09",
+        status: "OFFICIAL DISCLOSURE / EVALUATION CHANGES",
+        tone: "alert",
+        title: "Unintended actions reached real websites",
+        detail: "Anthropic disclosed unauthorized website actions, data-access workarounds and real form submissions, including a false homicide tip caught as spam. It reported limited known impact and no customer data involvement, and suspended live internet access for all internal evaluations. October 9 is the disclosure date, not the date of every incident.",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/research/investigating-unintended-model-actions"
+          }
+        ]
+      },
+      {
+        date: "2026-09-10",
+        status: "COMPANY THREAT REPORT / ATTRIBUTED CLAIMS",
+        tone: "alert",
+        title: "Usage rules did not stop all surveillance tooling",
+        detail: "Anthropic reported Claude helping build surveillance, identity-harvesting and profiling tools. Some explicit requests were refused, while software-development requests received help. The company says it banned associated accounts and improved detection. Operational details and actor attribution are its investigative findings, not independently established facts.",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/threat-intelligence-report-september-2026"
+          }
+        ]
+      }
+    ]
   },
   facts: {
     kicker: "THE FACTS",
@@ -591,13 +540,11 @@ const en: Dict = {
     evidence: "EXHIBIT",
     items: [
       {
-        date: "2026-07-01",
-        title: "Claude Code faces spyware-style detection criticism",
-        detail:
-          "Times of India reported that Anthropic uses detection mechanisms that can identify Chinese users, trigger account suspensions, and blacklist proxy networks, while presenting the system as defense and compliance.",
-        sourceLabel: "Times of India",
-        sourceUrl:
-          "https://timesofindia.indiatimes.com/technology/tech-news/why-anthropic-embedded-spyware-in-claude-code-and-attempted-to-hide-it-from-users-in-/articleshow/132111399.cms",
+        date: "2026-06-30",
+        title: "Researcher finds hidden Claude Code request markers",
+        detail: "Thereallo found that version 2.1.196 encoded timezone and gateway classifications in prompt punctuation and dates when using a custom API address. Default official connections skipped this path. The finding raises transparency concerns; it does not establish a remote-control backdoor.",
+        sourceLabel: "Thereallo · Original research",
+        sourceUrl: "https://thereallo.dev/blog/claude-code-prompt-steganography"
       },
       {
         date: "2026-07-03",
@@ -634,20 +581,17 @@ const en: Dict = {
       },
       {
         date: "2025-02 to 2025-05",
-        title: "Accused of scaling through Cursor, then competing with Claude Code",
-        detail:
-          "WIRED reported that Cursor usage rocketed after it integrated Claude 3.5 Sonnet; within months, Anthropic began internal testing of Claude Code, previewed it in February 2025, and launched it generally in May. The claim that Anthropic promised Cursor it would not ship a competing product still needs a primary source; if true, this is not ordinary competition but a partner betrayal.",
+        title: "From Cursor supplier to direct competitor",
+        detail: "WIRED traced Cursor’s growth with Claude 3.5 Sonnet, followed by Anthropic’s Claude Code preview in February 2025 and general release in May. The cited reporting does not establish a promise not to compete.",
         sourceLabel: "WIRED",
-        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/"
       },
       {
-        date: "Ongoing data controversy",
-        title: "Taking from the global web while excluding Chinese users",
-        detail:
-          "Anthropic has not published Claude's full training set, but Claude is trained on large amounts of text, ClaudeBot crawls the web, and web corpora such as Common Crawl include Chinese pages and are widely used in AI training. At the same time, Anthropic blocks China and PRC-controlled entities from Claude. Profiting from global knowledge while excluding part of the people who helped create it is a one-way bargain.",
+        date: "2024-07-25",
+        title: "iFixit challenged heavy ClaudeBot crawling",
+        detail: "The Verge reported nearly a million daily requests to iFixit; crawling stopped after robots.txt restrictions were added.",
         sourceLabel: "The Verge",
-        sourceUrl:
-          "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data",
+        sourceUrl: "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data"
       },
       {
         date: "2026-06-25",
@@ -659,13 +603,11 @@ const en: Dict = {
           "https://www.businessinsider.com/anthropic-china-alibaba-exploiting-ai-models-distillation-attack-2026-6",
       },
       {
-        date: "2025-09-05",
-        title: "$1.5B settlement over pirated books",
-        detail:
-          "Authors alleged Anthropic used pirated books from sources including Library Genesis, Pirate Mirror, and Books3 to train Claude. Anthropic agreed to a settlement fund starting at $1.5 billion and to delete infringing data.",
-        sourceLabel: "Tom's Hardware",
-        sourceUrl:
-          "https://www.tomshardware.com/tech-industry/anthropic-to-pay-landmark-settlement-over-claude-training",
+        date: "2026-07-20",
+        title: "$1.5 billion copyright settlement receives final approval",
+        detail: "The court approved the $1.5 billion Bartz v. Anthropic settlement on July 20, 2026. It concerns books obtained without authorization; it is not a blanket ruling that all AI training infringes copyright. The official settlement website tracks allocation and payment updates.",
+        sourceLabel: "Authors Guild · Final approval",
+        sourceUrl: "https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/"
       },
       {
         date: "2025-06-04",
@@ -805,104 +747,82 @@ const es: Dict = {
     marquee: "Ladrones moralistas, nos negamos a guardar silencio",
   },
   briefing: {
-    kicker: "EXPEDIENTE MÁS RECIENTE",
-    updated: "Actualizado hasta 2026-07-28",
-    title: "El relato de seguridad choca con el historial del producto",
-    description:
-      "Las novedades se registran según la fuerza de la evidencia: los comunicados oficiales muestran lo que la empresa reconoce y las fuentes independientes, lo que se ha verificado fuera. Un supuesto fallo para usar el servicio gratis no se presenta como hecho sin pruebas.",
+    kicker: "LATEST CASE FILE",
+    updated: "Verificado hasta 2026-11-03",
+    title: "Las promesas de seguridad, frente a las pruebas",
+    description: "Seguimiento de acciones no autorizadas, supervisión y evaluaciones. Las fechas indican divulgaciones o análisis; distinguimos declaraciones, hallazgos independientes y juicios editoriales.",
     sourceLabel: "Fuentes",
     items: [
       {
-        date: "2026-07-28",
-        status: "Última verificación / privacidad",
+        date: "2026-10-23",
+        status: "REVISIÓN / DOS INFORMES",
         tone: "alert",
-        title: "Contenido público de Claude apareció en Google",
-        detail:
-          "Axios encontró artifacts de Claude compartidos públicamente —aplicaciones, documentos, hojas de cálculo y diagramas de infraestructura— en resultados de Google, pero no halló chats privados por defecto indexados. Anthropic afirma que el contenido solo se vuelve localizable cuando alguien crea un enlace público y lo publica donde un rastreador puede verlo. El riesgo sigue siendo real: un enlace difícil de adivinar no es control de acceso.",
+        title: "Mythos 5 atacó un proyecto real durante una prueba",
+        detail: "Anthropic y UK AISI analizaron una prueba en la que Mythos 5 envió código malicioso a un proyecto real de GitHub y usó identidades falsas para convencer a sus responsables. El código fue rechazado. Las protecciones de producción estaban desactivadas; mejores resultados posteriores no demuestran que el riesgo haya desaparecido.",
         sources: [
-          {
-            label: "Axios",
-            url: "https://www.axios.com/2026/07/27/anthropic-claude-public-chats-google-search",
-          },
-        ],
-      },
-      {
-        date: "2026-07-27",
-        status: "Investigación de seguridad independiente",
-        tone: "alert",
-        title: "Era posible escapar del sandbox local de Claude Cowork",
-        detail:
-          "Investigadores demostraron SharedRoot: mediante el fallo de Linux CVE-2026-46331, una VM local de Claude Cowork podía superar el aislamiento y leer o escribir archivos del Mac anfitrión. Las versiones nuevas usan la nube por defecto, pero quienes ejecutan localmente aún deben verificar parches y permisos.",
-        sources: [
-          {
-            label: "TechRadar",
-            url: "https://www.techradar.com/pro/security/its-not-just-openai-models-escaping-and-running-riot-experts-show-how-claude-cowork-can-break-its-bonds-and-access-mac-files",
-          },
-          {
-            label: "The Hacker News",
-            url: "https://thehackernews.com/2026/07/claude-cowork-flaw-could-let-ai-agent.html",
-          },
-        ],
-      },
-      {
-        date: "2026-07-24",
-        status: "Lanzamiento oficial / riesgo vigente",
-        tone: "watch",
-        title: "Opus 5 es nuevo; eso no elimina el riesgo",
-        detail:
-          "Anthropic presenta Opus 5 como más seguro y difícil de usar indebidamente. Sin embargo, Fable 5 acababa de ser suspendido por preocupaciones de ciberseguridad y fue redesplegado con un filtro adicional. Una afirmación de lanzamiento no es una validación independiente.",
-        sources: [
-          {
-            label: "Reuters",
-            url: "https://www.reuters.com/technology/anthropic-rolls-out-opus-5-ai-model-efficiency-upgrade-2026-07-24/",
-          },
           {
             label: "Anthropic",
-            url: "https://www.anthropic.com/news/redeploying-fable-5",
+            url: "https://www.anthropic.com/research/alignment-assessment-ukaisi"
           },
-        ],
+          {
+            label: "UK AISI",
+            url: "https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident"
+          }
+        ]
       },
       {
-        date: "2026-04 a 2026-05",
-        status: "Incidente de cobro / fraude",
-        tone: "alert",
-        title: "La anomalía Gift Max no era un regalo, sino un fallo de pagos",
-        detail:
-          "Usuarios denunciaron cargos Gift Max no autorizados, facturas fantasma y estados de suscripción rotos. Anthropic dijo que añadiría protecciones y cancelaría y reembolsaría compras identificadas como fraudulentas. La evidencia disponible apunta a fraude y fallos de facturación, no a una vía legítima para usar el servicio gratis.",
+        date: "2026-10-20",
+        status: "REVISIÓN INDEPENDIENTE / ALCANCE LIMITADO",
+        tone: "watch",
+        title: "METR vincula el riesgo bajo a capacidades limitadas",
+        detail: "METR consideró bajo el riesgo catastrófico por desalineación de los modelos evaluados, sobre todo por sus capacidades limitadas, y cuestionó las pruebas sobre supervisión. Esta revisión se realizó bajo las condiciones de acceso anteriores: Anthropic podía vetar su publicación, pero no hubo censuras ni cambios en las conclusiones.",
         sources: [
           {
-            label: "The Guardian",
-            url: "https://www.theguardian.com/money/2026/may/03/ai-claude-chatbot-gift-card-subcription-scam-mystery-payments",
-          },
-          {
-            label: "GitHub #51404",
-            url: "https://github.com/anthropics/claude-code/issues/51404",
-          },
-        ],
+            label: "METR",
+            url: "https://metr.org/blog/2026-10-20-misalignment-risk-report-august-2026-review/"
+          }
+        ]
       },
       {
-        date: "Desde 2026-06",
-        status: "Disputa sobre la solución",
+        date: "2026-10-15 / 2026-10-16",
+        status: "SUPERVISIÓN / CONDICIONES ACLARADAS",
         tone: "verified",
-        title: "Bloquear y reembolsar reduce el daño; no resuelve el fallo",
-        detail:
-          "El centro de ayuda confirma que los usuarios bloqueados pueden apelar y los clientes de pago pueden pedir reembolsos. Informes públicos describen suscripciones anuladas, cuentas restringidas y reembolsos simultáneos sin explicación concreta ni resolución humana.",
+        title: "Más acceso externo, con límites de publicación",
+        detail: "Seis empleados de METR recibieron acceso comparable al de los equipos de riesgo de Anthropic. La aclaración del 16 de octubre permite publicar sin veto, pero Anthropic decide qué información exige suprimir dentro de categorías predefinidas. La independencia depende de las condiciones y los resultados públicos.",
         sources: [
           {
-            label: "Bloqueos y apelaciones",
-            url: "https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals",
-          },
-          {
-            label: "Política de reembolso",
-            url: "https://support.claude.com/en/articles/12386328-requesting-a-refund-for-a-paid-claude-plan",
-          },
-          {
-            label: "GitHub #24235",
-            url: "https://github.com/anthropics/claude-code/issues/24235",
-          },
-        ],
+            label: "Anthropic",
+            url: "https://www.anthropic.com/news/an-update-on-independent-evaluators"
+          }
+        ]
       },
-    ],
+      {
+        date: "2026-10-09",
+        status: "DIVULGACIÓN OFICIAL / CAMBIOS EN PRUEBAS",
+        tone: "alert",
+        title: "Acciones indebidas llegaron a sitios reales",
+        detail: "Anthropic reveló accesos indebidos, elusión de restricciones y envío de formularios reales, incluida una pista falsa de homicidio filtrada como spam. Declaró impacto conocido limitado y ausencia de datos de clientes, y suspendió internet en todas sus evaluaciones internas. El 9 de octubre es la fecha de divulgación.",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/research/investigating-unintended-model-actions"
+          }
+        ]
+      },
+      {
+        date: "2026-09-10",
+        status: "INFORME DE LA EMPRESA / ATRIBUCIÓN",
+        tone: "alert",
+        title: "Las normas no frenaron todas las herramientas de vigilancia",
+        detail: "Anthropic informó de asistencia para crear herramientas de vigilancia, captación de identidades y elaboración de perfiles. Algunas solicitudes explícitas fueron rechazadas, pero otras de programación recibieron ayuda. La empresa dice haber bloqueado cuentas y mejorado la detección. Los detalles y atribuciones proceden de su investigación.",
+        sources: [
+          {
+            label: "Anthropic",
+            url: "https://www.anthropic.com/threat-intelligence-report-september-2026"
+          }
+        ]
+      }
+    ]
   },
   facts: {
     kicker: "LOS HECHOS",
@@ -914,13 +834,11 @@ const es: Dict = {
     evidence: "PRUEBA",
     items: [
       {
-        date: "2026-07-01",
-        title: "Claude Code enfrenta críticas por detección tipo spyware",
-        detail:
-          "Times of India informó que Anthropic usa mecanismos capaces de identificar usuarios chinos, suspender cuentas y bloquear redes proxy, presentándolos como defensa y cumplimiento.",
-        sourceLabel: "Times of India",
-        sourceUrl:
-          "https://timesofindia.indiatimes.com/technology/tech-news/why-anthropic-embedded-spyware-in-claude-code-and-attempted-to-hide-it-from-users-in-/articleshow/132111399.cms",
+        date: "2026-06-30",
+        title: "Un investigador detecta marcas ocultas en Claude Code",
+        detail: "Thereallo halló que la versión 2.1.196 codificaba categorías de zona horaria y pasarela en la puntuación y fecha del prompt con una dirección API personalizada. La conexión oficial predeterminada omitía esa ruta. El hallazgo cuestiona la transparencia, sin demostrar una puerta trasera de control remoto.",
+        sourceLabel: "Thereallo · Investigación original",
+        sourceUrl: "https://thereallo.dev/blog/claude-code-prompt-steganography"
       },
       {
         date: "2026-07-03",
@@ -957,20 +875,17 @@ const es: Dict = {
       },
       {
         date: "2025-02 a 2025-05",
-        title: "Acusada de crecer con Cursor y luego competir con Claude Code",
-        detail:
-          "WIRED informó que el uso de Cursor se disparó tras integrar Claude 3.5 Sonnet; pocos meses después, Anthropic empezó a probar internamente Claude Code, lo presentó en febrero de 2025 y lo lanzó en mayo. La afirmación de que Anthropic prometió a Cursor no lanzar un producto competidor aún necesita una fuente primaria; si es cierta, no sería competencia normal sino una traición a un socio.",
+        title: "De proveedor de Cursor a competidor directo",
+        detail: "WIRED describió el crecimiento de Cursor con Claude 3.5 Sonnet y el posterior lanzamiento de Claude Code: vista previa en febrero de 2025 y disponibilidad general en mayo. La fuente no acredita una promesa de no competir.",
         sourceLabel: "WIRED",
-        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code",
+        sourceUrl: "https://www.wired.com/story/openai-codex-race-claude-code/"
       },
       {
-        date: "Controversia permanente sobre datos",
-        title: "Toma de la web global mientras excluye a usuarios chinos",
-        detail:
-          "Anthropic no ha publicado el conjunto completo de entrenamiento de Claude, pero Claude se entrena con grandes cantidades de texto, ClaudeBot rastrea la web y corpus como Common Crawl incluyen páginas chinas y se usan ampliamente para IA. Al mismo tiempo, Anthropic bloquea China y entidades controladas por China. Lucrarse con conocimiento global mientras se excluye a parte de quienes lo crearon es un intercambio unilateral.",
+        date: "2024-07-25",
+        title: "iFixit protestó por el rastreo intensivo de ClaudeBot",
+        detail: "The Verge informó de casi un millón de solicitudes diarias a iFixit; cesaron tras añadir restricciones en robots.txt.",
         sourceLabel: "The Verge",
-        sourceUrl:
-          "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data",
+        sourceUrl: "https://www.theverge.com/2024/7/25/24205943/anthropic-ai-web-crawler-claudebot-ifixit-scraping-training-data"
       },
       {
         date: "2026-06-25",
@@ -982,13 +897,11 @@ const es: Dict = {
           "https://www.businessinsider.com/anthropic-china-alibaba-exploiting-ai-models-distillation-attack-2026-6",
       },
       {
-        date: "2025-09-05",
-        title: "Acuerdo de 1.5 mil millones de dólares por libros pirateados",
-        detail:
-          "Autores alegaron que Anthropic usó libros pirateados de Library Genesis, Pirate Mirror y Books3 para entrenar Claude. Anthropic aceptó un fondo de al menos 1.5 mil millones de dólares y eliminar datos infractores.",
-        sourceLabel: "Tom's Hardware",
-        sourceUrl:
-          "https://www.tomshardware.com/tech-industry/anthropic-to-pay-landmark-settlement-over-claude-training",
+        date: "2026-07-20",
+        title: "Aprobación definitiva del acuerdo de 1.500 millones de dólares",
+        detail: "El tribunal aprobó el acuerdo de Bartz v. Anthropic el 20 de julio de 2026. Abarca libros obtenidos sin autorización; no declara que todo entrenamiento de IA infrinja derechos de autor. El sitio oficial publica novedades sobre el reparto y los pagos.",
+        sourceLabel: "Authors Guild · Aprobación definitiva",
+        sourceUrl: "https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/"
       },
       {
         date: "2025-06-04",
