@@ -24,7 +24,7 @@ npm run dev
 
 - 首页背景与交互短音取自随项目提供的 `Oliver_Miami_Opening.mp4`。`NEXT_PUBLIC_HERO_VIDEO_URL` 可覆盖首屏背景。
 - [Kevin Ache 的服务器机架摄影](https://unsplash.com/photos/a-rack-of-servers-in-a-server-room-2JJ3wBHu4_0) 用于文章栏目配图。
-- 放映室的即梦成片、封面及可追溯的参考资料位于 `public/media/`。字体及许可位于 `app/fonts/`。
+- 放映室可切换即梦成片和实际输入的电台实拍参考片段，原片出处、时码和制作记录位于 `public/media/`。字体及许可位于 `app/fonts/`。
 
 ## 表情包库（站长自管，无用户上传）
 

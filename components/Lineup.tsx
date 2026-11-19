@@ -9,7 +9,7 @@ export default function Lineup({ locale }: { locale: Locale }) {
   const latest = JOURNAL[0];
   const cards = [
     { href: editionPath(locale, `/articles/${latest.id}`), image: "/media/server-rack.webp", top: copy.articles, detail: latest.date.replaceAll("-", "."), title: latest.copy[locale].title, mark: "AI WIRE", style: "wire" },
-    { href: "#cinema", image: "/media/dario-after-hours.webp", top: copy.cinema, detail: copy.fiction, title: copy.filmTitle, mark: "AFTER HOURS", style: "movie" },
+    { href: "#cinema", image: "/media/dario-on-air.webp", top: copy.cinema, detail: copy.fiction, title: copy.filmTitle, mark: "ON AIR", style: "movie" },
     { href: "#facts", image: "/dario.webp", top: copy.archive, detail: "ANTHROPIC", title: copy.archiveTitle, mark: "CASE FILES", style: "files" },
   ];
   return (

@@ -1,0 +1,32 @@
+DARIO ON AIR / 达里奥的午夜电台
+
+Voice Wall 原创编辑讽刺动画。主角达里奥是虚构的漫画电台台长。
+An editorial cartoon for Voice Wall starring a fictional radio host.
+
+动态参考 / Motion reference supplied to the video model
+
+Staff Sgt Sari Seibert on how she became an AFN radio DJ (Broll). Filmed by Sgt. Kevin Henderson, AFN Kaiserslautern, on February 8, 2023. Posted on DVIDS on February 23, 2023. Video ID 874137. DVIDS lists this work as public domain.
+Original video: https://www.dvidshub.net/video/874137/staff-sgt-sari-seibert-she-became-afn-radio-dj-broll
+Media: https://d34w7g4gy10iej.cloudfront.net/video/2302/DOD_109469571/DOD_109469571.mp4
+Use information: https://www.dvidshub.net/about/copyright
+
+源视频时间 00:23.600–00:29.400。短摘保留画面顺序和播放速度，裁去部分边缘、缩小画幅并移除原声。低机位对准调音台，手触碰控件、退出、再回到台面。在网站摘录的第 4.00 秒，画面硬切到 ON AIR 灯箱。即梦全能参考直接读取了这段 5.8 秒视频，新片指定保留动作次序及切点。
+The 5.8-second excerpt covers 00:23.600–00:29.400 of the original. It has been cropped, resized and muted. The original edit and speed are preserved. Its console-level framing, hand movement and cut to the broadcast lamp at 4.00 seconds in the web excerpt guided the new animation. The excerpt was supplied to Dreamina through its video-input option.
+
+The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.
+
+图像参考 / Still images supplied to the video model
+
+1. Art Deco, Miami Beach, Florida. Carol M. Highsmith, between 1980 and 2006. Photographs in the Carol M. Highsmith Archive, Library of Congress, Prints and Photographs Division. No known restrictions on publication. Street architecture reference.
+https://www.loc.gov/item/2011630398/
+https://tile.loc.gov/storage-services/service/pnp/highsm/12200/12201v.jpg
+
+2. Oliver_Miami_Opening.mp4. The client-supplied opening at 0.30 s provided the reference for the violet sky, peach sunset and palm silhouettes.
+
+人物造型观察 / Character design research
+
+Dario Amodei in 2023. Simon Walker / No 10 Downing Street, May 24, 2023, via Wikimedia Commons. The team reviewed the public photograph for curls, glasses and formalwear.
+https://commons.wikimedia.org/wiki/File:Dario_Amodei_in_2023.jpg
+https://creativecommons.org/licenses/by/2.0/
+
+Timing verification: the full original cuts to the lamp at 27.6276 s. In the 30 fps excerpt supplied to Dreamina and shown on the site, the first lamp frame is at 4.000 s. The final edit retimes video and sound together so its cut lands on that same frame.

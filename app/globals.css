@@ -103,6 +103,13 @@ em { color: #d75e54; font-style: normal; }
 .film-credits li a { font-size: 13px; font-weight: 700; }
 .film-credits small { display: block; margin-top: 2px; color: #decada; font: 10px/1.5 var(--mono); }
 .cinema-frame { background: var(--paper); color: var(--ink); padding: 5px; box-shadow: 7px 7px 0 #b27791; }
+.reel-switch { display: flex; gap: 4px; padding-bottom: 5px; }
+.reel-switch button { padding: 8px 12px; border: 1px solid transparent; cursor: pointer; font-size: 12px; font-weight: 750; }
+.reel-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.reel-switch button:hover { border-color: var(--ink); }
+.reel-source { padding: 5px 8px 8px; font-size: 12px; }
+.reel-source a { font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.reel-source p { margin-top: 6px; color: var(--muted); font: 10px/1.55 var(--mono); }
 .cinema-frame video { width: 100%; display: block; background: #221321; aspect-ratio: 16/9; }
 .cinema-frame figcaption { padding: 9px 7px 5px; font-size: 9px; letter-spacing: .1em; }
 .cinema-frame i { width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; }
