@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import Reveal from "./Reveal";
+import { useCallback, useEffect, useState } from "react";
+import styles from "./CommunityArchive.module.css";
 import { useI18n } from "./LanguageProvider";
 
 interface RecentSigner {
@@ -15,9 +15,6 @@ interface PetitionPayload {
   recent: RecentSigner[];
 }
 
-const inputCls =
-  "w-full border border-white/20 bg-black/25 px-4 py-3.5 text-base outline-none transition placeholder:text-neutral-600 focus:border-accent";
-
 function nextMilestone(count: number) {
   if (count < 50) return 50;
   if (count < 100) return 100;
@@ -27,13 +24,9 @@ function nextMilestone(count: number) {
   return Math.ceil((count + 1) / 1000) * 1000;
 }
 
-function signerInitial(name: string) {
-  return Array.from(name.trim())[0]?.toUpperCase() ?? "?";
-}
-
 export default function Petition() {
   const { locale, t } = useI18n();
-  const [data, setData] = useState<PetitionPayload>({ count: 0, recent: [] });
+  const [data, setData] = useState<PetitionPayload | null>(null);
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -42,9 +35,9 @@ export default function Petition() {
   );
   const [errorMsg, setErrorMsg] = useState("");
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
 
-  const goal = useMemo(() => nextMilestone(data.count), [data.count]);
-  const progress = Math.min(100, Math.max(0, (data.count / goal) * 100));
+  const goal = nextMilestone(data?.count ?? 0);
 
   const load = useCallback(async () => {
     try {
@@ -104,238 +97,85 @@ export default function Petition() {
       try {
         await navigator.share(shareData);
         return;
-      } catch {
-        // 用户取消时保留复制链接这个降级路径。
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
       }
     }
 
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    } catch {
+      setShareUrl(url);
+    }
   }
 
   return (
-    <section
-      id="petition"
-      className="petition-section relative overflow-hidden border-y border-accent/30 bg-[#120d0f] py-24"
-    >
-      <span
-        aria-hidden
-        className="font-display pointer-events-none absolute -right-8 top-6 select-none text-[15vw] leading-none text-white/[0.035]"
-      >
-        SIGN
-      </span>
-
-      <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10">
-        <Reveal>
-          <p className="font-mono-geek mb-3 text-[12px] font-bold tracking-[0.38em] text-accent">
-            02 — {t.petition.kicker}
-          </p>
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <div>
-              <h2
-                className="max-w-3xl font-black tracking-tight"
-                style={{ fontSize: "clamp(38px, 5.4vw, 74px)", lineHeight: 1.02 }}
-              >
-                {t.petition.title}
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-neutral-400">
-                {t.petition.description}
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden border-2 border-accent bg-[#080809] p-6 shadow-[10px_10px_0_rgba(255,51,65,0.3)]">
-              <span
-                aria-hidden
-                className="font-display pointer-events-none absolute -right-2 -top-5 text-[88px] leading-none text-white/[0.035]"
-              >
-                COUNT
-              </span>
-              <div className="relative flex items-center justify-between gap-4">
-                <p className="font-mono-geek text-[10px] font-bold tracking-[0.3em] text-accent">
-                {t.petition.countLabel}
-                </p>
-                <span className="font-mono-geek inline-flex items-center gap-2 border border-white/15 bg-white/[0.04] px-2 py-1 text-[9px] font-bold tracking-[0.18em] text-neutral-400">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                  {t.petition.liveCount}
-                </span>
-              </div>
-              <p className="relative mt-4 flex items-end gap-3">
-                <span className="font-display text-[clamp(72px,8vw,112px)] leading-[0.78] tabular-nums text-white">
-                  {data.count.toLocaleString(locale === "zh" ? "zh-CN" : locale)}
-                </span>
-                <span className="pb-1 text-sm font-black tracking-[0.18em] text-accent">
-                  {t.petition.countUnit}
-                </span>
-              </p>
-              <div className="relative mt-7 h-3 overflow-hidden border border-white/10 bg-white/[0.06]">
-                <div
-                  className="petition-progress h-full bg-[repeating-linear-gradient(135deg,#ff3341_0_8px,#d51f2c_8px_16px)]"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <div className="relative mt-3 flex items-center justify-between gap-4">
-                <p className="font-mono-geek text-[10px] tracking-[0.18em] text-neutral-500">
-                  {t.petition.nextGoal(goal)}
-                </p>
-                <span className="font-mono-geek text-[10px] font-bold tabular-nums text-neutral-300">
-                  {Math.round(progress)}%
-                </span>
-              </div>
-            </div>
+    <section id="petition" className={styles.petition} aria-labelledby="petition-title">
+      <div className={styles.twoColumns}>
+        <div>
+          <h2 id="petition-title" className={styles.heading}>{t.petition.title}</h2>
+          <p className={styles.intro}>{t.petition.description}</p>
+          <div className={styles.count}>
+            <strong>{data?.count.toLocaleString(locale) ?? "—"}</strong> <span>{t.petition.countLabel}</span>
           </div>
-        </Reveal>
-
-        <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <Reveal>
-            <article className="border border-white/15 bg-black/25 p-6 md:p-8">
-              <p className="font-mono-geek text-[11px] font-bold tracking-[0.3em] text-accent">
-                {t.petition.statementLabel}
-              </p>
-              <p className="mt-5 text-lg font-semibold leading-8 text-neutral-100">
-                {t.petition.statement}
-              </p>
-
-              <p className="font-mono-geek mt-9 text-[11px] font-bold tracking-[0.3em] text-neutral-500">
-                {t.petition.demandsTitle}
-              </p>
-              <ol className="mt-4 space-y-4">
-                {t.petition.demands.map((demand, index) => (
-                  <li key={demand} className="flex gap-4 text-sm leading-6 text-neutral-300">
-                    <span className="font-mono-geek flex h-7 w-7 shrink-0 items-center justify-center bg-accent text-xs font-bold text-white">
-                      {index + 1}
-                    </span>
-                    {demand}
-                  </li>
-                ))}
-              </ol>
-
-              <div className="mt-9 border-t border-white/10 pt-6">
-                <p className="font-mono-geek text-[10px] font-bold tracking-[0.28em] text-neutral-500">
-                  {t.petition.recentTitle}
-                </p>
-                {data.recent.length > 0 ? (
-                  <div className="mt-4 flex flex-wrap gap-2" aria-live="polite">
-                    {data.recent.map((signer) => (
-                      <span
-                        key={signer.id}
-                        className="inline-flex items-center gap-2 border border-white/10 bg-white/[0.04] py-1.5 pl-1.5 pr-3 text-xs text-neutral-300"
-                      >
-                        <span className="flex h-6 w-6 items-center justify-center bg-accent/85 text-[10px] font-black text-white">
-                          {signerInitial(signer.nickname)}
-                        </span>
-                        {signer.nickname}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="mt-3 text-sm text-neutral-500">{t.petition.emptyRecent}</p>
-                )}
-              </div>
-            </article>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div className="relative border-2 border-accent bg-[#0b0b0c] p-6 md:p-8">
-              <div className="absolute -right-2 -top-3 rotate-2 bg-accent px-3 py-1 font-mono-geek text-[10px] font-bold tracking-[0.22em] text-white">
-                NO CONSENT / NO SILENCE
-              </div>
-
-              {status === "signed" ? (
-                <div className="flex min-h-[390px] flex-col items-center justify-center text-center">
-                  <span className="petition-signed-mark flex h-24 w-24 rotate-[-5deg] items-center justify-center border-4 border-accent text-5xl font-black text-accent">
-                    ✓
-                  </span>
-                  <h3 className="mt-7 text-3xl font-black">{t.petition.signedTitle}</h3>
-                  <p className="mt-3 max-w-md text-sm leading-7 text-neutral-400">
-                    {t.petition.signedBody}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={sharePetition}
-                    className="mt-8 border-2 border-white/30 px-7 py-3 text-xs font-black tracking-[0.2em] transition hover:border-accent hover:text-accent"
-                  >
-                    {copied ? t.petition.copied : t.petition.share} ↗
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <div>
-                    <label
-                      htmlFor="petition-nickname"
-                      className="font-mono-geek mb-2 block text-[11px] font-bold tracking-[0.2em] text-neutral-400"
-                    >
-                      {t.petition.nickLabel} <span className="text-accent">*</span>
-                    </label>
-                    <input
-                      id="petition-nickname"
-                      type="text"
-                      required
-                      maxLength={20}
-                      autoComplete="nickname"
-                      value={nickname}
-                      onChange={(event) => setNickname(event.target.value)}
-                      placeholder={t.petition.nickPlaceholder}
-                      className={inputCls}
-                    />
-                  </div>
-
-                  <div className="mt-6">
-                    <label
-                      htmlFor="petition-email"
-                      className="font-mono-geek mb-2 block text-[11px] font-bold tracking-[0.2em] text-neutral-400"
-                    >
-                      {t.petition.emailLabel}{" "}
-                      <span className="text-neutral-600">{t.petition.emailHint}</span>
-                    </label>
-                    <input
-                      id="petition-email"
-                      type="email"
-                      autoComplete="email"
-                      value={email}
-                      onChange={(event) => {
-                        setEmail(event.target.value);
-                        if (!event.target.value) setConsent(false);
-                      }}
-                      placeholder={t.petition.emailPlaceholder}
-                      className={inputCls}
-                    />
-                  </div>
-
-                  <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-neutral-400">
-                    <input
-                      type="checkbox"
-                      checked={consent}
-                      disabled={!email}
-                      required={Boolean(email)}
-                      onChange={(event) => setConsent(event.target.checked)}
-                      className="mt-1 h-4 w-4 shrink-0 accent-[#ff3341] disabled:opacity-35"
-                    />
-                    <span>{t.petition.consent}</span>
-                  </label>
-
-                  <p className="mt-3 text-xs leading-5 text-neutral-600">
-                    {t.petition.privacy}
-                  </p>
-
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="mt-8 flex w-full items-center justify-center gap-3 border-2 border-accent bg-accent py-4 text-sm font-black tracking-[0.26em] text-white transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(255,255,255,0.9)] disabled:opacity-50"
-                  >
-                    {status === "sending" ? t.petition.submitting : t.petition.submit}
-                    <span>→</span>
-                  </button>
-
-                  {status === "error" && (
-                    <p aria-live="polite" className="mt-4 text-center text-sm text-accent">
-                      {errorMsg}
-                    </p>
-                  )}
-                </form>
-              )}
+          {data && (
+            <>
+              <progress className={styles.progress} value={data.count} max={goal} aria-label={t.petition.nextGoal(goal)} />
+              <p className={styles.meta}>{t.petition.nextGoal(goal)}</p>
+            </>
+          )}
+          <details className={styles.statement}>
+            <summary>{t.petition.statementLabel}</summary>
+            <p>{t.petition.statement}</p>
+            <h3>{t.petition.demandsTitle}</h3>
+            <ol className={styles.demands}>
+              {t.petition.demands.map((demand) => <li key={demand}>{demand}</li>)}
+            </ol>
+          </details>
+          {data && <details className={styles.statement}>
+            <summary>{t.petition.recentTitle}</summary>
+            {data.recent.length ? (
+              <ul className={styles.signers}>
+                {data.recent.map((signer) => <li key={signer.id}>{signer.nickname}</li>)}
+              </ul>
+            ) : <p>{t.petition.emptyRecent}</p>}
+          </details>}
+        </div>
+        <div className={styles.sheet}>
+          {status === "signed" ? (
+            <div className={styles.success} role="status">
+              <span aria-hidden="true">✓</span>
+              <h3>{t.petition.signedTitle}</h3>
+              <p>{t.petition.signedBody}</p>
+              <button type="button" onClick={sharePetition} className={styles.submit}>
+                {copied ? t.petition.copied : t.petition.share} <b aria-hidden="true">↗</b>
+              </button>
+              {shareUrl && <input aria-label={t.petition.share} readOnly value={shareUrl} onFocus={(event) => event.target.select()} />}
             </div>
-          </Reveal>
+          ) : (
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <label htmlFor="petition-nickname">{t.petition.nickLabel}
+                <input id="petition-nickname" type="text" required maxLength={20}
+                  autoComplete="nickname" value={nickname} onChange={(event) => setNickname(event.target.value)}
+                  placeholder={t.petition.nickPlaceholder} />
+              </label>
+              <label htmlFor="petition-email">{t.petition.emailLabel} <small>{t.petition.emailHint}</small>
+                <input id="petition-email" type="email" autoComplete="email" value={email}
+                  onChange={(event) => { setEmail(event.target.value); if (!event.target.value) setConsent(false); }}
+                  placeholder={t.petition.emailPlaceholder} />
+              </label>
+              {email && <label className={styles.checkbox}>
+                <input type="checkbox" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />
+                {t.petition.consent}
+              </label>}
+              <p className={styles.hint}>{t.petition.privacy}</p>
+              <button type="submit" disabled={status === "sending"} className={styles.submit}>
+                {status === "sending" ? t.petition.submitting : t.petition.submit} <b aria-hidden="true">→</b>
+              </button>
+              {status === "error" && <p role="alert" className={styles.error}>{errorMsg}</p>}
+            </form>
+          )}
         </div>
       </div>
     </section>

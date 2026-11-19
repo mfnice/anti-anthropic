@@ -355,9 +355,9 @@ const zh: Dict = {
   },
   petition: {
     kicker: "COLLECTIVE ACTION",
-    title: "签下名字，把愤怒变成共同要求",
+    title: "加入公开联署",
     description:
-      "这不是一张装饰性的签名表。每一次联署都会被真实计数，并成为我们后续公开信、媒体沟通和集体行动的支持依据。",
+      "用名字或昵称支持这份公开信，一起要求 Anthropic 公开用户识别、封禁和申诉规则。",
     statementLabel: "联署声明",
     statement:
       "我们要求 Anthropic 停止以“安全”为名实施不透明的检测、封禁和差别对待；公开用户识别与申诉规则；尊重被用于训练和产品增长的创作者、开发者与全球知识贡献者。",
@@ -393,7 +393,7 @@ const zh: Dict = {
     kicker: "SPEAK UP",
     titlePre: "把抗议",
     titleAccent: "留下来",
-    description: "每一条留言都会实时出现在右上角。不是为了吵闹，是为了让 Anthropic 的反道德行为被看见、被记录、被追问。",
+    description: "分享你使用 AI 服务时的亲身经历。公开留言在墙上展示七天。",
     bullets: [
       "昵称随意，不需要真名",
       "邮箱选填，仅用于后续联系，永远不会公开展示",
@@ -411,14 +411,14 @@ const zh: Dict = {
     removeSticker: "移除",
     submit: "发出去",
     submitting: "发送中…",
-    okMsg: "已发送，看看右上角 ↗",
+    okMsg: "已发布到留言墙。",
     networkErr: "网络错误，请稍后再试",
     genericErr: "提交失败，请稍后再试",
   },
   feed: {
     title: "大家正在说",
     empty: "还没有留言，来做第一个",
-    live: "直播",
+    live: "实时",
     countLabel: "累计发声",
     latestLabel: (n) => `近 7 天留言 · ${n} 条`,
     placeholderLabel: "提示",
@@ -644,9 +644,9 @@ const en: Dict = {
   },
   petition: {
     kicker: "COLLECTIVE ACTION",
-    title: "Sign your name. Turn anger into a shared demand.",
+    title: "Sign the petition",
     description:
-      "This is not a decorative counter. Every signature is counted and can support a future open letter, press outreach, and collective action.",
+      "Add your name or nickname to the open letter calling on Anthropic to explain how users are identified, suspended and heard on appeal.",
     statementLabel: "PETITION STATEMENT",
     statement:
       "We call on Anthropic to stop opaque detection, bans, and discriminatory treatment in the name of safety; publish clear identification and appeal rules; and respect the creators, developers, and global knowledge contributors who helped build its products.",
@@ -683,7 +683,7 @@ const en: Dict = {
     titlePre: "Leave ",
     titleAccent: "your protest",
     description:
-      "Every message appears live in the top-right. This is not noise; it is a public record of why Anthropic's conduct is being challenged.",
+      "Share a firsthand experience with AI services. Public messages stay on the wall for seven days.",
     bullets: [
       "Any nickname works — no real name needed",
       "Email is optional, only for follow-up, never shown publicly",
@@ -701,7 +701,7 @@ const en: Dict = {
     removeSticker: "Remove",
     submit: "Send it",
     submitting: "Sending…",
-    okMsg: "Sent — check the top-right ↗",
+    okMsg: "Published to the wall.",
     networkErr: "Network error, please try again",
     genericErr: "Submission failed, please try again",
   },
@@ -938,9 +938,9 @@ const es: Dict = {
   },
   petition: {
     kicker: "ACCIÓN COLECTIVA",
-    title: "Firma. Convierte la indignación en una exigencia común.",
+    title: "Firma la petición",
     description:
-      "No es un contador decorativo. Cada firma se registra de verdad y podrá respaldar una carta abierta, contacto con medios y futuras acciones colectivas.",
+      "Apoya con tu nombre o apodo la carta abierta que pide a Anthropic explicar cómo identifica y suspende a sus usuarios y cómo se puede recurrir.",
     statementLabel: "DECLARACIÓN",
     statement:
       "Exigimos que Anthropic deje de aplicar detecciones, bloqueos y tratos discriminatorios opacos bajo el nombre de seguridad; publique reglas claras de identificación y apelación; y respete a creadores, desarrolladores y contribuyentes del conocimiento global.",
@@ -977,7 +977,7 @@ const es: Dict = {
     titlePre: "Deja ",
     titleAccent: "tu protesta",
     description:
-      "Cada mensaje aparece en vivo en la esquina superior derecha. No es ruido; es un registro público de por qué se cuestiona la conducta de Anthropic.",
+      "Comparte tu experiencia con los servicios de IA. Los mensajes públicos se muestran en el muro durante siete días.",
     bullets: [
       "Cualquier apodo sirve, no hace falta nombre real",
       "El correo es opcional, solo para contacto, nunca se muestra en público",
@@ -995,7 +995,7 @@ const es: Dict = {
     removeSticker: "Quitar",
     submit: "Enviar",
     submitting: "Enviando…",
-    okMsg: "Enviado — mira arriba a la derecha ↗",
+    okMsg: "Publicado en el muro.",
     networkErr: "Error de red, inténtalo de nuevo",
     genericErr: "Error al enviar, inténtalo de nuevo",
   },

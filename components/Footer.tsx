@@ -1,23 +1,14 @@
-"use client";
+import Link from "next/link";
+import { edition, editionPath } from "@/lib/edition";
+import type { Locale } from "@/lib/i18n";
+import { Wordmark } from "./Masthead";
 
-import Image from "next/image";
-import { useI18n } from "./LanguageProvider";
-
-export default function Footer() {
-  const { t } = useI18n();
+export default function Footer({ locale }: { locale: Locale }) {
+  const copy = edition[locale];
   return (
-    <footer className="flex flex-col items-center gap-2 border-t border-white/5 py-10 text-center">
-      <Image
-        src="/logo.svg"
-        alt=""
-        width={32}
-        height={32}
-        className="opacity-70"
-      />
-      <p className="font-mono-geek text-[10px] tracking-[0.4em] text-neutral-600">
-        ANTHROPIC_PROTEST_FILE
-      </p>
-      <p className="text-xs text-neutral-600">{t.footer}</p>
+    <footer className="colophon">
+      <div><Link href={editionPath(locale)}><Wordmark /></Link><p>{copy.footer}</p></div>
+      <div className="colophon-links"><Link href={editionPath(locale, "/articles")}>{copy.articles}</Link><a href={editionPath(locale) + "#petition"}>{locale === "zh" ? "加入联署" : locale === "en" ? "Petition" : "Petición"}</a><a href="/feed.xml">RSS ↗</a><a href="#top">{copy.backTop} ↑</a></div>
     </footer>
   );
 }

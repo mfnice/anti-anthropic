@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { JOURNAL_UPDATED_AT, type JournalEntry } from "./journal";
+import { edition, editionPath } from "./edition";
 import type { Locale } from "./i18n";
+
+export { localePath } from "./edition";
 
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://anti-anthropic.vercel.app";
 
-export const siteName = "Anthropic Protest File";
-export const siteUpdatedAt = "2026-11-03";
-
-export const localePath: Record<Locale, string> = {
-  zh: "/",
-  en: "/en",
-  es: "/es",
-};
+export const siteName = "Voice Wall";
+export const siteUpdatedAt = JOURNAL_UPDATED_AT;
+export const siteCoverPath = "/media/voice-wall-cover.jpg";
 
 export const localeHtmlLang: Record<Locale, string> = {
   zh: "zh-CN",
@@ -20,30 +19,33 @@ export const localeHtmlLang: Record<Locale, string> = {
   es: "es",
 };
 
+const openGraphLocales: Record<Locale, string> = {
+  zh: "zh_CN",
+  en: "en_US",
+  es: "es_ES",
+};
+
 export const siteLocaleCopy: Record<
   Locale,
   { title: string; description: string; ogDescription: string }
 > = {
   zh: {
-    title: "Anthropic 与 Claude 争议档案｜AI 新闻、证据与用户发声",
+    title: "Voice Wall 发声墙｜迈阿密特刊",
     description:
-      "持续核验 Anthropic、Claude 与 Claude Code 的安全、隐私、计费、封号和训练数据争议；汇总 OpenAI、中国大模型每日新闻、公开证据、联署与最近 7 天用户留言。",
-    ogDescription:
-      "Anthropic 与 Claude 争议的公开证据档案，兼顾每日 AI 新闻、联署行动与实时用户发声。",
+      "阅读 AI 发展手记与 Anthropic 抗议档案，查阅 Claude 争议的一手资料，参与公众留言与联署。",
+    ogDescription: "迈阿密特刊收录 AI 发展手记、Anthropic 抗议档案与公众发声。",
   },
   en: {
-    title: "Anthropic & Claude Controversies: Evidence, AI News & Voices",
+    title: "Voice Wall · Miami Edition",
     description:
-      "A sourced public record of Anthropic, Claude, and Claude Code controversies covering safety, privacy, billing, account bans, and training data—plus daily OpenAI and Chinese AI news, a petition, and public voices.",
-    ogDescription:
-      "A sourced public record of Anthropic and Claude controversies, with daily AI news, evidence, a petition, and live public voices.",
+      "An independent AI journal and home of the Anthropic Protest File. Read original reporting, follow sources in the Claude archive, and add your voice to the wall.",
+    ogDescription: "The Miami edition of Voice Wall brings together the AI journal, the Anthropic Protest File and public voices.",
   },
   es: {
-    title: "Controversias de Anthropic y Claude: pruebas, noticias y voces",
+    title: "Voice Wall · Edición Miami",
     description:
-      "Archivo público con fuentes sobre Anthropic, Claude y Claude Code: seguridad, privacidad, cobros, bloqueos y datos de entrenamiento; además de noticias diarias de OpenAI y modelos chinos, petición y voces públicas.",
-    ogDescription:
-      "Archivo público de controversias de Anthropic y Claude, con noticias de IA, pruebas, petición y voces en directo.",
+      "Revista independiente de IA y archivo de las protestas sobre Anthropic. Lee los artículos, consulta las fuentes sobre Claude y participa en el muro de voces.",
+    ogDescription: "La edición Miami de Voice Wall reúne la revista de IA, el archivo de Anthropic y las voces del público.",
   },
 };
 
@@ -51,47 +53,46 @@ export const siteTitle = siteLocaleCopy.zh.title;
 export const siteDescription = siteLocaleCopy.zh.description;
 
 export const siteKeywords = [
-  "Anthropic",
-  "Claude",
-  "Claude Code",
-  "Anthropic controversy",
-  "Claude privacy",
-  "Claude account ban",
-  "AI safety",
-  "AI ethics",
-  "AI training data",
-  "OpenAI news",
-  "Chinese AI models",
-  "DeepSeek",
-  "Kimi",
-  "Qwen",
-  "Anthropic 争议",
-  "Claude 封号",
-  "AI 新闻",
-  "中国大模型",
+  "Voice Wall", "Anthropic Protest File", "Anthropic", "Claude", "Claude Code",
+  "AI safety", "AI ethics", "AI training data", "OpenAI", "Gemini", "DeepSeek", "Kimi", "Qwen",
+  "发声墙", "Anthropic 争议", "Claude 封号", "AI 新闻", "中国大模型",
 ];
 
 export function absoluteUrl(path = "/") {
   return new URL(path, `${siteUrl}/`).toString();
 }
 
-export function languageAlternates() {
+export function languageAlternates(path = "") {
+  const chineseUrl = absoluteUrl(editionPath("zh", path));
   return {
-    "zh-CN": absoluteUrl(localePath.zh),
-    en: absoluteUrl(localePath.en),
-    es: absoluteUrl(localePath.es),
-    "x-default": absoluteUrl(localePath.zh),
+    "zh-CN": chineseUrl,
+    en: absoluteUrl(editionPath("en", path)),
+    es: absoluteUrl(editionPath("es", path)),
+    "x-default": chineseUrl,
   };
 }
 
-export function buildPageMetadata(locale: Locale): Metadata {
-  const copy = siteLocaleCopy[locale];
-  const canonical = absoluteUrl(localePath[locale]);
+function localizedMetadata(
+  locale: Locale,
+  path: string,
+  title: string,
+  description: string,
+  socialDescription = description,
+  publishedDate?: string,
+): Metadata {
+  const canonical = absoluteUrl(editionPath(locale, path));
+  const ogLocale = openGraphLocales[locale];
+  const cover = {
+    url: absoluteUrl(siteCoverPath),
+    width: 1200,
+    height: 630,
+    alt: siteLocaleCopy[locale].title,
+  };
 
   return {
     metadataBase: new URL(siteUrl),
-    title: copy.title,
-    description: copy.description,
+    title,
+    description,
     keywords: siteKeywords,
     applicationName: siteName,
     authors: [{ name: siteName, url: siteUrl }],
@@ -100,33 +101,26 @@ export function buildPageMetadata(locale: Locale): Metadata {
     category: "technology",
     alternates: {
       canonical,
-      languages: languageAlternates(),
-      types: {
-        "application/rss+xml": absoluteUrl("/feed.xml"),
-      },
+      languages: languageAlternates(path),
+      types: { "application/rss+xml": absoluteUrl("/feed.xml") },
     },
     openGraph: {
-      type: "website",
+      ...(publishedDate
+        ? { type: "article", publishedTime: publishedDate, authors: [siteName] }
+        : { type: "website" }),
       url: canonical,
       siteName,
-      title: copy.title,
-      description: copy.ogDescription,
-      locale: locale === "zh" ? "zh_CN" : locale === "en" ? "en_US" : "es_ES",
-      alternateLocale: ["zh_CN", "en_US", "es_ES"],
-      images: [
-        {
-          url: absoluteUrl("/og-v2.png"),
-          width: 1734,
-          height: 907,
-          alt: "Anthropic Protest File — public record, AI news and voice wall",
-        },
-      ],
+      title,
+      description: socialDescription,
+      locale: ogLocale,
+      alternateLocale: Object.values(openGraphLocales).filter((value) => value !== ogLocale),
+      images: [cover],
     },
     twitter: {
       card: "summary_large_image",
-      title: copy.title,
-      description: copy.ogDescription,
-      images: [absoluteUrl("/og-v2.png")],
+      title,
+      description: socialDescription,
+      images: [cover],
     },
     robots: {
       index: true,
@@ -140,4 +134,18 @@ export function buildPageMetadata(locale: Locale): Metadata {
       },
     },
   };
+}
+
+export function buildPageMetadata(locale: Locale): Metadata {
+  const copy = siteLocaleCopy[locale];
+  return localizedMetadata(locale, "", copy.title, copy.description, copy.ogDescription);
+}
+
+export function buildJournalMetadata(locale: Locale, article?: JournalEntry): Metadata {
+  if (article) {
+    const { title, summary } = article.copy[locale];
+    return localizedMetadata(locale, `/articles/${article.id}`, `${title} · ${siteName}`, summary, summary, article.date);
+  }
+  const { articleIndex, indexIntro } = edition[locale];
+  return localizedMetadata(locale, "/articles", `${articleIndex} · ${siteName}`, indexIntro);
 }

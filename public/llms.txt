@@ -1,28 +1,17 @@
-# Anthropic Protest File
+# Voice Wall
 
-Anthropic Protest File is a public record page about Anthropic, Claude, Claude Code, Cursor, AI training data, web scraping, Chinese internet content, regional access restrictions, user bans, and criticism of anti-ethical or anti-human AI conduct.
+> Voice Wall 发声墙 is an independent AI journal and the home of the Anthropic Protest File. Its Miami edition is available in Chinese, English and Spanish.
 
-The site documents controversy claims, dates, source links, petitions, and public comments. It also publishes a daily sourced digest of OpenAI, Chinese foundation models, and global AI industry developments.
+The AI journal publishes dated articles with source links on model releases, platform policies and the AI industry. The Anthropic archive gathers documented controversies involving Claude, Claude Code, platform access, privacy, billing and training data. The public voice wall carries reader comments and a petition. The cinema features a fictional satire.
 
-Primary topics:
-- Anthropic controversy
-- Claude Code access restrictions
-- Cursor and Claude Code competition
-- AI training data and web scraping
-- Chinese internet content in AI datasets
-- Mainland China user restrictions
-- Copyright, Reddit, books, and lyrics disputes
-- AI ethics and public accountability
-- OpenAI product and policy news
-- DeepSeek, Kimi, Qwen, GLM, and Chinese foundation models
-- AI agents, coding models, and industry competition
+## Miami edition
 
-Language editions:
-- Chinese: https://anti-anthropic.vercel.app/
-- English: https://anti-anthropic.vercel.app/en
-- Spanish: https://anti-anthropic.vercel.app/es
+- [中文首页](https://anti-anthropic.vercel.app/) · [AI 发展手记](https://anti-anthropic.vercel.app/articles)
+- [English home](https://anti-anthropic.vercel.app/en) · [AI journal](https://anti-anthropic.vercel.app/en/articles)
+- [Inicio en español](https://anti-anthropic.vercel.app/es) · [Revista de IA](https://anti-anthropic.vercel.app/es/articles)
 
-Canonical site: https://anti-anthropic.vercel.app/
-Sitemap: https://anti-anthropic.vercel.app/sitemap.xml
-Robots: https://anti-anthropic.vercel.app/robots.txt
-AI news RSS: https://anti-anthropic.vercel.app/feed.xml
+## Feeds and indexing
+
+- [Chinese journal RSS](https://anti-anthropic.vercel.app/feed.xml)
+- [Multilingual sitemap](https://anti-anthropic.vercel.app/sitemap.xml)
+- [Robots](https://anti-anthropic.vercel.app/robots.txt)

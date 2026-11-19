@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { STICKERS, MAX_STICKERS } from "@/lib/stickers";
 import Sticker from "./Sticker";
 import { useI18n } from "./LanguageProvider";
+import styles from "./CommunityArchive.module.css";
 
 export default function StickerPicker({
-  selected,
-  onToggle,
+  selected, onToggle,
 }: {
   selected: string[];
   onToggle: (id: string) => void;
@@ -15,64 +15,43 @@ export default function StickerPicker({
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
 
-  // 点击外部关闭
   useEffect(() => {
     if (!open) return;
-    function onDocClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    function onOutside(event: PointerEvent) {
+      if (!ref.current?.contains(event.target as Node)) setOpen(false);
     }
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
+    function onEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      trigger.current?.focus();
+    }
+    document.addEventListener("pointerdown", onOutside);
+    document.addEventListener("keydown", onEscape);
+    return () => {
+      document.removeEventListener("pointerdown", onOutside);
+      document.removeEventListener("keydown", onEscape);
+    };
   }, [open]);
 
-  const atLimit = selected.length >= MAX_STICKERS;
-
   return (
-    <div ref={ref} className="relative inline-block">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className={`font-mono-geek flex items-center gap-1.5 border px-3 py-2 text-[12px] font-bold tracking-wide transition ${
-          open
-            ? "border-accent text-accent"
-            : "border-white/[0.18] text-neutral-300 hover:border-accent hover:text-accent"
-        }`}
-      >
-        <span className="text-base leading-none">☺</span>
-        {t.form.addSticker}
+    <div ref={ref} className={styles.picker}>
+      <button type="button" ref={trigger} onClick={() => setOpen(!open)} aria-expanded={open}>
+        <span aria-hidden="true">☺</span> {t.form.addSticker}
       </button>
-
       {open && (
-        <div className="absolute bottom-full left-0 z-30 mb-2 w-80 max-w-[86vw] border border-white/[0.14] bg-[#0e0e10] p-3 shadow-[0_16px_50px_rgba(0,0,0,0.55),4px_4px_0_var(--accent)]">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono-geek text-[11px] font-bold tracking-[0.2em] text-neutral-400">
-              {t.form.stickerPanelTitle}
-            </span>
-            <span className="font-mono-geek text-[11px] tabular-nums text-neutral-600">
-              {selected.length}/{MAX_STICKERS}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-7 gap-1.5">
-            {STICKERS.map((s) => {
-              const isOn = selected.includes(s.id);
-              const disabled = !isOn && atLimit;
+        <div className={styles.tray} role="group" aria-label={t.form.stickerPanelTitle}>
+          <p>{t.form.stickerPanelTitle} <span>{selected.length}/{MAX_STICKERS}</span></p>
+          <div>
+            {STICKERS.map((sticker) => {
+              const chosen = selected.includes(sticker.id);
               return (
-                <button
-                  key={s.id}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => onToggle(s.id)}
-                  title={s.label}
-                  className={`flex aspect-square items-center justify-center border transition ${
-                    isOn
-                      ? "border-accent bg-accent/15"
-                      : "border-transparent hover:border-white/20 hover:bg-white/5"
-                  } ${disabled ? "cursor-not-allowed opacity-30" : ""}`}
-                >
-                  <Sticker id={s.id} size={22} />
+                <button key={sticker.id} type="button" title={sticker.label}
+                  aria-pressed={chosen} aria-label={sticker.label}
+                  disabled={!chosen && selected.length >= MAX_STICKERS}
+                  onClick={() => onToggle(sticker.id)}>
+                  <Sticker id={sticker.id} size={22} />
                 </button>
               );
             })}

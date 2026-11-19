@@ -1,8 +1,8 @@
 # 发声墙 Voice Wall
 
-一个单页发声/控诉页面：背景图/视频 + 大标语 + 最新动态 + AI 每日新闻 + 事实列表 + 联署请愿 + 留言表单（带表情包）+ 右上角直播式评论框。三语（中/EN/ES），左下角可切换。
+迈阿密特刊收录 AI 发展报道、Anthropic 争议档案、短片、联署与公众留言。中文、英语和西班牙语版共用一套版式。页眉可切换语言和音效。
 
-AI 新闻数据集中在 `lib/ai-news.ts`，每条保留日期、分类、三语摘要与可追溯来源。定时任务每天核验 OpenAI 和中国大模型动态，只在有实质更新时修改该文件。
+文章栏目位于 `/articles`、`/en/articles` 和 `/es/articles`，每篇文章有独立地址。`lib/ai-articles.ts` 存放三语正文、事件日期和一手来源。`lib/journal.ts` 将本期文章与 `lib/ai-news.ts` 内的历史报道按日期合并，供列表、RSS 和站点地图使用。
 
 ## 本地跑起来
 
@@ -20,18 +20,16 @@ npm run dev
 3. 复制 `.env.example` 为 `.env.local`，填入 Dashboard → Settings → API 里的 URL 和 `service_role` key
 4. 重启 `npm run dev`，留言自动落库
 
-## 需要你替换的占位内容
+## 视觉与音频素材
 
-| 位置 | 改什么 |
-|---|---|
-| `lib/i18n.ts` | 大标语、副标语、事实列表——三种语言各一份 |
-| `public/hero-bg.jpg` | 首屏背景图（放进去自动生效，现在是深红渐变占位） |
-| `NEXT_PUBLIC_HERO_VIDEO_URL` | 想用视频背景就填这个环境变量，留空用背景图 |
+- 首页背景与交互短音取自随项目提供的 `Oliver_Miami_Opening.mp4`。`NEXT_PUBLIC_HERO_VIDEO_URL` 可覆盖首屏背景。
+- [Kevin Ache 的服务器机架摄影](https://unsplash.com/photos/a-rack-of-servers-in-a-server-room-2JJ3wBHu4_0) 用于文章栏目配图。
+- 放映室的即梦成片、封面及可追溯的参考资料位于 `public/media/`。字体及许可位于 `app/fonts/`。
 
 ## 表情包库（站长自管，无用户上传）
 
 - 目录：`lib/stickers.ts`，emoji 型直接写字符，图片型放 `public/stickers/` 再加一行 `{ id, label, src }`
-- 用户在留言框点「表情包」选择，随评论一起显示在右上角评论墙
+- 用户在留言框点「表情包」选择，随评论一起显示在表单旁的留言墙
 - 服务端按白名单校验 id、去重、上限 8 个，改造/删减库不影响老数据
 
 ## 隐私设计
@@ -51,7 +49,4 @@ npm run dev
 
 ## 以后可以升级的
 
-- 评论实时推送：现在是 4 秒轮询，接入 Supabase Realtime 可改为即时推送
-- 防刷：给 POST 加频率限制（如 Upstash Ratelimit）或 Cloudflare Turnstile 人机验证
 - 敏感词过滤 / 举报按钮
-# anti-anthropic

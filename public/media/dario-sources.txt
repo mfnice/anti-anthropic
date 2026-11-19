@@ -1,0 +1,23 @@
+DARIO AFTER HOURS / 达里奥的午夜电台
+
+Voice Wall 原创讽刺动画。虚构电台台长达里奥操控着城市灯光。这段剧情是为网站创作的游戏过场。
+An original editorial cartoon for Voice Wall. Dario, a fictional radio host, controls the city lights from his mixing desk.
+
+人物造型观察 / Character design research
+Dario Amodei in 2023, 24 May 2023. Photograph by Simon Walker / No 10 Downing Street, via Wikimedia Commons. The character’s curls, glasses and tailoring draw on this public photograph. The production team viewed the photo locally. The references submitted to the video model are listed below.
+https://commons.wikimedia.org/wiki/File:Dario_Amodei_in_2023.jpg
+https://creativecommons.org/licenses/by/2.0/
+
+即梦实际使用的图像参考 / Images supplied to Dreamina
+
+1. Art Deco, Miami Beach, Florida. Carol M. Highsmith, between 1980 and 2006. Photographs in the Carol M. Highsmith Archive, Library of Congress, Prints and Photographs Division. No known restrictions on publication. Reference for the street and its architecture.
+https://www.loc.gov/item/2011630398/
+https://tile.loc.gov/storage-services/service/pnp/highsm/12200/12201v.jpg
+
+2. Mephistopheles presents himself to Martha (Goethe, Faust). Eugène Delacroix, 1825–27, lithograph. The Metropolitan Museum of Art, Harris Brisbane Dick Fund, 1932, accession 32.92.26. Public domain. Reference for the antagonist’s posture.
+https://www.metmuseum.org/art/collection/search/336615
+https://images.metmuseum.org/CRDImages/dp/web-large/DP852078.jpg
+
+3. Oliver_Miami_Opening.mp4. Client-supplied reference. A cropped frame from 0.30 seconds supplied the palette and palm silhouettes.
+
+Production: local official Dreamina CLI, multimodal2video, Seedance 2.0 Fast, 720p. The poster is a still from the finished animation. Sound is included in the video.
