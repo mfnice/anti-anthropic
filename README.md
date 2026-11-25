@@ -1,6 +1,6 @@
 # 发声墙 Voice Wall
 
-迈阿密特刊收录 AI 发展报道、Anthropic 争议档案、短片、联署与公众留言。中文、英语和西班牙语版共用一套版式。页眉可切换语言和音效。
+迈阿密特刊收录 AI 发展报道、Anthropic 争议档案、联署与公众留言。中文、英语和西班牙语版共用一套版式。页眉可切换语言和音效。
 
 文章栏目位于 `/articles`、`/en/articles` 和 `/es/articles`，每篇文章有独立地址。`lib/ai-articles.ts` 存放三语正文、事件日期和一手来源。`lib/journal.ts` 将本期文章与 `lib/ai-news.ts` 内的历史报道按日期合并，供列表、RSS 和站点地图使用。
 
@@ -24,7 +24,7 @@ npm run dev
 
 - 首页背景与交互短音取自随项目提供的 `Oliver_Miami_Opening.mp4`。`NEXT_PUBLIC_HERO_VIDEO_URL` 可覆盖首屏背景。
 - [Kevin Ache 的服务器机架摄影](https://unsplash.com/photos/a-rack-of-servers-in-a-server-room-2JJ3wBHu4_0) 用于文章栏目配图。
-- 放映室可切换即梦成片和实际输入的电台实拍参考片段，原片出处、时码和制作记录位于 `public/media/`。字体及许可位于 `app/fonts/`。
+- 字体及许可位于 `app/fonts/`。
 
 ## 表情包库（站长自管，无用户上传）
 

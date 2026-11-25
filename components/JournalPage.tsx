@@ -44,7 +44,7 @@ function JournalIndex({ locale }: { locale: Locale }) {
       <article className="journal-lead">
         <Link className="journal-image feature-art feature-wire" href={leadUrl} aria-label={lead.copy[locale].title}>
           <Image src="/media/server-rack.webp" alt="" fill sizes="(min-width: 750px) 48vw, 90vw" />
-          <b aria-hidden>AI WIRE</b>
+          <b aria-hidden>{lead.category === "opinion" ? "OPINION" : "AI WIRE"}</b>
         </Link>
         <div className="journal-lead-copy">
           <StoryDate article={lead} locale={locale} />

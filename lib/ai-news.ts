@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export type AINewsCategory = "openai" | "china" | "industry";
+export type AINewsCategory = "openai" | "china" | "industry" | "opinion";
 
 interface LocalizedNewsCopy {
   title: string;
@@ -45,6 +45,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
       openai: "OPENAI",
       china: "中国大模型",
       industry: "产业观察",
+      opinion: "评论",
     },
   },
   en: {
@@ -59,6 +60,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
       openai: "OPENAI",
       china: "CHINA MODELS",
       industry: "INDUSTRY",
+      opinion: "OPINION",
     },
   },
   es: {
@@ -73,6 +75,7 @@ export const AI_NEWS_SECTION: Record<Locale, AINewsSectionCopy> = {
       openai: "OPENAI",
       china: "MODELOS DE CHINA",
       industry: "INDUSTRIA",
+      opinion: "OPINIÓN",
     },
   },
 };

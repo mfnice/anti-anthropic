@@ -5,8 +5,8 @@ import { absoluteUrl, localeHtmlLang, siteLocaleCopy, siteName, siteUpdatedAt } 
 import { LanguageProvider } from "./LanguageProvider";
 import Masthead from "./Masthead";
 import Hero from "./Hero";
+import StockQuote from "./StockQuote";
 import Lineup from "./Lineup";
-import Cinema from "./Cinema";
 import CommunityArchive from "./CommunityArchive";
 import Footer from "./Footer";
 
@@ -33,7 +33,12 @@ export default function HomePage({ locale }: { locale: Locale }) {
     <LanguageProvider initialLocale={locale}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Masthead locale={locale} />
-      <main id="content"><Hero locale={locale} /><Lineup locale={locale} /><Cinema locale={locale} /><CommunityArchive /></main>
+      <main id="content">
+        <Hero locale={locale} />
+        <StockQuote locale={locale} />
+        <Lineup locale={locale} />
+        <CommunityArchive />
+      </main>
       <Footer locale={locale} />
     </LanguageProvider>
   );

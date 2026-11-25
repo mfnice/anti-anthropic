@@ -19,7 +19,6 @@ export default function Masthead({ locale, path = "" }: { locale: Locale; path?:
       <nav className="masthead-nav" aria-label={copy.nav}>
         <Link href={home} aria-current={!path ? "page" : undefined}>{copy.home}</Link>
         <Link href={editionPath(locale, "/articles")} aria-current={path ? "location" : undefined}>{copy.articles}</Link>
-        <a href={home + "#cinema"}>{copy.cinema}</a>
         <a href={home + "#facts"}>{copy.archive}</a>
         <a href={home + "#speak"}>{copy.voice}</a>
       </nav>

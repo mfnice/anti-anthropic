@@ -29,7 +29,6 @@ export default function Hero({ locale }: { locale: Locale }) {
       </section>
       <div className="issue-strip micro">
         <span><i aria-hidden />{copy.updated} &nbsp;{JOURNAL_UPDATED_AT.replaceAll("-", ".")}</span>
-        <a href="#cinema"><b aria-hidden>▶</b> &nbsp;{copy.filmTitle}</a>
         <a href="#lineup">{copy.browse} &nbsp;↓</a>
       </div>
     </>

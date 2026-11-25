@@ -2,7 +2,7 @@
 
 > Voice Wall 发声墙 is an independent AI journal and the home of the Anthropic Protest File. Its Miami edition is available in Chinese, English and Spanish.
 
-The AI journal publishes dated articles with source links on model releases, platform policies and the AI industry. The Anthropic archive gathers documented controversies involving Claude, Claude Code, platform access, privacy, billing and training data. The public voice wall carries reader comments and a petition. The cinema features a fictional satire.
+The AI journal publishes dated articles with source links on model releases, platform policies and the AI industry. The Anthropic archive gathers documented controversies involving Claude, Claude Code, platform access, privacy, billing and training data. The public voice wall carries reader comments and a petition.
 
 ## Miami edition
 
